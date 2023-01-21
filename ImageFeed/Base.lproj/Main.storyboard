@@ -16,9 +16,23 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="93K-tF-h7f">
+                                <rect key="frame" x="16" y="60" width="361" height="709"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="93K-tF-h7f" secondAttribute="trailing" constant="16" id="VbG-5U-Gqr"/>
+                            <constraint firstAttribute="leading" secondItem="93K-tF-h7f" secondAttribute="leading" constant="-16" id="ZLc-ts-RVd"/>
+                            <constraint firstAttribute="top" secondItem="93K-tF-h7f" secondAttribute="top" constant="-60" id="qZa-Gj-3CL"/>
+                            <constraint firstAttribute="bottom" secondItem="93K-tF-h7f" secondAttribute="bottom" constant="83" id="sR9-X4-iYK"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="93K-tF-h7f" id="ewY-OA-q5s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
