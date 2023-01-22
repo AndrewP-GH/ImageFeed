@@ -34,3 +34,7 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 }
 
+extension ImagesListViewController: UITableViewDelegate {
+
+}
+
