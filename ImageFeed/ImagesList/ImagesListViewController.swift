@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImagesListViewController: UIViewController {
+final class ImagesListViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -22,8 +22,13 @@ extension ImagesListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
+        let imageCell = cell as? ImagesListCell ?? ImagesListCell()
+        configCell(for: imageCell)
+        return imageCell
     }
+
+    func configCell(for cell: ImagesListCell) {}
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
