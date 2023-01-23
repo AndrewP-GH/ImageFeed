@@ -50,10 +50,21 @@ extension ImagesListViewController: UITableViewDataSource {
             return
         }
         cell.pictureView.image = image
+        setGradientBackground(for: cell.dataView)
         cell.dateLabel.text = dateFormatter.string(from: Date())
         let isFavorite = indexPath.row % 2 == 0
         let buttonImage = isFavorite ? heartFillImage : heartImage
         cell.addToFavoriteButton.setImage(buttonImage, for: .normal)
+    }
+
+    func setGradientBackground(for view: UIView) {
+        let colorTop = UIColor.ypBlack.withAlphaComponent(0.0).cgColor
+        let colorBottom = UIColor.ypBlack.withAlphaComponent(0.2).cgColor
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = view.bounds
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

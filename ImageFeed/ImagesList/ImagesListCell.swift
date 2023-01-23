@@ -13,4 +13,5 @@ final class ImagesListCell: UITableViewCell {
     @IBOutlet var pictureView: UIImageView!
     @IBOutlet var addToFavoriteButton: UIButton!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var dataView: UIView!
 }

@@ -28,7 +28,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="147"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10" translatesAutoresizingMaskIntoConstraints="NO" id="n58-As-Mc8" userLabel="Image">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="n58-As-Mc8" userLabel="Image">
                                                     <rect key="frame" x="16" y="4" width="361" height="139"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
@@ -38,35 +38,49 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXy-1j-CRe" userLabel="DateLabel">
-                                                    <rect key="frame" x="24.000000000000007" y="119" width="101.66666666666669" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" name="YP White"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBf-Ok-Fg2" userLabel="LikeButton">
                                                     <rect key="frame" x="337" y="16" width="30" height="26"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="Heart"/>
                                                 </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovx-iU-TNW" userLabel="DateView">
+                                                    <rect key="frame" x="16" y="113" width="361" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 августа 2022" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXy-1j-CRe" userLabel="DateLabel">
+                                                            <rect key="frame" x="8" y="4" width="101.66666666666667" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" name="YP White"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="lXy-1j-CRe" firstAttribute="top" secondItem="ovx-iU-TNW" secondAttribute="top" constant="4" id="LIa-0H-fN5"/>
+                                                        <constraint firstItem="lXy-1j-CRe" firstAttribute="leading" secondItem="ovx-iU-TNW" secondAttribute="leading" constant="8" id="kzo-Qt-oyR"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lXy-1j-CRe" secondAttribute="trailing" constant="8" id="npw-sZ-1SB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="lXy-1j-CRe" secondAttribute="bottom" constant="8" id="oMw-f4-xH0"/>
+                                                        <constraint firstAttribute="height" constant="30" id="za9-lQ-KCR"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="lXy-1j-CRe" firstAttribute="leading" secondItem="n58-As-Mc8" secondAttribute="leading" constant="8" id="5n9-eZ-BzQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="n58-As-Mc8" secondAttribute="trailing" constant="16" id="7lN-dl-EqN"/>
+                                                <constraint firstAttribute="bottom" secondItem="ovx-iU-TNW" secondAttribute="bottom" constant="4" id="8Ui-77-zh8"/>
                                                 <constraint firstItem="n58-As-Mc8" firstAttribute="trailing" secondItem="vBf-Ok-Fg2" secondAttribute="trailing" constant="10" id="9MO-bU-wJI"/>
+                                                <constraint firstAttribute="trailing" secondItem="ovx-iU-TNW" secondAttribute="trailing" constant="16" id="Alv-43-PWc"/>
                                                 <constraint firstAttribute="bottom" secondItem="n58-As-Mc8" secondAttribute="bottom" constant="4" id="IFu-88-Zk1"/>
                                                 <constraint firstItem="vBf-Ok-Fg2" firstAttribute="top" secondItem="n58-As-Mc8" secondAttribute="top" constant="12" id="La7-J0-2P9"/>
-                                                <constraint firstItem="n58-As-Mc8" firstAttribute="bottom" secondItem="lXy-1j-CRe" secondAttribute="bottom" constant="8" id="XtI-7F-Kf0"/>
                                                 <constraint firstItem="n58-As-Mc8" firstAttribute="leading" secondItem="00i-VA-nWu" secondAttribute="leading" constant="16" id="c8y-Xq-eKh"/>
                                                 <constraint firstItem="n58-As-Mc8" firstAttribute="top" secondItem="00i-VA-nWu" secondAttribute="top" constant="4" id="d9v-iT-Z2Z"/>
-                                                <constraint firstItem="n58-As-Mc8" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lXy-1j-CRe" secondAttribute="trailing" constant="8" id="rQ3-hk-OT6"/>
+                                                <constraint firstItem="ovx-iU-TNW" firstAttribute="leading" secondItem="00i-VA-nWu" secondAttribute="leading" constant="16" id="hVH-K8-JnC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="addToFavoriteButton" destination="vBf-Ok-Fg2" id="3y0-Lf-fOl"/>
-                                            <outlet property="pictureView" destination="n58-As-Mc8" id="iUs-px-GwZ"/>
+                                            <outlet property="dataView" destination="ovx-iU-TNW" id="HWM-8e-1wB"/>
                                             <outlet property="dateLabel" destination="lXy-1j-CRe" id="geT-MN-Uwp"/>
+                                            <outlet property="pictureView" destination="n58-As-Mc8" id="iUs-px-GwZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -95,7 +109,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="10" width="200" height="133"/>
+        <image name="4" width="200" height="115"/>
         <image name="Heart" width="29.333333969116211" height="26"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
