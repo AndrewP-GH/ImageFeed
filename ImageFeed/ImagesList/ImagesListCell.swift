@@ -10,7 +10,7 @@ import UIKit
 final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
 
-    @IBOutlet var ImageView: UIImageView!
-    @IBOutlet var FavoriteButton: UIButton!
-    @IBOutlet var Label: UILabel!
+    @IBOutlet var pictureView: UIImageView!
+    @IBOutlet var addToFavoriteButton: UIButton!
+    @IBOutlet var dateLabel: UILabel!
 }

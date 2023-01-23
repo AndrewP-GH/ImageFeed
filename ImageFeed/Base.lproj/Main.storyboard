@@ -64,9 +64,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="FavoriteButton" destination="vBf-Ok-Fg2" id="3y0-Lf-fOl"/>
-                                            <outlet property="ImageView" destination="n58-As-Mc8" id="iUs-px-GwZ"/>
-                                            <outlet property="Label" destination="lXy-1j-CRe" id="geT-MN-Uwp"/>
+                                            <outlet property="addToFavoriteButton" destination="vBf-Ok-Fg2" id="3y0-Lf-fOl"/>
+                                            <outlet property="pictureView" destination="n58-As-Mc8" id="iUs-px-GwZ"/>
+                                            <outlet property="dateLabel" destination="lXy-1j-CRe" id="geT-MN-Uwp"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

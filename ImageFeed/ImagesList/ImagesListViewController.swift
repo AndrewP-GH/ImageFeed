@@ -49,11 +49,11 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return
         }
-        cell.ImageView.image = image
-        cell.Label.text = dateFormatter.string(from: Date())
+        cell.pictureView.image = image
+        cell.dateLabel.text = dateFormatter.string(from: Date())
         let isFavorite = indexPath.row % 2 == 0
         let buttonImage = isFavorite ? HeartFillImage : HeartImage
-        cell.FavoriteButton.setImage(buttonImage, for: .normal)
+        cell.addToFavoriteButton.setImage(buttonImage, for: .normal)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
