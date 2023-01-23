@@ -10,8 +10,8 @@ import UIKit
 final class ImagesListViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
 
-    private var HeartFillImage: UIImage!
-    private var HeartImage: UIImage!
+    private var heartFillImage: UIImage!
+    private var heartImage: UIImage!
     private let photosName: [String] = (0..<20).map {
         "\($0)"
     }
@@ -26,8 +26,8 @@ final class ImagesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        HeartFillImage = UIImage(named: "Heart.fill")
-        HeartImage = UIImage(named: "Heart")
+        heartFillImage = UIImage(named: "Heart.fill")
+        heartImage = UIImage(named: "Heart")
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
 
@@ -52,7 +52,7 @@ extension ImagesListViewController: UITableViewDataSource {
         cell.pictureView.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
         let isFavorite = indexPath.row % 2 == 0
-        let buttonImage = isFavorite ? HeartFillImage : HeartImage
+        let buttonImage = isFavorite ? heartFillImage : heartImage
         cell.addToFavoriteButton.setImage(buttonImage, for: .normal)
     }
 
