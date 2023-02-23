@@ -30,16 +30,6 @@ final class ImagesListViewController: UIViewController {
         heartImage = UIImage(named: "Heart")
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        for cell in tableView.visibleCells {
-            guard let imageCell = cell as? ImagesListCell else {
-                continue
-            }
-            imageCell.adjustDataGradientBackground()
-        }
-    }
 }
 
 extension ImagesListViewController: UITableViewDataSource {
@@ -59,7 +49,6 @@ extension ImagesListViewController: UITableViewDataSource {
             return
         }
         cell.pictureView.image = image
-        cell.adjustDataGradientBackground()
         cell.dateLabel.text = dateFormatter.string(from: Date())
         let isFavorite = indexPath.row % 2 == 0
         let buttonImage = isFavorite ? heartFillImage : heartImage

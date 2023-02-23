@@ -15,6 +15,7 @@
 		1BD36C102979CBD700C6B73F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BD36C0E2979CBD700C6B73F /* LaunchScreen.storyboard */; };
 		1BD36C1A297BF9BC00C6B73F /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD36C19297BF9BC00C6B73F /* UIColor+Extensions.swift */; };
 		1BD36C1D297D6FA800C6B73F /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD36C1C297D6FA800C6B73F /* ImagesListCell.swift */; };
+		AE09A736214C7276671BBEEF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A7771A9E34BADF21B057 /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1BD36C112979CBD700C6B73F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BD36C19297BF9BC00C6B73F /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		1BD36C1C297D6FA800C6B73F /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		AE09A7771A9E34BADF21B057 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				1BD36C072979CBD700C6B73F /* ImagesListViewController.swift */,
 				1BD36C1C297D6FA800C6B73F /* ImagesListCell.swift */,
+				AE09A7771A9E34BADF21B057 /* GradientView.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				1BD36C1D297D6FA800C6B73F /* ImagesListCell.swift in Sources */,
 				1BD36C062979CBD700C6B73F /* SceneDelegate.swift in Sources */,
 				1BD36C1A297BF9BC00C6B73F /* UIColor+Extensions.swift in Sources */,
+				AE09A736214C7276671BBEEF /* GradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
