@@ -26,8 +26,8 @@ final class ImagesListCell: UITableViewCell {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = bounds
-        layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.frame = dataView.bounds
+        dataView.layer.insertSublayer(gradientLayer, at: 0)
         isGradientSet = true
     }
 }
