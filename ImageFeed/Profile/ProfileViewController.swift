@@ -9,9 +9,9 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    @IBOutlet var PersonImage: UIImageView!
-    @IBOutlet var FullNameLabel: UILabel!
-    @IBOutlet var NicknameLabel: UILabel!
-    @IBOutlet var TextLabel: UILabel!
-    @IBOutlet var LogoutButton: UIButton!
+    @IBOutlet private var PersonImage: UIImageView!
+    @IBOutlet private var FullNameLabel: UILabel!
+    @IBOutlet private var NicknameLabel: UILabel!
+    @IBOutlet private var TextLabel: UILabel!
+    @IBOutlet private var LogoutButton: UIButton!
 }
