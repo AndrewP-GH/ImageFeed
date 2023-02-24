@@ -138,6 +138,9 @@
                                 <rect key="frame" x="347" y="115" width="20" height="22"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="Logout"/>
+                                <connections>
+                                    <action selector="didTapLogout" destination="Gcd-29-xEv" eventType="touchUpInside" id="IjG-LR-mz5"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ekaterina_nov" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUW-dF-zbD" userLabel="NicknameLabel">
                                 <rect key="frame" x="16" y="204" width="351" height="15.333333333333343"/>
