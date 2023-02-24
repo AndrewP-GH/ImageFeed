@@ -117,6 +117,10 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Person" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-fm-uJ3" userLabel="PersonImage">
                                 <rect key="frame" x="16" y="91" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="3bg-BS-nhc"/>
+                                    <constraint firstAttribute="width" constant="70" id="MTJ-68-ZlK"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="61"/>
@@ -141,7 +145,7 @@
                                 <color key="textColor" name="YP Gray"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, world!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vk-cA-01q" userLabel="TextLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, world!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vk-cA-01q" userLabel="DescriptionLabel">
                                 <rect key="frame" x="16" y="227.33333333333334" width="351" height="15.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" name="YP White"/>
@@ -151,32 +155,33 @@
                         <viewLayoutGuide key="safeArea" id="XPc-fR-Oo9"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstItem="GsX-sU-BMX" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XPc-fR-Oo9" secondAttribute="trailing" constant="-26" id="7Tc-3c-ucA"/>
+                            <constraint firstItem="gzr-fm-uJ3" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="JdS-qP-BFv" secondAttribute="leading" id="4a1-LZ-Z3d"/>
                             <constraint firstItem="IUW-dF-zbD" firstAttribute="top" secondItem="GsX-sU-BMX" secondAttribute="bottom" constant="8" id="7ip-iZ-19H"/>
-                            <constraint firstItem="7vk-cA-01q" firstAttribute="leading" secondItem="XPc-fR-Oo9" secondAttribute="leading" constant="16" id="8RA-uM-md6"/>
-                            <constraint firstItem="IUW-dF-zbD" firstAttribute="leading" secondItem="XPc-fR-Oo9" secondAttribute="leading" constant="16" id="8Vi-BA-h4q"/>
+                            <constraint firstItem="IUW-dF-zbD" firstAttribute="trailing" secondItem="GsX-sU-BMX" secondAttribute="trailing" id="8Zv-e6-aqD"/>
                             <constraint firstItem="JdS-qP-BFv" firstAttribute="top" secondItem="XPc-fR-Oo9" secondAttribute="top" constant="56" id="Fye-55-ZGU"/>
+                            <constraint firstItem="7vk-cA-01q" firstAttribute="trailing" secondItem="GsX-sU-BMX" secondAttribute="trailing" id="J1i-Qo-NAv"/>
+                            <constraint firstItem="IUW-dF-zbD" firstAttribute="leading" secondItem="GsX-sU-BMX" secondAttribute="leading" id="NNE-Ys-q7e"/>
                             <constraint firstItem="7vk-cA-01q" firstAttribute="top" secondItem="IUW-dF-zbD" secondAttribute="bottom" constant="8" id="Rac-dW-9xm"/>
+                            <constraint firstItem="GsX-sU-BMX" firstAttribute="leading" secondItem="gzr-fm-uJ3" secondAttribute="leading" id="UfY-FR-HWx"/>
                             <constraint firstItem="JdS-qP-BFv" firstAttribute="trailing" secondItem="XPc-fR-Oo9" secondAttribute="trailing" constant="-26" id="X78-r6-zTf"/>
-                            <constraint firstItem="GsX-sU-BMX" firstAttribute="leading" secondItem="XPc-fR-Oo9" secondAttribute="leading" constant="16" id="ZiM-rZ-94T"/>
                             <constraint firstItem="gzr-fm-uJ3" firstAttribute="top" secondItem="XPc-fR-Oo9" secondAttribute="top" constant="32" id="bp8-Ev-Mo6"/>
-                            <constraint firstItem="IUW-dF-zbD" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XPc-fR-Oo9" secondAttribute="trailing" constant="-26" id="fOv-j0-rxg"/>
+                            <constraint firstItem="7vk-cA-01q" firstAttribute="leading" secondItem="GsX-sU-BMX" secondAttribute="leading" id="gDE-mh-d3Y"/>
                             <constraint firstItem="GsX-sU-BMX" firstAttribute="top" secondItem="gzr-fm-uJ3" secondAttribute="bottom" constant="8" id="lV0-jo-k4q"/>
-                            <constraint firstItem="7vk-cA-01q" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XPc-fR-Oo9" secondAttribute="trailing" constant="-26" id="qc8-bY-Kt3"/>
+                            <constraint firstItem="GsX-sU-BMX" firstAttribute="trailing" secondItem="JdS-qP-BFv" secondAttribute="trailing" id="qUj-n9-Qkc"/>
                             <constraint firstItem="gzr-fm-uJ3" firstAttribute="leading" secondItem="XPc-fR-Oo9" secondAttribute="leading" constant="16" id="uKJ-aN-hVG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="DescriptionLabel" destination="7vk-cA-01q" id="XG6-g4-0pY"/>
                         <outlet property="FullNameLabel" destination="GsX-sU-BMX" id="7Mn-it-wwj"/>
                         <outlet property="LogoutButton" destination="JdS-qP-BFv" id="bLF-cg-jcN"/>
                         <outlet property="NicknameLabel" destination="IUW-dF-zbD" id="piB-gh-GtB"/>
                         <outlet property="PersonImage" destination="gzr-fm-uJ3" id="TWr-Jy-aGe"/>
-                        <outlet property="TextLabel" destination="7vk-cA-01q" id="XG6-g4-0pY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RJ6-sG-3vN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506.1068702290076" y="-679.57746478873241"/>
+            <point key="canvasLocation" x="-653" y="-2"/>
         </scene>
     </scenes>
     <resources>

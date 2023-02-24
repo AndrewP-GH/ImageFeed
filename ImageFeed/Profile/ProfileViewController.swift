@@ -12,6 +12,6 @@ final class ProfileViewController: UIViewController {
     @IBOutlet private var PersonImage: UIImageView!
     @IBOutlet private var FullNameLabel: UILabel!
     @IBOutlet private var NicknameLabel: UILabel!
-    @IBOutlet private var TextLabel: UILabel!
+    @IBOutlet private var DescriptionLabel: UILabel!
     @IBOutlet private var LogoutButton: UIButton!
 }
