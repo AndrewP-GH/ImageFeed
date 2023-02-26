@@ -8,6 +8,8 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
+    private let showSingleImageSegueIdentifier = "ShowSingleImage"
+
     @IBOutlet private var tableView: UITableView!
 
     private var heartFillImage: UIImage!
@@ -55,10 +57,6 @@ extension ImagesListViewController: UITableViewDataSource {
         cell.addToFavoriteButton.setImage(buttonImage, for: .normal)
     }
 
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return 0
@@ -69,10 +67,21 @@ extension ImagesListViewController: UITableViewDataSource {
         let imageViewHeight = image.size.height * scale
         return imageViewHeight + imageInsets.top + imageInsets.bottom
     }
-
 }
 
 extension ImagesListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+    }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showSingleImageSegueIdentifier,
+           let destination = segue.destination as? SingleImageViewController,
+           let image = sender as? IndexPath {
+            let image = UIImage(named: photosName[image.row])
+            destination.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
 }
-
