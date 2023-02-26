@@ -81,6 +81,7 @@
                                             <outlet property="dataView" destination="ovx-iU-TNW" id="HWM-8e-1wB"/>
                                             <outlet property="dateLabel" destination="lXy-1j-CRe" id="geT-MN-Uwp"/>
                                             <outlet property="pictureView" destination="n58-As-Mc8" id="iUs-px-GwZ"/>
+                                            <segue destination="YNc-OZ-nUE" kind="show" id="gKw-Au-z0d"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -106,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="162.59541984732823" y="-165.49295774647888"/>
+            <point key="canvasLocation" x="33" y="-165"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="25g-A3-ieg">
@@ -233,6 +234,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Est-mg-AQl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-764.12213740458014" y="-165.49295774647888"/>
+        </scene>
+        <!--Single Image-->
+        <scene sceneID="z32-3p-plz">
+            <objects>
+                <viewController id="YNc-OZ-nUE" userLabel="Single Image" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cmq-mO-Ant">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="HVv-QK-ujL">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <color key="backgroundColor" name="YP Black"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CTw-Fk-aNT"/>
+                        <color key="backgroundColor" name="YP Black"/>
+                        <constraints>
+                            <constraint firstItem="HVv-QK-ujL" firstAttribute="trailing" secondItem="CTw-Fk-aNT" secondAttribute="trailing" id="8P3-HH-VvI"/>
+                            <constraint firstItem="HVv-QK-ujL" firstAttribute="top" secondItem="CTw-Fk-aNT" secondAttribute="top" id="TRL-dI-MSv"/>
+                            <constraint firstItem="HVv-QK-ujL" firstAttribute="bottom" secondItem="CTw-Fk-aNT" secondAttribute="bottom" id="kfs-gI-gmY"/>
+                            <constraint firstItem="HVv-QK-ujL" firstAttribute="leading" secondItem="CTw-Fk-aNT" secondAttribute="leading" id="pk1-dE-TfG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="33u-3k-uSS"/>
+                    <connections>
+                        <outlet property="imageView" destination="HVv-QK-ujL" id="A5S-IK-OEv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Mb-3w-Rvn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="827" y="-165"/>
         </scene>
     </scenes>
     <resources>

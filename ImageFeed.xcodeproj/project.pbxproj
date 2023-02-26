@@ -16,6 +16,7 @@
 		1BD36C102979CBD700C6B73F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BD36C0E2979CBD700C6B73F /* LaunchScreen.storyboard */; };
 		1BD36C1A297BF9BC00C6B73F /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD36C19297BF9BC00C6B73F /* UIColor+Extensions.swift */; };
 		1BD36C1D297D6FA800C6B73F /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD36C1C297D6FA800C6B73F /* ImagesListCell.swift */; };
+		AE09A2DDC54C07668E706DAE /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09ADBDB74E7560CF6814EB /* SingleImageViewController.swift */; };
 		AE09A736214C7276671BBEEF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A7771A9E34BADF21B057 /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		1BD36C19297BF9BC00C6B73F /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		1BD36C1C297D6FA800C6B73F /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		AE09A7771A9E34BADF21B057 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		AE09ADBDB74E7560CF6814EB /* SingleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				1BD36C0C2979CBD700C6B73F /* Assets.xcassets */,
 				1BD36C0E2979CBD700C6B73F /* LaunchScreen.storyboard */,
 				1BD36C112979CBD700C6B73F /* Info.plist */,
+				AE09A7BB6B9588D0398294DE /* SingleImage */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -101,6 +104,14 @@
 				AE09A7771A9E34BADF21B057 /* GradientView.swift */,
 			);
 			path = ImagesList;
+			sourceTree = "<group>";
+		};
+		AE09A7BB6B9588D0398294DE /* SingleImage */ = {
+			isa = PBXGroup;
+			children = (
+				AE09ADBDB74E7560CF6814EB /* SingleImageViewController.swift */,
+			);
+			path = SingleImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 				1BCC34E829A8EBB300DD5E41 /* ProfileViewController.swift in Sources */,
 				1BD36C1A297BF9BC00C6B73F /* UIColor+Extensions.swift in Sources */,
 				AE09A736214C7276671BBEEF /* GradientView.swift in Sources */,
+				AE09A2DDC54C07668E706DAE /* SingleImageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
