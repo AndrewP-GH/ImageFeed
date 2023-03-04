@@ -220,10 +220,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="HVv-QK-ujL">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nht-PV-yAv">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" name="YP Black"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4" translatesAutoresizingMaskIntoConstraints="NO" id="HVv-QK-ujL">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="115"/>
+                                        <color key="backgroundColor" name="YP Black"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="HVv-QK-ujL" firstAttribute="bottom" secondItem="Nht-PV-yAv" secondAttribute="bottom" id="Q6E-Ye-Ycw"/>
+                                    <constraint firstItem="HVv-QK-ujL" firstAttribute="trailing" secondItem="Nht-PV-yAv" secondAttribute="trailing" id="TSG-l2-ibI"/>
+                                    <constraint firstItem="HVv-QK-ujL" firstAttribute="leading" secondItem="Nht-PV-yAv" secondAttribute="leading" id="gVN-UO-QmK"/>
+                                    <constraint firstItem="HVv-QK-ujL" firstAttribute="top" secondItem="Nht-PV-yAv" secondAttribute="top" id="zYg-lX-HTU"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="O5P-Qy-11s"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="yuZ-tR-bqD"/>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zs8-db-wZh">
                                 <rect key="frame" x="0.0" y="61" width="42" height="42"/>
                                 <constraints>
@@ -241,12 +254,12 @@
                         <viewLayoutGuide key="safeArea" id="CTw-Fk-aNT"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
+                            <constraint firstItem="Nht-PV-yAv" firstAttribute="trailing" secondItem="CTw-Fk-aNT" secondAttribute="trailing" id="2QM-ps-qB7"/>
                             <constraint firstItem="Zs8-db-wZh" firstAttribute="top" secondItem="CTw-Fk-aNT" secondAttribute="top" constant="2" id="4if-FQ-rlr"/>
-                            <constraint firstItem="HVv-QK-ujL" firstAttribute="trailing" secondItem="Cmq-mO-Ant" secondAttribute="trailing" id="8P3-HH-VvI"/>
-                            <constraint firstItem="HVv-QK-ujL" firstAttribute="top" secondItem="Cmq-mO-Ant" secondAttribute="top" id="TRL-dI-MSv"/>
-                            <constraint firstItem="HVv-QK-ujL" firstAttribute="bottom" secondItem="Cmq-mO-Ant" secondAttribute="bottom" id="kfs-gI-gmY"/>
+                            <constraint firstItem="Nht-PV-yAv" firstAttribute="top" secondItem="Cmq-mO-Ant" secondAttribute="top" id="K6K-uu-YbH"/>
+                            <constraint firstItem="Nht-PV-yAv" firstAttribute="leading" secondItem="CTw-Fk-aNT" secondAttribute="leading" id="Ne0-XK-mfr"/>
+                            <constraint firstItem="Nht-PV-yAv" firstAttribute="bottom" secondItem="Cmq-mO-Ant" secondAttribute="bottom" id="Ysl-OC-gAj"/>
                             <constraint firstItem="Zs8-db-wZh" firstAttribute="leading" secondItem="CTw-Fk-aNT" secondAttribute="leading" id="msS-7M-hZV"/>
-                            <constraint firstItem="HVv-QK-ujL" firstAttribute="leading" secondItem="Cmq-mO-Ant" secondAttribute="leading" id="pk1-dE-TfG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="33u-3k-uSS"/>
