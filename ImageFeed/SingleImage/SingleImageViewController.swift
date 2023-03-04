@@ -26,8 +26,13 @@ final class SingleImageViewController: UIViewController {
         setImage(image) // if image was set before view loaded
     }
 
-    @IBAction private func didTapBackButton() {
+    @IBAction private func didTapBackwardButton() {
         dismiss(animated: true)
+    }
+
+    @IBAction func didTapShareButton(_ sender: Any) {
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        present(activityViewController, animated: true)
     }
 
     private func setImage(_ image: UIImage) {

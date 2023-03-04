@@ -240,7 +240,7 @@
                                     <outlet property="delegate" destination="YNc-OZ-nUE" id="Tim-L5-csi"/>
                                 </connections>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zs8-db-wZh">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zs8-db-wZh" userLabel="BackwardButton">
                                 <rect key="frame" x="0.0" y="61" width="42" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="ENh-hV-T9p"/>
@@ -248,9 +248,21 @@
                                 </constraints>
                                 <color key="tintColor" name="YP White"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="Backward"/>
+                                <state key="normal" image="Backward">
+                                    <color key="titleColor" name="YP White"/>
+                                </state>
                                 <connections>
-                                    <action selector="didTapBackButton" destination="YNc-OZ-nUE" eventType="touchUpInside" id="mTK-lu-7z0"/>
+                                    <action selector="didTapBackwardButton" destination="YNc-OZ-nUE" eventType="touchUpInside" id="mTK-lu-7z0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhP-JG-rKS" userLabel="ShareButton">
+                                <rect key="frame" x="171.66666666666666" y="751" width="50" height="50"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="ShareButton">
+                                    <color key="titleColor" name="YP White"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapShareButton:" destination="YNc-OZ-nUE" eventType="touchUpInside" id="LjX-Hd-ykJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -259,9 +271,11 @@
                         <constraints>
                             <constraint firstItem="Nht-PV-yAv" firstAttribute="trailing" secondItem="CTw-Fk-aNT" secondAttribute="trailing" id="2QM-ps-qB7"/>
                             <constraint firstItem="Zs8-db-wZh" firstAttribute="top" secondItem="CTw-Fk-aNT" secondAttribute="top" constant="2" id="4if-FQ-rlr"/>
+                            <constraint firstItem="zhP-JG-rKS" firstAttribute="centerX" secondItem="CTw-Fk-aNT" secondAttribute="centerX" id="5m1-xk-XDv"/>
                             <constraint firstItem="Nht-PV-yAv" firstAttribute="top" secondItem="Cmq-mO-Ant" secondAttribute="top" id="K6K-uu-YbH"/>
                             <constraint firstItem="Nht-PV-yAv" firstAttribute="leading" secondItem="CTw-Fk-aNT" secondAttribute="leading" id="Ne0-XK-mfr"/>
                             <constraint firstItem="Nht-PV-yAv" firstAttribute="bottom" secondItem="Cmq-mO-Ant" secondAttribute="bottom" id="Ysl-OC-gAj"/>
+                            <constraint firstItem="zhP-JG-rKS" firstAttribute="bottom" secondItem="Cmq-mO-Ant" secondAttribute="bottom" constant="-51" id="eMs-hu-MDq"/>
                             <constraint firstItem="Zs8-db-wZh" firstAttribute="leading" secondItem="CTw-Fk-aNT" secondAttribute="leading" id="msS-7M-hZV"/>
                         </constraints>
                     </view>
@@ -282,6 +296,7 @@
         <image name="Heart" width="29.333333969116211" height="26"/>
         <image name="Logout" width="20" height="22"/>
         <image name="Person" width="70" height="70"/>
+        <image name="ShareButton" width="50" height="50"/>
         <image name="tab_editorial_active" width="20" height="22"/>
         <image name="tab_profile_active" width="24" height="24"/>
         <namedColor name="YP Black">
