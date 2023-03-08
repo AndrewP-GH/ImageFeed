@@ -37,7 +37,7 @@ final class ProfileViewController: UIViewController {
     }
 
     private func getPersonImage() -> UIImage {
-        let person = UIImage(named: "Person")
+        let person = UIImage(named: "StubPhoto")
         if person != nil {
             return person!
         } else {
