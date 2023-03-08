@@ -27,6 +27,7 @@ final class GradientView: UIView {
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.frame = bounds
+        self.gradientLayer = gradientLayer
     }
 
     override class var layerClass: AnyClass {
