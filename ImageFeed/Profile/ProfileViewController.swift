@@ -18,10 +18,10 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPersonImage()
+        setupLogoutButton()
         setupFullNameLabel()
-//        setupNicknameLabel()
-//        setupDescriptionLabel()
-//        setupLogoutButton()
+        setupNicknameLabel()
+        setupDescriptionLabel()
     }
 
     private func setupPersonImage() {
@@ -51,6 +51,20 @@ final class ProfileViewController: UIViewController {
         }
     }
 
+    private func setupLogoutButton() {
+        logoutButton = UIButton.systemButton(
+                with: UIImage(named: "Logout")!,
+                target: self,
+                action: #selector(didTapLogout))
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.tintColor = .ypRed
+        view.addSubview(logoutButton)
+        logoutButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        logoutButton.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        logoutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 56).isActive = true
+        logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26).isActive = true
+    }
+
     private func setupFullNameLabel() {
         fullNameLabel = UILabel()
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +74,32 @@ final class ProfileViewController: UIViewController {
         view.addSubview(fullNameLabel)
         fullNameLabel.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 8).isActive = true
         fullNameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor).isActive = true
-        fullNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26).isActive = true
+        fullNameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor).isActive = true
+    }
+
+    private func setupNicknameLabel() {
+        nicknameLabel = UILabel()
+        nicknameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nicknameLabel.text = "@ekaterina_nov"
+        nicknameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)   // regular (400)
+        nicknameLabel.textColor = .ypGrey
+        view.addSubview(nicknameLabel)
+        nicknameLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 8).isActive = true
+        nicknameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor).isActive = true
+        nicknameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor).isActive = true
+    }
+
+    private func setupDescriptionLabel() {
+        descriptionLabel = UILabel()
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.text = "Hello, world!"
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)   // regular (400)
+        descriptionLabel.textColor = .ypWhite
+        descriptionLabel.numberOfLines = 0
+        view.addSubview(descriptionLabel)
+        descriptionLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor).isActive = true
+        descriptionLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor).isActive = true
     }
 
     @objc private func didTapLogout() {
