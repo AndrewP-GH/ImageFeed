@@ -18,7 +18,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPersonImage()
-//        setupFullNameLabel()
+        setupFullNameLabel()
 //        setupNicknameLabel()
 //        setupDescriptionLabel()
 //        setupLogoutButton()
@@ -49,6 +49,18 @@ final class ProfileViewController: UIViewController {
                 return UIImage(systemName: systemName)!
             }
         }
+    }
+
+    private func setupFullNameLabel() {
+        fullNameLabel = UILabel()
+        fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        fullNameLabel.text = "Екатерина Новикова"
+        fullNameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)   // bold (700)
+        fullNameLabel.textColor = .ypWhite
+        view.addSubview(fullNameLabel)
+        fullNameLabel.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 8).isActive = true
+        fullNameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor).isActive = true
+        fullNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26).isActive = true
     }
 
     @objc private func didTapLogout() {
