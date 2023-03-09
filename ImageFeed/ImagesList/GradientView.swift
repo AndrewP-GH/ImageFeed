@@ -28,11 +28,11 @@ final class GradientView: UIView {
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.frame = bounds
-        gradientLayer.mask = createMask()
+        gradientLayer.mask = createRoundingMask()
         self.gradientLayer = gradientLayer
     }
 
-    private func createMask() -> CALayer {
+    private func createRoundingMask() -> CALayer {
         let radius = 16
         let path = UIBezierPath(
                 roundedRect: bounds,
