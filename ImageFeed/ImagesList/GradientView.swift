@@ -22,8 +22,9 @@ final class GradientView: UIView {
         guard let gradientLayer = layer as? CAGradientLayer else {
             return;
         }
-        let colorTop = UIColor.ypBlack.withAlphaComponent(0).cgColor
-        let colorBottom = UIColor.ypBlack.withAlphaComponent(0.2).cgColor
+        let color = UIColor.ypBlack
+        let colorTop = color.withAlphaComponent(0).cgColor
+        let colorBottom = color.withAlphaComponent(0.2).cgColor
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.frame = bounds
