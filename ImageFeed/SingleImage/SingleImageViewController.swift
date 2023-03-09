@@ -30,7 +30,7 @@ final class SingleImageViewController: UIViewController {
         dismiss(animated: true)
     }
 
-    @IBAction func didTapShareButton(_ sender: Any) {
+    @IBAction private func didTapShareButton(_ sender: Any) {
         guard let image else {
             return
         }

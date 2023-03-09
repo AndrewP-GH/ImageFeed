@@ -61,7 +61,7 @@ final class ProfileViewController: UIViewController {
         view.addSubview(logoutButton)
         logoutButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
         logoutButton.heightAnchor.constraint(equalToConstant: 22).isActive = true
-        logoutButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 56).isActive = true
+        logoutButton.centerYAnchor.constraint(equalTo: personImage.centerYAnchor).isActive = true
         logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26).isActive = true
     }
 
