@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B2DB11029BA6FA500436337 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2DB10F29BA6FA500436337 /* AuthViewController.swift */; };
 		1BCC34E829A8EBB300DD5E41 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCC34E729A8EBB300DD5E41 /* ProfileViewController.swift */; };
 		1BD36C042979CBD700C6B73F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD36C032979CBD700C6B73F /* AppDelegate.swift */; };
 		1BD36C062979CBD700C6B73F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD36C052979CBD700C6B73F /* SceneDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B2DB10F29BA6FA500436337 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		1BCC34E729A8EBB300DD5E41 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1BD36C002979CBD700C6B73F /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD36C032979CBD700C6B73F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B2DB10E29BA6F9500436337 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				1B2DB10F29BA6FA500436337 /* AuthViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		1BCC34E629A8EB9A00DD5E41 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +86,7 @@
 		1BD36C022979CBD700C6B73F /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				1B2DB10E29BA6F9500436337 /* Auth */,
 				1BCC34E629A8EB9A00DD5E41 /* Profile */,
 				1BD36C1B297D6F8F00C6B73F /* ImagesList */,
 				1BD36C18297BF9A900C6B73F /* Helpers */,
@@ -190,6 +201,7 @@
 			files = (
 				1BD36C082979CBD700C6B73F /* ImagesListViewController.swift in Sources */,
 				1BD36C042979CBD700C6B73F /* AppDelegate.swift in Sources */,
+				1B2DB11029BA6FA500436337 /* AuthViewController.swift in Sources */,
 				1BD36C1D297D6FA800C6B73F /* ImagesListCell.swift in Sources */,
 				1BD36C062979CBD700C6B73F /* SceneDelegate.swift in Sources */,
 				1BCC34E829A8EBB300DD5E41 /* ProfileViewController.swift in Sources */,
