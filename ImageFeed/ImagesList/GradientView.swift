@@ -28,23 +28,34 @@ final class GradientView: UIView {
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
         gradientLayer.frame = bounds
-        gradientLayer.mask = createRoundingMask()
         self.gradientLayer = gradientLayer
     }
 
-    private func createRoundingMask() -> CALayer {
+    private func roundCorners() {
+        guard let gradientLayer = gradientLayer else {
+            return
+        }
         let radius = 16
         let path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.bottomLeft, .bottomRight],
                 cornerRadii: CGSize(width: radius, height: radius)
         )
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        return mask
+
+        var mask = gradientLayer.mask as? CAShapeLayer
+        if mask == nil {
+            mask = CAShapeLayer()
+            gradientLayer.mask = mask
+        }
+        mask!.path = path.cgPath
     }
 
     override class var layerClass: AnyClass {
         CAGradientLayer.self
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        roundCorners()
     }
 }
