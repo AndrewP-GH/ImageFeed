@@ -6,6 +6,7 @@ import UIKit
 
 final class GradientView: UIView {
     private var gradientLayer: CAGradientLayer? = nil
+    private let cornerRadius: CGFloat = 16
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,13 +36,11 @@ final class GradientView: UIView {
         guard let gradientLayer = gradientLayer else {
             return
         }
-        let radius = 16
         let path = UIBezierPath(
                 roundedRect: bounds,
                 byRoundingCorners: [.bottomLeft, .bottomRight],
-                cornerRadii: CGSize(width: radius, height: radius)
+                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
         )
-
         var mask = gradientLayer.mask as? CAShapeLayer
         if mask == nil {
             mask = CAShapeLayer()
