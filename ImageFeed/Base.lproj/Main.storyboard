@@ -64,15 +64,15 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="ovx-iU-TNW" firstAttribute="bottom" secondItem="n58-As-Mc8" secondAttribute="bottom" id="1fV-gT-U2k"/>
+                                                <constraint firstItem="ovx-iU-TNW" firstAttribute="trailing" secondItem="n58-As-Mc8" secondAttribute="trailing" id="67r-VJ-TTl"/>
                                                 <constraint firstAttribute="trailing" secondItem="n58-As-Mc8" secondAttribute="trailing" constant="16" id="7lN-dl-EqN"/>
-                                                <constraint firstAttribute="bottom" secondItem="ovx-iU-TNW" secondAttribute="bottom" constant="4" id="8Ui-77-zh8"/>
                                                 <constraint firstItem="n58-As-Mc8" firstAttribute="trailing" secondItem="vBf-Ok-Fg2" secondAttribute="trailing" constant="10" id="9MO-bU-wJI"/>
-                                                <constraint firstAttribute="trailing" secondItem="ovx-iU-TNW" secondAttribute="trailing" constant="16" id="Alv-43-PWc"/>
                                                 <constraint firstAttribute="bottom" secondItem="n58-As-Mc8" secondAttribute="bottom" constant="4" id="IFu-88-Zk1"/>
                                                 <constraint firstItem="vBf-Ok-Fg2" firstAttribute="top" secondItem="n58-As-Mc8" secondAttribute="top" constant="12" id="La7-J0-2P9"/>
                                                 <constraint firstItem="n58-As-Mc8" firstAttribute="leading" secondItem="00i-VA-nWu" secondAttribute="leading" constant="16" id="c8y-Xq-eKh"/>
                                                 <constraint firstItem="n58-As-Mc8" firstAttribute="top" secondItem="00i-VA-nWu" secondAttribute="top" constant="4" id="d9v-iT-Z2Z"/>
-                                                <constraint firstItem="ovx-iU-TNW" firstAttribute="leading" secondItem="00i-VA-nWu" secondAttribute="leading" constant="16" id="hVH-K8-JnC"/>
+                                                <constraint firstItem="ovx-iU-TNW" firstAttribute="leading" secondItem="n58-As-Mc8" secondAttribute="leading" id="vIr-OB-CnZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
