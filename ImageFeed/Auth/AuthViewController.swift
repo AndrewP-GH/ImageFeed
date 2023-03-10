@@ -8,8 +8,6 @@
 import UIKit
 
 final class AuthViewController: UIViewController {
-
-    @IBOutlet private var logoImageView: UIImageView!
     @IBOutlet private var loginButton: UIButton!
 
     override func viewDidLoad() {

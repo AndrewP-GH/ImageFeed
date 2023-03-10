@@ -272,7 +272,6 @@
                     <navigationItem key="navigationItem" id="j23-Vo-K2W"/>
                     <connections>
                         <outlet property="loginButton" destination="3Is-xE-AE4" id="xRg-qh-ah5"/>
-                        <outlet property="logoImageView" destination="GG7-O4-Km7" id="e7g-vr-QYq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nen-F7-AfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
