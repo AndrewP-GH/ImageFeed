@@ -35,10 +35,10 @@ final class WebViewViewController: UIViewController {
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == webViewProgressKeyPath && object as? WKWebView == webView {
-            updateProgress(webView.estimatedProgress)
-        }
-        else {
+        switch (keyPath, object, change) {
+        case (webViewProgressKeyPath, _ as WKWebView, let change?):
+            updateProgress(change[.newKey] as! Double)
+        default:
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
