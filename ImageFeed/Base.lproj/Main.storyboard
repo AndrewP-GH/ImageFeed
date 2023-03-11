@@ -329,7 +329,7 @@
                                 </connections>
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" progressImage="0,5" translatesAutoresizingMaskIntoConstraints="NO" id="fz2-VX-CWx">
-                                <rect key="frame" x="0.0" y="105" width="393" height="4"/>
+                                <rect key="frame" x="0.0" y="99" width="393" height="4"/>
                                 <color key="tintColor" name="YP Black"/>
                                 <color key="progressTintColor" name="YP Black"/>
                             </progressView>
@@ -341,7 +341,7 @@
                             <constraint firstItem="iuH-Ps-kdu" firstAttribute="leading" secondItem="dbf-9X-C2G" secondAttribute="leading" id="Bv3-aD-vgG"/>
                             <constraint firstItem="iuH-Ps-kdu" firstAttribute="bottom" secondItem="dbf-9X-C2G" secondAttribute="bottom" id="LxH-YG-1Ox"/>
                             <constraint firstItem="0I5-Ho-Hlq" firstAttribute="leading" secondItem="hBF-W0-7hD" secondAttribute="leading" constant="16" id="Lxt-lL-mMJ"/>
-                            <constraint firstItem="fz2-VX-CWx" firstAttribute="top" secondItem="0I5-Ho-Hlq" secondAttribute="bottom" constant="6" id="SSE-qk-YCP"/>
+                            <constraint firstItem="fz2-VX-CWx" firstAttribute="top" secondItem="0I5-Ho-Hlq" secondAttribute="bottom" id="SSE-qk-YCP"/>
                             <constraint firstItem="iuH-Ps-kdu" firstAttribute="trailing" secondItem="dbf-9X-C2G" secondAttribute="trailing" id="kGS-sP-1h6"/>
                             <constraint firstItem="fz2-VX-CWx" firstAttribute="trailing" secondItem="dbf-9X-C2G" secondAttribute="trailing" id="vga-JI-aIo"/>
                             <constraint firstItem="fz2-VX-CWx" firstAttribute="leading" secondItem="dbf-9X-C2G" secondAttribute="leading" id="xBB-Fm-mk3"/>
