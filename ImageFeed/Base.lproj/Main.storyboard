@@ -328,6 +328,11 @@
                                     <action selector="didTapBackButton" destination="O9M-lO-Tzl" eventType="touchUpInside" id="enn-Nc-11V"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" progressImage="0,5" translatesAutoresizingMaskIntoConstraints="NO" id="fz2-VX-CWx">
+                                <rect key="frame" x="0.0" y="105" width="393" height="4"/>
+                                <color key="tintColor" name="YP Black"/>
+                                <color key="progressTintColor" name="YP Black"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hBF-W0-7hD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -336,12 +341,16 @@
                             <constraint firstItem="iuH-Ps-kdu" firstAttribute="leading" secondItem="dbf-9X-C2G" secondAttribute="leading" id="Bv3-aD-vgG"/>
                             <constraint firstItem="iuH-Ps-kdu" firstAttribute="bottom" secondItem="dbf-9X-C2G" secondAttribute="bottom" id="LxH-YG-1Ox"/>
                             <constraint firstItem="0I5-Ho-Hlq" firstAttribute="leading" secondItem="hBF-W0-7hD" secondAttribute="leading" constant="16" id="Lxt-lL-mMJ"/>
+                            <constraint firstItem="fz2-VX-CWx" firstAttribute="top" secondItem="0I5-Ho-Hlq" secondAttribute="bottom" constant="6" id="SSE-qk-YCP"/>
                             <constraint firstItem="iuH-Ps-kdu" firstAttribute="trailing" secondItem="dbf-9X-C2G" secondAttribute="trailing" id="kGS-sP-1h6"/>
+                            <constraint firstItem="fz2-VX-CWx" firstAttribute="trailing" secondItem="dbf-9X-C2G" secondAttribute="trailing" id="vga-JI-aIo"/>
+                            <constraint firstItem="fz2-VX-CWx" firstAttribute="leading" secondItem="dbf-9X-C2G" secondAttribute="leading" id="xBB-Fm-mk3"/>
                             <constraint firstItem="0I5-Ho-Hlq" firstAttribute="top" secondItem="hBF-W0-7hD" secondAttribute="top" constant="16" id="xRC-pE-z1C"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ngc-nm-CBn"/>
                     <connections>
+                        <outlet property="progressView" destination="fz2-VX-CWx" id="Y0O-em-QtW"/>
                         <outlet property="webView" destination="iuH-Ps-kdu" id="07a-ha-2l6"/>
                     </connections>
                 </viewController>
@@ -351,6 +360,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="0,5" width="128" height="128"/>
         <image name="4" width="200" height="115"/>
         <image name="Backward" width="9" height="15.666666984558105"/>
         <image name="Heart" width="29.333333969116211" height="26"/>
