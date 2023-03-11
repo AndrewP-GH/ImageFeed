@@ -9,11 +9,15 @@ final class WebViewViewController: UIViewController {
     @IBOutlet private var webView: WKWebView!
     private let unsplashAuthUrl = "https://unsplash.com/oauth/authorize"
 
+    weak var delegate: WebViewViewControllerDelegate?
+
     @IBAction private func didTapBackButton() {
+        delegate?.webViewViewControllerDidCancel(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.navigationDelegate = self
         loadAuthPage()
     }
 
@@ -28,5 +32,31 @@ final class WebViewViewController: UIViewController {
         let authUrl = urlComponent.url!
         let urlRequest = URLRequest(url: authUrl)
         webView.load(urlRequest)
+    }
+}
+
+extension WebViewViewController: WKNavigationDelegate {
+    func webView(
+            _ webView: WKWebView,
+            decidePolicyFor navigationAction: WKNavigationAction,
+            decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let code = code(from: navigationAction) {
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
+
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if let url = navigationAction.request.url,
+           let utlComponent = URLComponents(string: url.absoluteString),
+           utlComponent.path == "/oauth/authorize/native",
+           let items = utlComponent.queryItems,
+           let codeItem = items.first(where: { $0.name == "code" }) {
+            return codeItem.value
+        } else {
+            return nil
+        }
     }
 }
