@@ -342,7 +342,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ngc-nm-CBn"/>
                     <connections>
-                        <outlet property="webView" destination="0I5-Ho-Hlq" id="IVb-aK-pi4"/>
+                        <outlet property="webView" destination="iuH-Ps-kdu" id="07a-ha-2l6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpt-zh-cK1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
