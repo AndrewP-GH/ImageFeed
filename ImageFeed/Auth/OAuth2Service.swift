@@ -12,7 +12,7 @@ final class OAuth2Service {
             if let data = data,
                let response = response as? HTTPURLResponse,
                200..<300 ~= response.statusCode {
-                let authResponse = try? JSONDecoder().decode(AuthResponse.self, from: data)
+                let authResponse = try? JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
                 if let authResponse, !authResponse.access_token.isEmpty {
                     completion(.success(authResponse.access_token))
                 } else {
@@ -42,11 +42,11 @@ final class OAuth2Service {
                         + "&&code=\(code)"
                         + "&&grant_type=authorization_code",
                 httpMethod: "POST",
-                baseURL: URL(string: "https://unsplash.com/oauth/token")!
+                baseURL: URL(string: "https://unsplash.com/")!
         )
     }
 
-    private struct AuthResponse: Decodable {
+    private struct OAuthTokenResponseBody: Decodable {
         let access_token: String
         let token_type: String
         let scope: String
