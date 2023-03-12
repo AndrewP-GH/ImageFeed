@@ -32,7 +32,7 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        authService.fetchAuthToken(code: code) { [weak self] result in
+        authService.fetchAuthToken(code: code) { [weak self] result in //TODO: main thread
             defer {
                 DispatchQueue.main.async { [weak self] in
                     self?.dismiss(animated: true)
