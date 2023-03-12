@@ -32,19 +32,16 @@ final class OAuth2Service {
     }
 
     private func createAuthRequest(code: String) -> URLRequest {
-        let url = URL(string: "https://unsplash.com/oauth/token")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let authRequest = AuthRequest(
-                client_id: Constants.accessKey,
-                client_secret: Constants.secretKey,
-                redirect_uri: Constants.redirectURI,
-                code: code,
-                grant_type: "authorization_code")
-        let body = try? JSONEncoder().encode(authRequest)
-        print(String(data: body!, encoding: .utf8) ?? "nil")
-        request.httpBody = body
-        return request
+        URLRequest.makeHTTPRequest(
+                path: "/oauth/token"
+                        + "?client_id=\(Constants.accessKey)"
+                        + "&&client_secret=\(Constants.secretKey)"
+                        + "&&redirect_uri=\(Constants.redirectURI)"
+                        + "&&code=\(code)"
+                        + "&&grant_type=authorization_code",
+                httpMethod: "POST",
+                baseURL: URL(string: "https://unsplash.com/oauth/token")!
+        )
     }
 
     private struct AuthRequest: Encodable {
