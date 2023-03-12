@@ -40,9 +40,9 @@ extension AuthViewController: WebViewViewControllerDelegate {
             }
             switch result {
             case .success(let token):
-                print("Token: \(token)")
+                print("Token: \(token)")    //TODO: save token
             case .failure(let error):
-                print("Error: \(error)")
+                print("Error: \(error)")    //TODO: show error, test dismiss
             }
         }
     }
