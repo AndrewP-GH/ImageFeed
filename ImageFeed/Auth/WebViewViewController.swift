@@ -34,7 +34,11 @@ final class WebViewViewController: UIViewController {
         webView.removeObserver(self, forKeyPath: webViewProgressKeyPath)
     }
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(
+            forKeyPath keyPath: String?,
+            of object: Any?,
+            change: [NSKeyValueChangeKey: Any]?,
+            context: UnsafeMutableRawPointer?) {
         switch (keyPath, object, change) {
         case (webViewProgressKeyPath, _ as WKWebView, let change?):
             updateProgress(change[.newKey] as! Double)
