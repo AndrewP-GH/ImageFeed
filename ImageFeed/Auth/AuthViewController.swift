@@ -52,7 +52,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 if let response = response as? HTTPURLResponse {
                     var msg = "no data"
                     if let data {
-                        msg = String(data: data, encoding: .utf8) ?? "no message"
+                        msg = String(data: data, encoding: .utf8) ?? "nil"
                     }
                     print("Auth error: \(response.statusCode), message: \(msg)")
                 }
