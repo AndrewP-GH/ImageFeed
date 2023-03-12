@@ -9,5 +9,4 @@ struct Constants {
     static let secretKey = "6SUreVK1nFltdeUC7JSoIBKjrfm30AECfbOCB5nN-L4"
     static let redirectURI = "urn:ietf:wg:oauth:2.0:oob"
     static let accessScope = "public+read_user+write_likes"
-    static let defaultBaseURL = URL(string: "https://api.unsplash.com")!
 }
