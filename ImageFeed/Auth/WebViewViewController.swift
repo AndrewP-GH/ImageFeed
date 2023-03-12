@@ -10,6 +10,7 @@ final class WebViewViewController: UIViewController {
     @IBOutlet private var progressView: UIProgressView!
     private let unsplashAuthUrl = "https://unsplash.com/oauth/authorize"
     private let webViewProgressKeyPath = #keyPath(WKWebView.estimatedProgress)
+    private let pageLoadedProgress = 1.0
 
     weak var delegate: WebViewViewControllerDelegate?
 
@@ -62,7 +63,20 @@ final class WebViewViewController: UIViewController {
         ]
         let authUrl = urlComponent.url!
         let urlRequest = URLRequest(url: authUrl)
+        removeUnsplashCookies()
         webView.load(urlRequest)
+    }
+
+    private func removeUnsplashCookies() {
+        let dataStore = WKWebsiteDataStore.default()
+        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
+            records.forEach { record in
+                if record.displayName.contains("unsplash") {
+                    dataStore.removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+                    print("[WebCacheCleaner] Record \(record) deleted")
+                }
+            }
+        }
     }
 }
 
@@ -77,6 +91,10 @@ extension WebViewViewController: WKNavigationDelegate {
         } else {
             decisionHandler(.allow)
         }
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        updateProgress(pageLoadedProgress)
     }
 
     private func code(from navigationAction: WKNavigationAction) -> String? {

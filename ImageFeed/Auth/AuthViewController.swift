@@ -75,7 +75,8 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 redirect_uri: Constants.redirectURI,
                 code: code,
                 grant_type: "authorization_code")
-        request.httpBody = try? JSONEncoder().encode(authRequest)
+        let body = try? JSONEncoder().encode(authRequest)
+        request.httpBody = body
         return request
     }
 
