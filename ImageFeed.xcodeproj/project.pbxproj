@@ -89,6 +89,7 @@
 		1BD36BF72979CBD700C6B73F = {
 			isa = PBXGroup;
 			children = (
+				1BD6437029BF579600794BCB /* Splash */,
 				1BD36C022979CBD700C6B73F /* ImageFeed */,
 				1BD36C012979CBD700C6B73F /* Products */,
 			);
@@ -117,7 +118,6 @@
 				1BD36C112979CBD700C6B73F /* Info.plist */,
 				AE09A7BB6B9588D0398294DE /* SingleImage */,
 				AE09A784AF52643263C8A665 /* Constants.swift */,
-				1BD6436E29BE163B00794BCB /* SplashViewController.swift */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -139,6 +139,14 @@
 				AE09A7771A9E34BADF21B057 /* GradientView.swift */,
 			);
 			path = ImagesList;
+			sourceTree = "<group>";
+		};
+		1BD6437029BF579600794BCB /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				1BD6436E29BE163B00794BCB /* SplashViewController.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		AE09A7BB6B9588D0398294DE /* SingleImage */ = {
