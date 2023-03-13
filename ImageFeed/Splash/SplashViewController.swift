@@ -38,15 +38,6 @@ final class SplashViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setNeedsStatusBarAppearanceUpdate()
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
-
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Invalid Configuration")
