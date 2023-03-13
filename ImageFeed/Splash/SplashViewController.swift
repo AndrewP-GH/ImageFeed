@@ -52,12 +52,6 @@ final class SplashViewController: UIViewController {
     }
 }
 
-extension UITabBarController {
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
-    }
-}
-
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         DispatchQueue.main.async { [weak self] in
