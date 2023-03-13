@@ -33,14 +33,14 @@ final class SplashViewController: UIViewController {
         }
     }
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        setNeedsStatusBarAppearanceUpdate()
-//    }
-//
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        .lightContent
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setNeedsStatusBarAppearanceUpdate()
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else {
@@ -49,6 +49,12 @@ final class SplashViewController: UIViewController {
         let tabBarViewController = UIStoryboard(name: "Main", bundle: nil)
                 .instantiateViewController(identifier: "TabBarViewController")
         window.rootViewController = tabBarViewController
+    }
+}
+
+extension UITabBarController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
     }
 }
 
