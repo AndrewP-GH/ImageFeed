@@ -8,7 +8,6 @@ import WebKit
 final class WebViewViewController: UIViewController {
     @IBOutlet private var webView: WKWebView!
     @IBOutlet private var progressView: UIProgressView!
-    private let unsplashAuthUrl = "https://unsplash.com/oauth/authorize"
     private let webViewProgressKeyPath = #keyPath(WKWebView.estimatedProgress)
     private let pageLoadedProgress = 1.0
 
@@ -54,7 +53,7 @@ final class WebViewViewController: UIViewController {
     }
 
     private func loadAuthPage() {
-        var urlComponent = URLComponents(string: unsplashAuthUrl)!
+        var urlComponent = URLComponents(url: Constants.unsplashAuthUrl, resolvingAgainstBaseURL: false)!
         urlComponent.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKey),
             URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),

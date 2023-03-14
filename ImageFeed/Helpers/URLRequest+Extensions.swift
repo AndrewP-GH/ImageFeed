@@ -4,13 +4,11 @@
 
 import Foundation
 
-fileprivate let ApiBaseURL = URL(string: "https://api.unsplash.com")!
-
 extension URLRequest {
     static func makeHTTPRequest(
             path: String,
             httpMethod: String,
-            baseURL: URL = ApiBaseURL
+            baseURL: URL = Constants.apiBaseUrl
     ) -> URLRequest {
         var request = URLRequest(url: URL(string: path, relativeTo: baseURL)!)
         request.httpMethod = httpMethod
