@@ -14,10 +14,6 @@ final class AuthViewController: UIViewController {
 
     public var delegate: AuthViewControllerDelegate?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == loginSegueIdentifier {
             guard let vc = segue.destination as? WebViewViewController else {
