@@ -12,11 +12,11 @@ final class OAuth2Service {
             if let data = data,
                let response = response as? HTTPURLResponse,
                200..<300 ~= response.statusCode {
-                let authResponse = try? JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                if let authResponse, !authResponse.access_token.isEmpty {
+                do {
+                    let authResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
                     completion(.success(authResponse.access_token))
-                } else {
-                    completion(.failure(NSError(domain: "Auth error: no token", code: response.statusCode)))
+                } catch {
+                    completion(.failure(error))
                 }
             } else {
                 if let response = response as? HTTPURLResponse {
