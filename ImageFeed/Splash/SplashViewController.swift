@@ -10,6 +10,7 @@ import UIKit
 final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let tokenStorage = OAuth2TokenStorage()
+    private weak var authNavigationController: UINavigationController?
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -28,6 +29,7 @@ final class SplashViewController: UIViewController {
                 assertionFailure("Failed to prepare for segue \(showAuthenticationScreenSegueIdentifier)")
                 return
             }
+            authNavigationController = navigationController
             authController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -48,10 +50,9 @@ final class SplashViewController: UIViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        DispatchQueue.main.async { [weak self] in
-            self?.dismiss(animated: true) { [weak self] in
-                self?.fetchOAuthToken(code)
-            }
+        authNavigationController?.popToRootViewController(animated: true)
+        DispatchQueue.global().async {
+            self.fetchOAuthToken(code)
         }
     }
 
