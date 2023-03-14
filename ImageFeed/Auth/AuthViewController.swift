@@ -12,7 +12,7 @@ final class AuthViewController: UIViewController {
 
     private let loginSegueIdentifier = "ShowWebView"
 
-    public var delegate: AuthViewControllerDelegate?
+    weak var delegate: AuthViewControllerDelegate?
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == loginSegueIdentifier {
