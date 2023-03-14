@@ -10,15 +10,10 @@ import UIKit
 final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let tokenStorage = OAuth2TokenStorage()
-    private var isAlreadyAppeared = false
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if isAlreadyAppeared {
-            return
-        }
-        isAlreadyAppeared = true
         if tokenStorage.token == nil {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         } else {
