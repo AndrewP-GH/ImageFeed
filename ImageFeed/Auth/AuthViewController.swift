@@ -21,7 +21,8 @@ final class AuthViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == loginSegueIdentifier {
             guard let vc = segue.destination as? WebViewViewController else {
-                fatalError("Failed to prepare for segue \(loginSegueIdentifier)")
+                assertionFailure("Failed to prepare for segue \(loginSegueIdentifier)")
+                return
             }
             vc.delegate = self
         } else {

@@ -30,7 +30,8 @@ final class SplashViewController: UIViewController {
         if segue.identifier == showAuthenticationScreenSegueIdentifier {
             guard let navigationController = segue.destination as? UINavigationController,
                   let authController = navigationController.viewControllers[0] as? AuthViewController else {
-                fatalError("Failed to prepare for segue \(showAuthenticationScreenSegueIdentifier)")
+                assertionFailure("Failed to prepare for segue \(showAuthenticationScreenSegueIdentifier)")
+                return
             }
             authController.delegate = self
         } else {
@@ -40,7 +41,8 @@ final class SplashViewController: UIViewController {
 
     private func switchToTabBarController() {
         guard let window = UIApplication.shared.windows.first else {
-            fatalError("Invalid Configuration")
+            assertionFailure("Invalid Configuration")
+            return
         }
         let tabBarViewController = UIStoryboard(name: "Main", bundle: nil)
                 .instantiateViewController(identifier: "TabBarViewController")
