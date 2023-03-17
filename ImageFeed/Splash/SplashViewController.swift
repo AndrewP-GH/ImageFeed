@@ -53,25 +53,18 @@ extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         authNavigationController?.popToRootViewController(animated: true)
         ProgressHUD.show()
-        DispatchQueue.global().async {
-            self.fetchOAuthToken(code)
-        }
+        fetchOAuthToken(code)
     }
 
     private func fetchOAuthToken(_ code: String) {
         OAuth2Service().fetchAuthToken(code: code) { result in
-            DispatchQueue.main.async { [weak self] in
-                guard let self else {
-                    return
-                }
-                switch result {
-                case .success(let token):
-                    self.tokenStorage.token = token
-                    ProgressHUD.dismiss()
-                    self.switchToTabBarController()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            switch result {
+            case .success(let token):
+                self.tokenStorage.token = token
+                ProgressHUD.dismiss()
+                self.switchToTabBarController()
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
