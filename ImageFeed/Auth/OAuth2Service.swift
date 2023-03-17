@@ -56,8 +56,8 @@ final class OAuth2Service {
                         + "&&redirect_uri=\(Constants.redirectURI)"
                         + "&&code=\(code)"
                         + "&&grant_type=authorization_code",
-                httpMethod: "POST",
-                baseURL: URL(string: "https://unsplash.com/")!
+                httpMethod: .POST,
+                baseURL: Constants.UnsplashUrls.general
         )
     }
 

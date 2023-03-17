@@ -8,6 +8,8 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+    private let profileService = ProfileService()
+    private let tokenStorage = OAuth2TokenStorage()
 
     private lazy var personImage: UIImageView = {
         let personImage = UIImageView()
@@ -19,7 +21,6 @@ final class ProfileViewController: UIViewController {
     private lazy var fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        fullNameLabel.text = "Екатерина Новикова"
         fullNameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)   // bold (700)
         fullNameLabel.textColor = .ypWhite
         return fullNameLabel
@@ -27,7 +28,6 @@ final class ProfileViewController: UIViewController {
     private lazy var nicknameLabel: UILabel = {
         let nicknameLabel = UILabel()
         nicknameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nicknameLabel.text = "@ekaterina_nov"
         nicknameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)   // regular (400)
         nicknameLabel.textColor = .ypGrey
         return nicknameLabel
@@ -35,7 +35,6 @@ final class ProfileViewController: UIViewController {
     private lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.text = "Hello, world!"
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)   // regular (400)
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.numberOfLines = 0
@@ -53,8 +52,26 @@ final class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        fetchProfile()
         addSubViews()
         applyConstraints()
+    }
+
+    private func fetchProfile() {
+        let token = tokenStorage.token ?? ""
+        profileService.fetchProfile(token) { [weak self] result in
+            switch result {
+            case .success(let profile):
+                DispatchQueue.main.async {
+                    self?.fullNameLabel.text = profile.name
+                    self?.nicknameLabel.text = profile.loginName
+                    self?.descriptionLabel.text = profile.bio
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     private func addSubViews() {
