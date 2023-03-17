@@ -63,11 +63,12 @@ final class ProfileViewController: UIViewController {
         profileService.fetchProfile(token) { [weak self] result in
             switch result {
             case .success(let profile):
-                DispatchQueue.main.async {
-                    self?.fullNameLabel.text = profile.name
-                    self?.nicknameLabel.text = profile.loginName
-                    self?.descriptionLabel.text = profile.bio
+                guard let self else {
+                    return
                 }
+                self.fullNameLabel.text = profile.name
+                self.nicknameLabel.text = profile.loginName
+                self.descriptionLabel.text = profile.bio
             case .failure(let error):
                 print(error)
             }
