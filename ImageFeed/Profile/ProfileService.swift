@@ -33,7 +33,6 @@ final class ProfileService {
                         let profile = ProfileService.profileFactory(profileResult)
                         completion(.success(profile))
                     } catch {
-                        debugPrint(error)
                         completion(.failure(error))
                     }
                 } else {

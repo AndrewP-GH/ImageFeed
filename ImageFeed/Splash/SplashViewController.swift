@@ -64,7 +64,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 self.tokenStorage.token = token
                 self.fetchProfileAndSwitchScreen(token)
             case .failure(let error):
-                print(error.localizedDescription)
+                debugPrint(error.localizedDescription)
                 UIBlockingProgressHUD.dismiss()
             }
         }
@@ -79,7 +79,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success(let profile):
                 self.switchToTabBarController()
             case .failure(let error):
-                print(error.localizedDescription)
+                debugPrint(error.localizedDescription)
             }
         }
     }

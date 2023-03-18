@@ -72,7 +72,7 @@ final class WebViewViewController: UIViewController {
             records.forEach { record in
                 if record.displayName.contains("unsplash") {
                     dataStore.removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-                    print("Record \(record) deleted")
+                    debugPrint("Record \(record) deleted")
                 }
             }
         }
