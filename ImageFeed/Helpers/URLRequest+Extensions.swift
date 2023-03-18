@@ -31,4 +31,8 @@ extension URLRequest {
         urlComponent.queryItems = queryItems
         return URLRequest(url: urlComponent.url!)
     }
+
+    mutating func addAuthorizationHeader(_ token: String) {
+        self.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    }
 }

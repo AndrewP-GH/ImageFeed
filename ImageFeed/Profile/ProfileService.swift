@@ -18,7 +18,7 @@ final class ProfileService {
     private(set) var profile: Profile?
 
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
-        let request = createAuthRequest(accessToken: token)
+        let request = createGetProfileRequest(accessToken: token)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
@@ -49,9 +49,9 @@ final class ProfileService {
         task.resume()
     }
 
-    private func createAuthRequest(accessToken: String) -> URLRequest {
+    private func createGetProfileRequest(accessToken: String) -> URLRequest {
         var request = URLRequest.makeHTTPRequest(path: "/me", baseURL: Constants.UnsplashUrls.api)
-        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.addAuthorizationHeader(accessToken)
         return request
     }
 
