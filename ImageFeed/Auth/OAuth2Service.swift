@@ -5,11 +5,16 @@
 import Foundation
 
 final class OAuth2Service {
-    private var state: (String, URLSessionDataTask)?
+    private enum State {
+        case idle
+        case inProgress(code: String, task: URLSessionDataTask)
+    }
+
+    private var state: State = .idle
 
     func fetchAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
-        if let (currentCode, currentTask) = state {
+        if case let .inProgress(currentCode, currentTask) = state {
             if currentCode == code {
                 return
             }
@@ -20,7 +25,7 @@ final class OAuth2Service {
         let task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 defer {
-                    self.state = nil
+                    self.state = .idle
                 }
                 if let data = data,
                    let response = response as? HTTPURLResponse,
@@ -44,7 +49,7 @@ final class OAuth2Service {
                 }
             }
         }
-        state = (code, task)
+        state = .inProgress(code: code, task: task)
         task.resume()
     }
 
