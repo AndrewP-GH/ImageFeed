@@ -50,13 +50,14 @@ final class OAuth2Service {
 
     private func createAuthRequest(code: String) -> URLRequest {
         URLRequest.makeHTTPRequest(
-                path: "/oauth/token"
-                        + "?client_id=\(Constants.accessKey)"
-                        + "&&client_secret=\(Constants.secretKey)"
-                        + "&&redirect_uri=\(Constants.redirectURI)"
-                        + "&&code=\(code)"
-                        + "&&grant_type=authorization_code",
-                httpMethod: .POST,
+                path: "/oauth/token",
+                queryItems: [
+                    URLQueryItem(name: "client_id", value: Constants.accessKey),
+                    URLQueryItem(name: "client_secret", value: Constants.secretKey),
+                    URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+                    URLQueryItem(name: "code", value: code),
+                    URLQueryItem(name: "grant_type", value: "authorization_code"),
+                ],
                 baseURL: Constants.UnsplashUrls.general
         )
     }

@@ -21,4 +21,14 @@ extension URLRequest {
         request.httpMethod = httpMethod.rawValue
         return request
     }
+
+    static func makeHTTPRequest(
+            path: String,
+            queryItems: [URLQueryItem],
+            baseURL: URL = Constants.UnsplashUrls.api
+    ) -> URLRequest {
+        var urlComponent = URLComponents(url: URL(string: path, relativeTo: baseURL)!, resolvingAgainstBaseURL: true)!
+        urlComponent.queryItems = queryItems
+        return URLRequest(url: urlComponent.url!)
+    }
 }
