@@ -8,9 +8,6 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
-    private let profileService = ProfileService()
-    private let tokenStorage = OAuth2TokenStorage()
-
     private lazy var personImage: UIImageView = {
         let personImage = UIImageView()
         personImage.translatesAutoresizingMaskIntoConstraints = false
@@ -53,26 +50,8 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchProfile()
         addSubViews()
         applyConstraints()
-    }
-
-    private func fetchProfile() {
-        let token = tokenStorage.token ?? ""
-        profileService.fetchProfile(token) { [weak self] result in
-            switch result {
-            case .success(let profile):
-                guard let self else {
-                    return
-                }
-                self.fullNameLabel.text = profile.name
-                self.nicknameLabel.text = profile.loginName
-                self.descriptionLabel.text = profile.bio
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
 
     private func addSubViews() {

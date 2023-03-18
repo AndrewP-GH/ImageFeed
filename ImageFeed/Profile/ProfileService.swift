@@ -8,9 +8,9 @@ final class ProfileService {
     private struct ProfileResult: Decodable {
         let id: String
         let username: String
-        let first_name: String
-        let last_name: String
-        let bio: String
+        let first_name: String?
+        let last_name: String?
+        let bio: String?
     }
 
     struct Profile {
@@ -33,6 +33,7 @@ final class ProfileService {
                         let profile = ProfileService.profileFactory(profileResult)
                         completion(.success(profile))
                     } catch {
+                        debugPrint(error)
                         completion(.failure(error))
                     }
                 } else {
@@ -60,9 +61,11 @@ final class ProfileService {
     private static func profileFactory(_ result: ProfileResult) -> Profile {
         Profile(
                 username: result.username,
-                name: "\(result.first_name) \(result.last_name)",
+                name: """
+                      \(result.first_name.orEmpty()) \(result.last_name.orEmpty())
+                      """,
                 loginName: "@\(result.username)",
-                bio: result.bio
+                bio: result.bio.orEmpty()
         )
     }
 }
