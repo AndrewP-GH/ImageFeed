@@ -120,17 +120,12 @@ final class ProfileViewController: UIViewController {
     }
 
     private static func getPersonImage() -> UIImage {
-        let person = UIImage(named: "StubPhoto")
-        if person != nil {
-            return person!
+        let systemName = "person.crop.circle.fill"
+        if #available(iOS 15.0, *) {
+            let config = UIImage.SymbolConfiguration(paletteColors: [.ypWhite, .ypGrey])
+            return UIImage(systemName: systemName, withConfiguration: config)!
         } else {
-            let systemName = "person.crop.circle.fill"
-            if #available(iOS 15.0, *) {
-                let config = UIImage.SymbolConfiguration(paletteColors: [.ypWhite, .ypGrey])
-                return UIImage(systemName: systemName, withConfiguration: config)!
-            } else {
-                return UIImage(systemName: systemName)!
-            }
+            return UIImage(systemName: systemName)!
         }
     }
 
