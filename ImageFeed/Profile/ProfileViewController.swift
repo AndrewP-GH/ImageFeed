@@ -10,6 +10,7 @@ import UIKit
 final class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
 
     private lazy var personImage: UIImageView = {
         let personImage = UIImageView()
@@ -50,49 +51,17 @@ final class ProfileViewController: UIViewController {
         return logoutButton
     }()
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        addObserver()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        addObserver()
-    }
-
-    deinit {
-        removeObserver()
-    }
-
-    private func addObserver() {
-        NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(updateAvatar(notification:)),
-                name: ProfileImageService.DidChangeNotification,
-                object: nil)
-    }
-
-    private func removeObserver() {
-        NotificationCenter.default.removeObserver(
-                self,
-                name: ProfileImageService.DidChangeNotification,
-                object: nil)
-    }
-
-    @objc private func updateAvatar(notification: Notification) {
-        guard
-                isViewLoaded,
-                let userInfo = notification.userInfo,
-                let imageURL = userInfo["URL"] as? String,
-                let url = URL(string: imageURL) else {
-            assertionFailure("Invalid notification")
-            return
-        }
-        //TODO: Load image from url
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        profileImageServiceObserver = NotificationCenter.default
+                .addObserver(
+                        forName: ProfileImageService.DidChangeNotification,
+                        object: self,
+                        queue: .main
+                ) { [weak self] notification in
+                    self?.updateAvatar()
+                }
 
         addSubViews()
         applyConstraints()
@@ -101,9 +70,13 @@ final class ProfileViewController: UIViewController {
             return
         }
         updateProfileDetails(profile: profile)
+        updateAvatar()
+    }
+
+    private func updateAvatar() {
         if let avatarUrl = profileImageService.avatarURL,
-           let url = URL(string: avatarUrl) {
-            //TODO: Load image from url
+           let imageUrl = URL(string: avatarUrl) {
+
         }
     }
 
