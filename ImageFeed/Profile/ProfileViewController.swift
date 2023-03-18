@@ -98,8 +98,8 @@ final class ProfileViewController: UIViewController {
                     logoutButton.widthAnchor.constraint(equalToConstant: 20),
                     logoutButton.heightAnchor.constraint(equalToConstant: 22),
                     logoutButton.centerYAnchor.constraint(equalTo: personImage.centerYAnchor),
-                    logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                                           constant: -26),
+                    logoutButton.trailingAnchor
+                            .constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26),
                     fullNameLabel.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 8),
                     fullNameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
                     fullNameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
