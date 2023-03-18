@@ -10,7 +10,7 @@ import UIKit
 final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let tokenStorage = OAuth2TokenStorage()
-    private let profileService = ProfileService()
+    private let profileService = ProfileService.shared
 
     private weak var authNavigationController: UINavigationController?
 

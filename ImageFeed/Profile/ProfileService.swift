@@ -5,6 +5,8 @@
 import Foundation
 
 final class ProfileService {
+    static let shared = ProfileService()
+
     private struct ProfileResult: Decodable {
         let id: String
         let username: String
@@ -13,12 +15,7 @@ final class ProfileService {
         let bio: String?
     }
 
-    struct Profile {
-        let username: String
-        let name: String
-        let loginName: String
-        let bio: String
-    }
+    private(set) var profile: Profile?
 
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         let request = createAuthRequest(accessToken: token)
@@ -31,6 +28,7 @@ final class ProfileService {
                     do {
                         let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
                         let profile = ProfileService.profileFactory(profileResult)
+                        self.profile = profile
                         completion(.success(profile))
                     } catch {
                         completion(.failure(error))

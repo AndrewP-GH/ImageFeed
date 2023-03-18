@@ -8,6 +8,8 @@
 import UIKit
 
 final class ProfileViewController: UIViewController {
+    private let profileService = ProfileService.shared
+
     private lazy var personImage: UIImageView = {
         let personImage = UIImageView()
         personImage.translatesAutoresizingMaskIntoConstraints = false
@@ -52,6 +54,10 @@ final class ProfileViewController: UIViewController {
 
         addSubViews()
         applyConstraints()
+        guard let profile = profileService.profile else {
+            return
+        }
+        updateProfileDetails(profile: profile)
     }
 
     private func addSubViews() {
@@ -82,6 +88,12 @@ final class ProfileViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
         ])
+    }
+
+    private func updateProfileDetails(profile: Profile) {
+        fullNameLabel.text = profile.name
+        nicknameLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
     }
 
     private static func getPersonImage() -> UIImage {
