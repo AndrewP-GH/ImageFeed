@@ -15,7 +15,7 @@ final class ProfileImageService {
         let small: String
     }
 
-    private static let shared = ProfileImageService()
+    static let shared = ProfileImageService()
 
     private let tokenStorage = OAuth2TokenStorage()
 
