@@ -16,6 +16,7 @@ final class ProfileImageService {
     }
 
     static let shared = ProfileImageService()
+    static let DidChangeNotification = Notification.Name("ProfileImageProviderDidChange")
 
     private let tokenStorage = OAuth2TokenStorage()
 
@@ -38,6 +39,11 @@ final class ProfileImageService {
                         let imageURL = userResult.profile_image.small
                         self.avatarURL = imageURL
                         completion(.success(imageURL))
+                        NotificationCenter.default.post(
+                                name: Self.DidChangeNotification,
+                                object: self,
+                                userInfo: ["URL": imageURL]
+                        )
                     } catch {
                         completion(.failure(error))
                     }
