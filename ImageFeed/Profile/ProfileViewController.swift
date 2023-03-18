@@ -9,6 +9,7 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
 
     private lazy var personImage: UIImageView = {
         let personImage = UIImageView()
@@ -49,6 +50,47 @@ final class ProfileViewController: UIViewController {
         return logoutButton
     }()
 
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        addObserver()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addObserver()
+    }
+
+    deinit {
+        removeObserver()
+    }
+
+    private func addObserver() {
+        NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(updateAvatar(notification:)),
+                name: ProfileImageService.DidChangeNotification,
+                object: nil)
+    }
+
+    private func removeObserver() {
+        NotificationCenter.default.removeObserver(
+                self,
+                name: ProfileImageService.DidChangeNotification,
+                object: nil)
+    }
+
+    @objc private func updateAvatar(notification: Notification) {
+        guard
+                isViewLoaded,
+                let userInfo = notification.userInfo,
+                let imageURL = userInfo["URL"] as? String,
+                let url = URL(string: imageURL) else {
+            assertionFailure("Invalid notification")
+            return
+        }
+        //TODO: Load image from url
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,6 +101,10 @@ final class ProfileViewController: UIViewController {
             return
         }
         updateProfileDetails(profile: profile)
+        if let avatarUrl = profileImageService.avatarURL,
+           let url = URL(string: avatarUrl) {
+            //TODO: Load image from url
+        }
     }
 
     private func addSubViews() {
@@ -70,25 +116,28 @@ final class ProfileViewController: UIViewController {
     }
 
     private func applyConstraints() {
-        NSLayoutConstraint.activate([
-            personImage.widthAnchor.constraint(equalToConstant: 70),
-            personImage.heightAnchor.constraint(equalToConstant: 70),
-            personImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            personImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            logoutButton.widthAnchor.constraint(equalToConstant: 20),
-            logoutButton.heightAnchor.constraint(equalToConstant: 22),
-            logoutButton.centerYAnchor.constraint(equalTo: personImage.centerYAnchor),
-            logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26),
-            fullNameLabel.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 8),
-            fullNameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
-            fullNameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
-            nicknameLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 8),
-            nicknameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
-            nicknameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8),
-            descriptionLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
-        ])
+        NSLayoutConstraint.activate(
+                [
+                    personImage.widthAnchor.constraint(equalToConstant: 70),
+                    personImage.heightAnchor.constraint(equalToConstant: 70),
+                    personImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+                    personImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                    logoutButton.widthAnchor.constraint(equalToConstant: 20),
+                    logoutButton.heightAnchor.constraint(equalToConstant: 22),
+                    logoutButton.centerYAnchor.constraint(equalTo: personImage.centerYAnchor),
+                    logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                                           constant: -26),
+                    fullNameLabel.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 8),
+                    fullNameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
+                    fullNameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
+                    nicknameLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 8),
+                    nicknameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
+                    nicknameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
+                    descriptionLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8),
+                    descriptionLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
+                    descriptionLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
+                ]
+        )
     }
 
     private func updateProfileDetails(profile: Profile) {
