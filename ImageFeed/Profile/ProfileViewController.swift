@@ -130,5 +130,6 @@ final class ProfileViewController: UIViewController {
     }
 
     @objc private func didTapLogout() {
+        UserDefaults.standard.removeObject(forKey: "authToken") //TODO: Remove hack
     }
 }
