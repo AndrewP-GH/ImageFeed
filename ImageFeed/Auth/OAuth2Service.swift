@@ -21,34 +21,20 @@ final class OAuth2Service {
             currentTask.cancel()
         }
         let request = createAuthRequest(code: code)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                defer {
-                    self.state = .idle
-                }
-                if let data = data,
-                   let response = response as? HTTPURLResponse,
-                   200..<300 ~= response.statusCode {
-                    do {
-                        let authResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                        completion(.success(authResponse.access_token))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                } else {
-                    if let response = response as? HTTPURLResponse {
-                        var msg = "no data"
-                        if let data = data {
-                            msg = String(data: data, encoding: .utf8) ?? "nil"
+        let task = URLSession.shared
+                .objectTask(request: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
+                    DispatchQueue.main.async {
+                        defer {
+                            self?.state = .idle
                         }
-                        completion(.failure(NSError(domain: "Auth error: \(msg)", code: response.statusCode)))
-                    } else {
-                        completion(.failure(error ?? NSError(domain: "Unknown error", code: 0)))
+                        switch result {
+                        case let .success(authResponse):
+                            completion(.success(authResponse.access_token))
+                        case let .failure(error):
+                            completion(.failure(error))
+                        }
                     }
                 }
-            }
-        }
         state = .inProgress(code: code, task: task)
         task.resume()
     }

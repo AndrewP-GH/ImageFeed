@@ -28,38 +28,24 @@ final class ProfileImageService {
             return
         }
         let request = createGetProfileImageRequest(username: username, token: token)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                if let data,
-                   let response = response as? HTTPURLResponse,
-                   200..<300 ~= response.statusCode {
-                    do {
-                        let userResult = try JSONDecoder().decode(UserResult.self, from: data)
-                        let imageURL = userResult.profile_image.small
-                        self.avatarURL = imageURL
-                        completion(.success(imageURL))
-                        NotificationCenter.default.post(
-                                name: Self.DidChangeNotification,
-                                object: self,
-                                userInfo: ["URL": imageURL]
-                        )
-                    } catch {
-                        completion(.failure(error))
-                    }
-                } else {
-                    if let response = response as? HTTPURLResponse {
-                        var msg = "no data"
-                        if let data {
-                            msg = String(data: data, encoding: .utf8) ?? "nil"
+        let task = URLSession.shared
+                .objectTask(request: request) { [weak self] (result: Result<UserResult, Error>) in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case let .success(userResult):
+                            let imageURL = userResult.profile_image.small
+                            self?.avatarURL = imageURL
+                            completion(.success(imageURL))
+                            NotificationCenter.default.post(
+                                    name: Self.DidChangeNotification,
+                                    object: self,
+                                    userInfo: ["URL": imageURL]
+                            )
+                        case let .failure(error):
+                            completion(.failure(error))
                         }
-                        completion(.failure(NSError(domain: "Request error: \(msg)", code: response.statusCode)))
-                    } else {
-                        completion(.failure(error ?? NSError(domain: "Unknown error", code: 0)))
                     }
                 }
-            }
-        }
         task.resume()
     }
 
