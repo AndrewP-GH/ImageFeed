@@ -67,7 +67,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .failure(let error):
                 debugPrint(error.localizedDescription)
                 UIBlockingProgressHUD.dismiss()
-                self.showNetworkErrorAlert()    //TODO: not working
+                //cause performSegue to auth vc was called in viewDidAppear
+                SplashViewController.showNetworkErrorAlert(self.authNavigationController ?? self)
             }
         }
     }
@@ -83,16 +84,16 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .failure(let error):
                 debugPrint(error.localizedDescription)
                 UIBlockingProgressHUD.dismiss()
-                self.showNetworkErrorAlert()
+                SplashViewController.showNetworkErrorAlert(self)
             }
         }
     }
 
-    private func showNetworkErrorAlert() {
+    private static func showNetworkErrorAlert(_ vc: UIViewController) {
         let alert = UIAlertController(title: "Что-то пошло не так(",
                                       message: "Не удалось войти в систему",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        vc.present(alert, animated: true, completion: nil)
     }
 }
