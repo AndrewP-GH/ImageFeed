@@ -10,7 +10,7 @@ final class WebViewViewController: UIViewController {
     @IBOutlet private var progressView: UIProgressView!
     private let webViewProgressKeyPath = #keyPath(WKWebView.estimatedProgress)
     private let pageLoadedProgress = 1.0
-
+    private var estimateProgressObserver: NSKeyValueObservation?
     weak var delegate: WebViewViewControllerDelegate?
 
     @IBAction private func didTapBackButton() {
@@ -19,35 +19,27 @@ final class WebViewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        estimateProgressObserver = webView.observe(
+                \.estimatedProgress,
+                options: [.new],
+                changeHandler: { [weak self] _, change in
+                    self?.updateProgress(change.newValue!)
+                }
+        )
         webView.navigationDelegate = self
         loadAuthPage()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        webView.addObserver(self, forKeyPath: webViewProgressKeyPath, options: .new, context: nil)
         updateProgress(webView.estimatedProgress)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        webView.removeObserver(self, forKeyPath: webViewProgressKeyPath)
     }
 
-    override func observeValue(
-            forKeyPath keyPath: String?,
-            of object: Any?,
-            change: [NSKeyValueChangeKey: Any]?,
-            context: UnsafeMutableRawPointer?) {
-        switch (keyPath, object, change) {
-        case (webViewProgressKeyPath, _ as WKWebView, let change?):
-            updateProgress(change[.newKey] as! Double)
-        default:
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
-
-    private func updateProgress(_ progress: Double) {
+   private func updateProgress(_ progress: Double) {
         progressView.progress = Float(progress)
         progressView.isHidden = fabs(progress - 1.0) <= 0.0001
     }
