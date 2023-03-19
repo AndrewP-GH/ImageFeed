@@ -22,8 +22,7 @@ extension URLSession {
                         completion(.failure(error))
                     }
                 default:
-                    completion(.failure(NSError(domain: "HTTP error: \(response.statusCode)",
-                                                code: response.statusCode)))
+                    completion(.failure(NSError(domain: "HTTP error", code: response.statusCode)))
                 }
             } else {
                 completion(.failure(error ?? NSError(domain: "Unknown error", code: 0)))
