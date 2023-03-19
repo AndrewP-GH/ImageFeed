@@ -67,7 +67,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .failure(let error):
                 debugPrint(error.localizedDescription)
                 UIBlockingProgressHUD.dismiss()
-                self.showNetworkErrorAlert()
+                self.showNetworkErrorAlert()    //TODO: not working
             }
         }
     }
