@@ -12,7 +12,8 @@ extension URLSession {
         self.dataTask(with: request) { data, response, error in
             if let data,
                let response = response as? HTTPURLResponse {
-                if 200..<300 ~= response.statusCode {
+                switch response.statusCode {
+                case 200..<300:
                     do {
                         let object = try JSONDecoder().decode(T.self, from: data)
                         completion(.success(object))
@@ -20,14 +21,12 @@ extension URLSession {
                         debugPrint(error.localizedDescription)
                         completion(.failure(error))
                     }
-                } else {
+                default:
                     completion(.failure(NSError(domain: "HTTP error: \(response.statusCode)",
                                                 code: response.statusCode)))
                 }
-            } else if let error = error {
-                completion(.failure(error))
             } else {
-                completion(.failure(NSError(domain: "Unknown error", code: 0)))
+                completion(.failure(error ?? NSError(domain: "Unknown error", code: 0)))
             }
         }
     }
