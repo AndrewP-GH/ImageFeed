@@ -53,7 +53,7 @@ final class SplashViewController: UIViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        authNavigationController?.popToRootViewController(animated: true)
+        authNavigationController!.popToRootViewController(animated: true)
         UIBlockingProgressHUD.show()
         fetchOAuthToken(code)
     }
@@ -74,16 +74,15 @@ extension SplashViewController: AuthViewControllerDelegate {
 
     private func fetchProfileAndSwitchScreen(_ token: String) {
         profileService.fetchProfile(token) { result in
-            defer {
-                UIBlockingProgressHUD.dismiss()
-            }
             switch result {
             case .success(let profile):
                 self.profileImageService.fetchProfileImageURL(username: profile.username) { _ in
                 }
+                UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
             case .failure(let error):
                 debugPrint(error.localizedDescription)
+                UIBlockingProgressHUD.dismiss()
                 self.showNetworkErrorAlert()
             }
         }
