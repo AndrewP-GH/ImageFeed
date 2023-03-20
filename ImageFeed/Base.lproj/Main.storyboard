@@ -156,22 +156,6 @@
             </objects>
             <point key="canvasLocation" x="-779" y="92"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="cG3-XR-hC4">
-            <objects>
-                <viewController storyboardIdentifier="ProfileViewController" title="Profile" id="Gcd-29-xEv" userLabel="Profile" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="opj-jq-Dyd">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="XPc-fR-Oo9"/>
-                        <color key="backgroundColor" name="YP Black"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="aer-24-hao"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RJ6-sG-3vN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="162.59541984732823" y="487.32394366197184"/>
-        </scene>
         <!--Single Image-->
         <scene sceneID="z32-3p-plz">
             <objects>
@@ -392,7 +376,6 @@
         <image name="UnsplashLogo" width="60" height="60"/>
         <image name="nav_back_button" width="24" height="24"/>
         <image name="tab_editorial_active" width="20" height="22"/>
-        <image name="tab_profile_active" width="24" height="24"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
