@@ -142,7 +142,7 @@
 				AE09A784AF52643263C8A665 /* Constants.swift */,
 				AE09AE4847BC7BFADC65FC34 /* Splash */,
 				AE09AD919E7E47456E907D4F /* UIBlockingProgressHUD.swift */,
-				AE09AABBEA0F84375B88C228 /* Main */,
+				AE09AABBEA0F84375B88C228 /* TabBar */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -176,12 +176,12 @@
 			path = SingleImage;
 			sourceTree = "<group>";
 		};
-		AE09AABBEA0F84375B88C228 /* Main */ = {
+		AE09AABBEA0F84375B88C228 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
 				AE09A2CA95E26C596630E7B2 /* TabBarController.swift */,
 			);
-			path = Main;
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		AE09AE4847BC7BFADC65FC34 /* Splash */ = {
