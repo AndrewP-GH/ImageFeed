@@ -53,9 +53,8 @@ final class ProfileViewController: UIViewController {
         return logoutButton
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
         profileImageServiceObserver = NotificationCenter.default
                 .addObserver(
                         forName: ProfileImageService.DidChangeNotification,
@@ -64,6 +63,10 @@ final class ProfileViewController: UIViewController {
                 ) { [weak self] notification in
                     self?.updateAvatar()
                 }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         addSubViews()
         applyConstraints()

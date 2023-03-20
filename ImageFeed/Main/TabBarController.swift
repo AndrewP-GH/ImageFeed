@@ -10,7 +10,9 @@ final class TabBarController: UITabBarController {
 
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let imageListVC = storyboard.instantiateViewController(withIdentifier: "ImageListViewController")
-        let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
+        let profileVC = ProfileViewController()
+        profileVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "tab_profile_active"), selectedImage: nil)
+        profileVC.view.backgroundColor = .ypBlack
 
         viewControllers = [imageListVC, profileVC]
     }
