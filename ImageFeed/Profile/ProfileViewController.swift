@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     private var profileImageServiceObserver: NSObjectProtocol?
+    private var profileImageSize: CGFloat = 70
 
     private lazy var personImage: UIImageView = {
         let personImage = UIImageView()
@@ -76,7 +78,12 @@ final class ProfileViewController: UIViewController {
     private func updateAvatar() {
         if let avatarUrl = profileImageService.avatarURL,
            let imageUrl = URL(string: avatarUrl) {
-
+            let processor = RoundCornerImageProcessor(cornerRadius: profileImageSize / 2)
+            personImage.kf.indicatorType = .activity
+            personImage.kf.setImage(
+                    with: imageUrl,
+                    placeholder: personImage.image,
+                    options: [.processor(processor), .cacheSerializer(FormatIndicatedCacheSerializer.png), .cacheMemoryOnly])
         }
     }
 
@@ -91,8 +98,8 @@ final class ProfileViewController: UIViewController {
     private func applyConstraints() {
         NSLayoutConstraint.activate(
                 [
-                    personImage.widthAnchor.constraint(equalToConstant: 70),
-                    personImage.heightAnchor.constraint(equalToConstant: 70),
+                    personImage.widthAnchor.constraint(equalToConstant: profileImageSize),
+                    personImage.heightAnchor.constraint(equalToConstant: profileImageSize),
                     personImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
                     personImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
                     logoutButton.widthAnchor.constraint(equalToConstant: 20),
