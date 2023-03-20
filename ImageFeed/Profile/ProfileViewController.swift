@@ -58,7 +58,7 @@ final class ProfileViewController: UIViewController {
         profileImageServiceObserver = NotificationCenter.default
                 .addObserver(
                         forName: ProfileImageService.DidChangeNotification,
-                        object: self,
+                        object: nil,
                         queue: .main
                 ) { [weak self] notification in
                     self?.updateAvatar()
