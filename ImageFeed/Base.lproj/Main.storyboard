@@ -187,72 +187,12 @@
             </objects>
             <point key="canvasLocation" x="1089" y="-196"/>
         </scene>
-        <!--WebView-->
-        <scene sceneID="ruJ-R9-br4">
-            <objects>
-                <viewController storyboardIdentifier="WebViewViewController" id="O9M-lO-Tzl" userLabel="WebView" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dbf-9X-C2G">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iuH-Ps-kdu">
-                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
-                                <color key="backgroundColor" name="YP White"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0I5-Ho-Hlq" userLabel="BackButton">
-                                <rect key="frame" x="16" y="75" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="8X4-va-iVp"/>
-                                    <constraint firstAttribute="width" constant="24" id="hoR-Oe-o3y"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="nav_back_button"/>
-                                <connections>
-                                    <action selector="didTapBackButton" destination="O9M-lO-Tzl" eventType="touchUpInside" id="enn-Nc-11V"/>
-                                </connections>
-                            </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" progressImage="0,5" translatesAutoresizingMaskIntoConstraints="NO" id="fz2-VX-CWx">
-                                <rect key="frame" x="0.0" y="99" width="393" height="4"/>
-                                <color key="tintColor" name="YP Black"/>
-                                <color key="progressTintColor" name="YP Black"/>
-                            </progressView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="hBF-W0-7hD"/>
-                        <color key="backgroundColor" name="YP White"/>
-                        <constraints>
-                            <constraint firstItem="iuH-Ps-kdu" firstAttribute="top" secondItem="fz2-VX-CWx" secondAttribute="bottom" id="Aat-Md-d32"/>
-                            <constraint firstItem="iuH-Ps-kdu" firstAttribute="leading" secondItem="dbf-9X-C2G" secondAttribute="leading" id="Bv3-aD-vgG"/>
-                            <constraint firstItem="iuH-Ps-kdu" firstAttribute="bottom" secondItem="dbf-9X-C2G" secondAttribute="bottom" id="LxH-YG-1Ox"/>
-                            <constraint firstItem="0I5-Ho-Hlq" firstAttribute="leading" secondItem="hBF-W0-7hD" secondAttribute="leading" constant="16" id="Lxt-lL-mMJ"/>
-                            <constraint firstItem="fz2-VX-CWx" firstAttribute="top" secondItem="0I5-Ho-Hlq" secondAttribute="bottom" id="SSE-qk-YCP"/>
-                            <constraint firstItem="iuH-Ps-kdu" firstAttribute="trailing" secondItem="dbf-9X-C2G" secondAttribute="trailing" id="kGS-sP-1h6"/>
-                            <constraint firstItem="fz2-VX-CWx" firstAttribute="trailing" secondItem="dbf-9X-C2G" secondAttribute="trailing" id="vga-JI-aIo"/>
-                            <constraint firstItem="fz2-VX-CWx" firstAttribute="leading" secondItem="dbf-9X-C2G" secondAttribute="leading" id="xBB-Fm-mk3"/>
-                            <constraint firstItem="0I5-Ho-Hlq" firstAttribute="top" secondItem="hBF-W0-7hD" secondAttribute="top" constant="16" id="xRC-pE-z1C"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Ngc-nm-CBn"/>
-                    <connections>
-                        <outlet property="progressView" destination="fz2-VX-CWx" id="Y0O-em-QtW"/>
-                        <outlet property="webView" destination="iuH-Ps-kdu" id="07a-ha-2l6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qpt-zh-cK1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1088" y="-927"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="0,5" width="128" height="128"/>
         <image name="4" width="200" height="115"/>
         <image name="Backward" width="9" height="15.666666984558105"/>
         <image name="Heart" width="29.333333969116211" height="26"/>
         <image name="ShareButton" width="50" height="50"/>
-        <image name="nav_back_button" width="24" height="24"/>
         <image name="tab_editorial_active" width="20" height="22"/>
         <namedColor name="YP Black">
             <color red="0.10199999809265137" green="0.10599999874830246" blue="0.13300000131130219" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

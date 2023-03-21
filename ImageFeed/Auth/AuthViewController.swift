@@ -8,7 +8,6 @@
 import UIKit
 
 final class AuthViewController: UIViewController {
-
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton(type: .system)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +26,6 @@ final class AuthViewController: UIViewController {
         logoImageView.contentMode = .scaleAspectFit
         return logoImageView
     }()
-
     weak var delegate: AuthViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -66,8 +64,7 @@ final class AuthViewController: UIViewController {
     }
 
     @objc private func loginButtonTapped() {
-        let vc = UIStoryboard(name: "Main", bundle: nil)
-                .instantiateViewController(withIdentifier: "WebViewViewController") as! WebViewViewController
+        let vc = WebViewViewController()
         vc.delegate = self
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
