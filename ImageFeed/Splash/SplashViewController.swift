@@ -8,12 +8,10 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-    private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let tokenStorage = OAuth2TokenStorage()
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
-
-    private weak var authNavigationController: UINavigationController?
+    private weak var authViewController: AuthViewController?
 
     private var launchScreenImage: UIImageView = {
         let launchScreenImage = UIImageView()
@@ -50,26 +48,12 @@ final class SplashViewController: UIViewController {
         if let token = tokenStorage.token {
             fetchProfileAndSwitchScreen(token)
         } else {
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
-//            let authVC = UIStoryboard(name: "Main", bundle: nil)
-//                    .instantiateViewController(identifier: "AuthViewController") as! AuthViewController
-//            authVC.delegate = self
-//            authVC.modalPresentationStyle = .fullScreen
-//            present(authVC, animated: true)
-        }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            guard let navigationController = segue.destination as? UINavigationController,
-                  let authController = navigationController.viewControllers[0] as? AuthViewController else {
-                assertionFailure("Failed to prepare for segue \(showAuthenticationScreenSegueIdentifier)")
-                return
-            }
-            authNavigationController = navigationController
-            authController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
+            let authViewController = UIStoryboard(name: "Main", bundle: nil)
+                    .instantiateViewController(identifier: "AuthViewController") as! AuthViewController
+            authViewController.delegate = self
+            authViewController.modalPresentationStyle = .fullScreen
+            self.authViewController = authViewController
+            present(authViewController, animated: true)
         }
     }
 
@@ -87,7 +71,7 @@ final class SplashViewController: UIViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        authNavigationController!.popToRootViewController(animated: true)
+        vc.dismiss(animated: true)
         UIBlockingProgressHUD.show()
         fetchOAuthToken(code)
     }
@@ -101,8 +85,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .failure(let error):
                 debugPrint(error.localizedDescription)
                 UIBlockingProgressHUD.dismiss()
-                //cause performSegue to auth vc was called in viewDidAppear
-                SplashViewController.showNetworkErrorAlert(self.authNavigationController ?? self)
+                SplashViewController.showNetworkErrorAlert(self.authViewController ?? self)
             }
         }
     }
