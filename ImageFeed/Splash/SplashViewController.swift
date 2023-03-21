@@ -62,8 +62,7 @@ final class SplashViewController: UIViewController {
             assertionFailure("Invalid Configuration")
             return
         }
-        let tabBarViewController = UIStoryboard(name: "Main", bundle: nil)
-                .instantiateViewController(identifier: "TabBarViewController")
+        let tabBarViewController = TabBarController()
         window.rootViewController = tabBarViewController
         window.makeKeyAndVisible()
     }
@@ -104,6 +103,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 SplashViewController.showNetworkErrorAlert(self)
             }
         }
+        self.switchToTabBarController()
     }
 
     private static func showNetworkErrorAlert(_ vc: UIViewController) {
