@@ -13,11 +13,11 @@ final class SplashViewController: UIViewController {
     private let profileImageService = ProfileImageService.shared
     private weak var authViewController: AuthViewController?
 
-    private var launchScreenImage: UIImageView = {
+    private lazy var launchScreenImage: UIImageView = {
         let launchScreenImage = UIImageView()
+        launchScreenImage.translatesAutoresizingMaskIntoConstraints = false
         launchScreenImage.image = UIImage(named: "LaunchScreen")
         launchScreenImage.contentMode = .scaleAspectFit
-        launchScreenImage.translatesAutoresizingMaskIntoConstraints = false
         return launchScreenImage
     }()
 
@@ -48,13 +48,16 @@ final class SplashViewController: UIViewController {
         if let token = tokenStorage.token {
             fetchProfileAndSwitchScreen(token)
         } else {
-            let authViewController = UIStoryboard(name: "Main", bundle: nil)
-                    .instantiateViewController(identifier: "AuthViewController") as! AuthViewController
-            authViewController.delegate = self
-            authViewController.modalPresentationStyle = .fullScreen
-            self.authViewController = authViewController
-            present(authViewController, animated: true)
+            showAuthViewController()
         }
+    }
+
+    private func showAuthViewController() {
+        let authViewController = AuthViewController()
+        authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
+        self.authViewController = authViewController
+        present(authViewController, animated: true)
     }
 
     private func switchToTabBarController() {
@@ -93,8 +96,8 @@ extension SplashViewController: AuthViewControllerDelegate {
         profileService.fetchProfile(token) { result in
             switch result {
             case .success(let profile):
-                self.profileImageService.fetchProfileImageURL(username: profile.username) { _ in
-                }
+//                self.profileImageService.fetchProfileImageURL(username: profile.username) { _ in
+//                }
                 UIBlockingProgressHUD.dismiss()
                 self.switchToTabBarController()
             case .failure(let error):
