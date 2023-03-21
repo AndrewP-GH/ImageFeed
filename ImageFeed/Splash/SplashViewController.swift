@@ -103,7 +103,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 SplashViewController.showNetworkErrorAlert(self)
             }
         }
-        self.switchToTabBarController()
+        switchToTabBarController()
     }
 
     private static func showNetworkErrorAlert(_ vc: UIViewController) {
