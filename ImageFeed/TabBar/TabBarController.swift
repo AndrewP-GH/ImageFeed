@@ -12,7 +12,6 @@ final class TabBarController: UITabBarController {
         let imageListVC = storyboard.instantiateViewController(withIdentifier: "ImageListViewController")
         let profileVC = ProfileViewController()
         profileVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "tab_profile_active"), selectedImage: nil)
-        profileVC.view.backgroundColor = .ypBlack
 
         viewControllers = [imageListVC, profileVC]
     }
