@@ -12,7 +12,7 @@ final class WebViewViewController: UIViewController {
         webView.backgroundColor = .ypWhite
         return webView
     }()
-    private var progressView: UIProgressView = {
+    private lazy var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .default)
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.progressTintColor = .ypBlack
