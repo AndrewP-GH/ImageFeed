@@ -27,7 +27,6 @@ final class ImagesListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         heartFillImage = UIImage(named: "Heart.fill")
         heartImage = UIImage(named: "Heart")
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)

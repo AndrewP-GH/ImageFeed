@@ -72,8 +72,6 @@ final class AuthViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
-
-
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
