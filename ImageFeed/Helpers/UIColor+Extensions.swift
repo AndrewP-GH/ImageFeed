@@ -12,4 +12,6 @@ extension UIColor {
     static var ypGrey: UIColor { UIColor(named: "YP Gray")! }
     static var ypWhite: UIColor { UIColor(named: "YP White")! }
     static var ypRed: UIColor { UIColor(named: "YP Red")! }
+
+    static let backgroundColor = UIColor.ypBlack
 }
