@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
+        window!.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

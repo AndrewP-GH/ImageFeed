@@ -15,6 +15,35 @@ final class SplashViewController: UIViewController {
 
     private weak var authNavigationController: UINavigationController?
 
+    private var launchScreenImage: UIImageView = {
+        let launchScreenImage = UIImageView()
+        launchScreenImage.image = UIImage(named: "LaunchScreen")
+        launchScreenImage.contentMode = .scaleAspectFit
+        launchScreenImage.translatesAutoresizingMaskIntoConstraints = false
+        return launchScreenImage
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = .backgroundColor
+        addSubviews()
+        setupConstraints()
+    }
+
+    private func addSubviews() {
+        view.addSubview(launchScreenImage)
+    }
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate(
+                [
+                    launchScreenImage.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                    launchScreenImage.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+                ]
+        )
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -22,6 +51,11 @@ final class SplashViewController: UIViewController {
             fetchProfileAndSwitchScreen(token)
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+//            let authVC = UIStoryboard(name: "Main", bundle: nil)
+//                    .instantiateViewController(identifier: "AuthViewController") as! AuthViewController
+//            authVC.delegate = self
+//            authVC.modalPresentationStyle = .fullScreen
+//            present(authVC, animated: true)
         }
     }
 
