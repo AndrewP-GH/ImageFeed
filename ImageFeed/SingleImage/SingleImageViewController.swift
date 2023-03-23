@@ -48,7 +48,7 @@ final class SingleImageViewController: UIViewController {
         setupConstraints()
         scrollView.maximumZoomScale = 1.25
         scrollView.minimumZoomScale = 0.1
-        scrollView.setImage(image)
+        scrollView.setImage(image)  // (re)set image after constraints are set
     }
 
     private func addSubviews() {
