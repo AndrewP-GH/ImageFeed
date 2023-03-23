@@ -5,8 +5,20 @@
 import UIKit
 
 final class SingleImageViewController: UIViewController {
-    @IBOutlet private var scrollView: UIScrollView!
-    @IBOutlet private var imageView: UIImageView!
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.bouncesZoom = true
+        return scrollView
+    }()
+    private lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
 
     public var image: UIImage! {
         didSet {
@@ -45,7 +57,8 @@ final class SingleImageViewController: UIViewController {
         let (minZoomScale, maxZoomScale) = (scrollView.minimumZoomScale, scrollView.maximumZoomScale)
         view.layoutIfNeeded()
         let visibleSize = scrollView.bounds.size
-        let (horizontalScale, verticalScale) = (visibleSize.width / image.size.width, visibleSize.height / image.size.height)
+        let (horizontalScale, verticalScale) = (visibleSize.width / image.size.width,
+                visibleSize.height / image.size.height)
         let scale = min(maxZoomScale, max(minZoomScale, max(horizontalScale, verticalScale)))
         scrollView.setZoomScale(scale, animated: false)
         scrollView.layoutIfNeeded()
