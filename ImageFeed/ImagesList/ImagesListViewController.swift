@@ -8,7 +8,6 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
-    private let showSingleImageSegueIdentifier = "ShowSingleImage"
 
     @IBOutlet private var tableView: UITableView!
 
@@ -70,17 +69,10 @@ extension ImagesListViewController: UITableViewDataSource {
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showSingleImageSegueIdentifier,
-           let destination = segue.destination as? SingleImageViewController,
-           let image = sender as? IndexPath {
-            let image = UIImage(named: photosName[image.row])
-            destination.image = image
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
+        let destination = SingleImageViewController()
+        let image = UIImage(named: photosName[indexPath.row])
+        destination.image = image
+        destination.modalPresentationStyle = .fullScreen
+        present(destination, animated: true)
     }
 }
