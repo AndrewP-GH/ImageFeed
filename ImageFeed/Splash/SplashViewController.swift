@@ -11,7 +11,6 @@ final class SplashViewController: UIViewController {
     private let tokenStorage = OAuth2TokenStorage()
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
-    private weak var authViewController: AuthViewController?
 
     private lazy var launchScreenImage: UIImageView = {
         let launchScreenImage = UIImageView()
@@ -55,7 +54,6 @@ final class SplashViewController: UIViewController {
         let authViewController = AuthViewController()
         authViewController.delegate = self
         authViewController.modalPresentationStyle = .fullScreen
-        self.authViewController = authViewController
         present(authViewController, animated: true)
     }
 
@@ -86,7 +84,7 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .failure(let error):
                 debugPrint(error.localizedDescription)
                 UIBlockingProgressHUD.dismiss()
-                SplashViewController.showNetworkErrorAlert(self.authViewController ?? self)
+                SplashViewController.showNetworkErrorAlert(self.presentedViewController ?? self)
             }
         }
     }
