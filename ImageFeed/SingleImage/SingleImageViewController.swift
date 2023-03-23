@@ -8,6 +8,9 @@ final class SingleImageViewController: UIViewController {
     private lazy var scrollView: ImageScrollView = {
         let scrollView = ImageScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.bouncesZoom = true
         scrollView.backgroundColor = .backgroundColor
         return scrollView
     }()

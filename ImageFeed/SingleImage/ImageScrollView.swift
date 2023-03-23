@@ -24,10 +24,6 @@ final class ImageScrollView: UIScrollView {
     }
 
     private func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-        showsVerticalScrollIndicator = false
-        showsHorizontalScrollIndicator = false
-        bouncesZoom = true
         addSubviews()
         setupConstraints()
         delegate = self // delegate is weak
