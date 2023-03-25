@@ -53,8 +53,8 @@ final class ImageScrollView: UIScrollView {
         let (minZoomScale, maxZoomScale) = (minimumZoomScale, maximumZoomScale)
         layoutIfNeeded()
         let visibleSize = bounds.size
-        let (horizontalScale, verticalScale) = (visibleSize.width / image.size.width,
-                visibleSize.height / image.size.height)
+        let horizontalScale = visibleSize.width / image.size.width
+        let verticalScale = visibleSize.height / image.size.height
         let scale = min(maxZoomScale, max(minZoomScale, max(horizontalScale, verticalScale)))
         setZoomScale(scale, animated: false)
         layoutIfNeeded()
