@@ -12,6 +12,8 @@ final class SingleImageViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.bouncesZoom = true
         scrollView.backgroundColor = .backgroundColor
+        scrollView.minimumZoomScale = 0.1
+        scrollView.maximumZoomScale = 1.25
         return scrollView
     }()
     private lazy var backButton: UIButton = {
@@ -49,8 +51,6 @@ final class SingleImageViewController: UIViewController {
         view.backgroundColor = .backgroundColor
         addSubviews()
         setupConstraints()
-        scrollView.maximumZoomScale = 1.25
-        scrollView.minimumZoomScale = 0.1
         scrollView.setImage(image)  // (re)set image after constraints are set
     }
 
