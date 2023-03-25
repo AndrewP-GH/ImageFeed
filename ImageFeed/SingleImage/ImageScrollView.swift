@@ -23,6 +23,11 @@ final class ImageScrollView: UIScrollView {
         setupView()
     }
 
+    func setImage(_ image: UIImage) {
+        imageView.image = image
+        rescaleAndCenterImageInScrollView(image: image)
+    }
+
     private func setupView() {
         addSubviews()
         setupConstraints()
@@ -42,11 +47,6 @@ final class ImageScrollView: UIScrollView {
                     imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
                 ]
         )
-    }
-
-    func setImage(_ image: UIImage) {
-        imageView.image = image
-        rescaleAndCenterImageInScrollView(image: image)
     }
 
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
