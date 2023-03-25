@@ -8,11 +8,44 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = .backgroundColor
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        tableView.separatorStyle = .none
+        return tableView
+    }()
 
-    @IBOutlet private var tableView: UITableView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupView()
+    }
 
-    private var heartFillImage: UIImage!
-    private var heartImage: UIImage!
+    private func setupView() {
+        view.backgroundColor = .backgroundColor
+        addSubviews()
+        setupConstraints()
+    }
+
+    private func addSubviews() {
+        view.addSubview(tableView)
+    }
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate(
+                [
+                    tableView.topAnchor.constraint(equalTo: view.topAnchor),
+                    tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                    tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                ]
+        )
+    }
+
     private let photosName: [String] = (0..<20).map {
         "\($0)"
     }
@@ -23,13 +56,6 @@ final class ImagesListViewController: UIViewController {
         formatter.timeStyle = .none
         return formatter
     }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        heartFillImage = UIImage(named: "Heart.fill")
-        heartImage = UIImage(named: "Heart")
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-    }
 }
 
 extension ImagesListViewController: UITableViewDataSource {
@@ -48,11 +74,9 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return
         }
-        cell.pictureView.image = image
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-        let isFavorite = indexPath.row % 2 == 0
-        let buttonImage = isFavorite ? heartFillImage : heartImage
-        cell.addToFavoriteButton.setImage(buttonImage, for: .normal)
+        cell.setImage(image)
+        cell.setDate(dateFormatter.string(from: Date()))
+        cell.setFavorite(indexPath.row % 2 == 0)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

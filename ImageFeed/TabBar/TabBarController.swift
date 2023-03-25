@@ -13,8 +13,7 @@ final class TabBarController: UITabBarController {
         appearance.backgroundColor = .backgroundColor
         tabBar.standardAppearance = appearance
 
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        let imageListVC = storyboard.instantiateViewController(withIdentifier: "ImageListViewController")
+        let imageListVC = ImagesListViewController()
         imageListVC.tabBarItem = UITabBarItem(title: nil,
                                               image: UIImage(named: "tab_editorial_active"),
                                               selectedImage: nil)
