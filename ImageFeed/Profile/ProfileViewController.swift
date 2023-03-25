@@ -71,7 +71,6 @@ final class ProfileViewController: UIViewController {
         addSubViews()
         applyConstraints()
         guard let profile = profileService.profile else {
-            assertionFailure("Profile is not loaded")
             return
         }
         updateProfileDetails(profile: profile)
