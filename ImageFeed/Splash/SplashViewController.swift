@@ -11,6 +11,7 @@ final class SplashViewController: UIViewController {
     private let tokenStorage = OAuth2TokenStorage()
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    private let oAuth2Service = OAuth2Service()
 
     private lazy var launchScreenImage: UIImageView = {
         let launchScreenImage = UIImageView()
@@ -76,7 +77,10 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
 
     private func fetchOAuthToken(_ code: String) {
-        OAuth2Service().fetchAuthToken(code: code) { result in
+        oAuth2Service.fetchAuthToken(code: code) { [weak self] result in
+            guard let self = self else {
+                return
+            }
             switch result {
             case .success(let token):
                 self.tokenStorage.token = token
@@ -90,7 +94,10 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
 
     private func fetchProfileAndSwitchScreen(_ token: String) {
-        profileService.fetchProfile(token) { result in
+        profileService.fetchProfile(token) { [weak self] result in
+            guard let self = self else {
+                return
+            }
             switch result {
             case .success(let profile):
                 self.profileImageService.fetchProfileImageURL(username: profile.username) { _ in
