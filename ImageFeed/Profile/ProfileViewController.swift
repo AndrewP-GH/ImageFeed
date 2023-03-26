@@ -19,6 +19,8 @@ final class ProfileViewController: UIViewController {
         personImage.translatesAutoresizingMaskIntoConstraints = false
         personImage.image = ProfileViewController.getPersonImage()
         personImage.contentMode = .scaleAspectFit
+        personImage.layer.cornerRadius = profileImageSize / 2
+        personImage.clipsToBounds = true
         return personImage
     }()
     private lazy var fullNameLabel: UILabel = {
@@ -67,9 +69,7 @@ final class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .backgroundColor
-        addSubViews()
-        applyConstraints()
+        setupView()
         guard let profile = profileService.profile else {
             return
         }
@@ -77,15 +77,20 @@ final class ProfileViewController: UIViewController {
         updateAvatar()
     }
 
+    private func setupView() {
+        view.backgroundColor = .backgroundColor
+        addSubViews()
+        setupConstraints()
+    }
+
     private func updateAvatar() {
         if let avatarUrl = profileImageService.avatarURL,
            let imageUrl = URL(string: avatarUrl) {
-            let processor = RoundCornerImageProcessor(cornerRadius: profileImageSize / 2)
             personImage.kf.indicatorType = .activity
             personImage.kf.setImage(
                     with: imageUrl,
                     placeholder: personImage.image,
-                    options: [.processor(processor), .cacheSerializer(FormatIndicatedCacheSerializer.png), .cacheMemoryOnly])
+                    options: [.cacheSerializer(FormatIndicatedCacheSerializer.png), .cacheMemoryOnly])
         }
     }
 
@@ -97,24 +102,29 @@ final class ProfileViewController: UIViewController {
         view.addSubview(descriptionLabel)
     }
 
-    private func applyConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate(
                 [
+                    // personImage
                     personImage.widthAnchor.constraint(equalToConstant: profileImageSize),
                     personImage.heightAnchor.constraint(equalToConstant: profileImageSize),
                     personImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
                     personImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                    // logoutButton
                     logoutButton.widthAnchor.constraint(equalToConstant: 20),
                     logoutButton.heightAnchor.constraint(equalToConstant: 22),
                     logoutButton.centerYAnchor.constraint(equalTo: personImage.centerYAnchor),
                     logoutButton.trailingAnchor
                             .constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26),
+                    // fullNameLabel
                     fullNameLabel.topAnchor.constraint(equalTo: personImage.bottomAnchor, constant: 8),
                     fullNameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
                     fullNameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
+                    // nicknameLabel
                     nicknameLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 8),
                     nicknameLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
                     nicknameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
+                    // descriptionLabel
                     descriptionLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor, constant: 8),
                     descriptionLabel.leadingAnchor.constraint(equalTo: personImage.leadingAnchor),
                     descriptionLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
