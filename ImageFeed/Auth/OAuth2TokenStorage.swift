@@ -3,16 +3,24 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 final class OAuth2TokenStorage {
     private let key = "authToken"
 
     var token: String? {
         get {
-            UserDefaults.standard.string(forKey: key)
+            KeychainWrapper.standard.string(forKey: key)
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: key)
+            if let token = newValue {
+                guard KeychainWrapper.standard.set(token, forKey: key) else {
+                    assertionFailure("Failed to save token")
+                    return
+                }
+            } else {
+                KeychainWrapper.standard.removeObject(forKey: key)
+            }
         }
     }
 }

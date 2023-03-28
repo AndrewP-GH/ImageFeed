@@ -6,45 +6,86 @@ import UIKit
 import WebKit
 
 final class WebViewViewController: UIViewController {
-    @IBOutlet private var webView: WKWebView!
-    @IBOutlet private var progressView: UIProgressView!
+    private lazy var webView: WKWebView = {
+        let webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.backgroundColor = .ypWhite
+        return webView
+    }()
+    private lazy var progressView: UIProgressView = {
+        let progressView = UIProgressView(progressViewStyle: .default)
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.progressTintColor = .ypBlack
+        progressView.trackTintColor = .ypWhite
+        return progressView
+    }()
+    private lazy var backButton: UIButton = {
+        let backButton = UIButton(type: .system)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.setImage(UIImage(named: "nav_back_button"), for: .normal)
+        backButton.tintColor = .ypBlack
+        return backButton
+    }()
     private let webViewProgressKeyPath = #keyPath(WKWebView.estimatedProgress)
     private let pageLoadedProgress = 1.0
-
+    private var estimateProgressObserver: NSKeyValueObservation?
     weak var delegate: WebViewViewControllerDelegate?
 
-    @IBAction private func didTapBackButton() {
+    @objc private func didTapBackButton() {
         delegate?.webViewViewControllerDidCancel(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .ypWhite
+        addSubviews()
+        setupConstraints()
+        setupActions()
+        estimateProgressObserver = webView.observe(
+                \.estimatedProgress,
+                options: [.new],
+                changeHandler: { [weak self] _, change in
+                    self?.updateProgress(change.newValue!)
+                }
+        )
         webView.navigationDelegate = self
         loadAuthPage()
     }
 
+    private func addSubviews() {
+        view.addSubview(webView)
+        view.addSubview(progressView)
+        view.addSubview(backButton)
+    }
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate(
+                [
+                    // backButton
+                    backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+                    backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+                    backButton.widthAnchor.constraint(equalToConstant: 24),
+                    backButton.heightAnchor.constraint(equalToConstant: 24),
+                    // progressView
+                    progressView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
+                    progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                    progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                    // webView
+                    webView.topAnchor.constraint(equalTo: progressView.bottomAnchor),
+                    webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                    webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                    webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                ]
+        )
+    }
+
+    private func setupActions() {
+        backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        webView.addObserver(self, forKeyPath: webViewProgressKeyPath, options: .new, context: nil)
         updateProgress(webView.estimatedProgress)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        webView.removeObserver(self, forKeyPath: webViewProgressKeyPath)
-    }
-
-    override func observeValue(
-            forKeyPath keyPath: String?,
-            of object: Any?,
-            change: [NSKeyValueChangeKey: Any]?,
-            context: UnsafeMutableRawPointer?) {
-        switch (keyPath, object, change) {
-        case (webViewProgressKeyPath, _ as WKWebView, let change?):
-            updateProgress(change[.newKey] as! Double)
-        default:
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
     }
 
     private func updateProgress(_ progress: Double) {
@@ -53,15 +94,15 @@ final class WebViewViewController: UIViewController {
     }
 
     private func loadAuthPage() {
-        var urlComponent = URLComponents(url: Constants.unsplashAuthUrl, resolvingAgainstBaseURL: false)!
-        urlComponent.queryItems = [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: Constants.accessScope)
-        ]
-        let authUrl = urlComponent.url!
-        let urlRequest = URLRequest(url: authUrl)
+        let urlRequest = URLRequest.makeHTTPRequest(
+                path: "/oauth/authorize",
+                queryItems: [
+                    URLQueryItem(name: "client_id", value: Constants.accessKey),
+                    URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+                    URLQueryItem(name: "response_type", value: "code"),
+                    URLQueryItem(name: "scope", value: Constants.accessScope)
+                ],
+                baseURL: Constants.UnsplashUrls.general)
         removeUnsplashCookies()
         webView.load(urlRequest)
     }
@@ -72,7 +113,7 @@ final class WebViewViewController: UIViewController {
             records.forEach { record in
                 if record.displayName.contains("unsplash") {
                     dataStore.removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-                    print("Record \(record) deleted")
+                    debugPrint("Record \(record) deleted")
                 }
             }
         }
