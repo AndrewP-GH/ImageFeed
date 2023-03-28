@@ -40,17 +40,13 @@ final class OAuth2Service {
     }
 
     private func createAuthRequest(code: String) -> URLRequest {
-        URLRequest.makeHTTPRequest(
-                path: "/oauth/token",
-                queryItems: [
-                    URLQueryItem(name: "client_id", value: Constants.accessKey),
-                    URLQueryItem(name: "client_secret", value: Constants.secretKey),
-                    URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-                    URLQueryItem(name: "code", value: code),
-                    URLQueryItem(name: "grant_type", value: "authorization_code"),
-                ],
-                baseURL: Constants.UnsplashUrls.general
-        )
+        URLRequest.makeHTTPRequest(path: "/oauth/token", baseURL: Constants.UnsplashUrls.general, queryItems: [
+            URLQueryItem(name: "client_id", value: Constants.accessKey),
+            URLQueryItem(name: "client_secret", value: Constants.secretKey),
+            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+            URLQueryItem(name: "code", value: code),
+            URLQueryItem(name: "grant_type", value: "authorization_code"),
+        ])
     }
 
     private struct OAuthTokenResponseBody: Decodable {

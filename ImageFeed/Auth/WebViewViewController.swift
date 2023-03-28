@@ -94,15 +94,14 @@ final class WebViewViewController: UIViewController {
     }
 
     private func loadAuthPage() {
-        let urlRequest = URLRequest.makeHTTPRequest(
-                path: "/oauth/authorize",
-                queryItems: [
-                    URLQueryItem(name: "client_id", value: Constants.accessKey),
-                    URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-                    URLQueryItem(name: "response_type", value: "code"),
-                    URLQueryItem(name: "scope", value: Constants.accessScope)
-                ],
-                baseURL: Constants.UnsplashUrls.general)
+        let urlRequest = URLRequest.makeHTTPRequest(path: "/oauth/authorize",
+                                                    baseURL: Constants.UnsplashUrls.general,
+                                                    queryItems: [
+                                                        URLQueryItem(name: "client_id", value: Constants.accessKey),
+                                                        URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+                                                        URLQueryItem(name: "response_type", value: "code"),
+                                                        URLQueryItem(name: "scope", value: Constants.accessScope)
+                                                    ])
         removeUnsplashCookies()
         webView.load(urlRequest)
     }
