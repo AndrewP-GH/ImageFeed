@@ -19,6 +19,7 @@ final class ImagesListViewController: UIViewController {
         tableView.separatorStyle = .none
         return tableView
     }()
+    private let imagesListService = ImagesListService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +38,12 @@ final class ImagesListViewController: UIViewController {
 
     private func setupConstraints() {
         NSLayoutConstraint.activate(
-                [
-                    tableView.topAnchor.constraint(equalTo: view.topAnchor),
-                    tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                    tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                    tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                ]
+            [
+                tableView.topAnchor.constraint(equalTo: view.topAnchor),
+                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ]
         )
     }
 
@@ -88,6 +89,13 @@ extension ImagesListViewController: UITableViewDataSource {
         let scale = imageViewWidth / image.size.width
         let imageViewHeight = image.size.height * scale
         return imageViewHeight + imageInsets.top + imageInsets.bottom
+    }
+
+    func tableView( _ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath
+    ) {
+        if indexPath.row + 1 == photosName.count {
+            imagesListService.fetchPhotosNextPage()
+        }
     }
 }
 
