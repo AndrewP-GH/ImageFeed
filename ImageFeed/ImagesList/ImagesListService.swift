@@ -63,7 +63,7 @@ final class ImagesListService {
               let largeImageUrl = photoResult.urls[.full] else {
             return nil
         }
-        let photo = Photo(
+        return Photo(
                 id: photoResult.id,
                 size: CGSize(width: photoResult.width, height: photoResult.height),
                 createdAt: photoResult.createdAt,
@@ -71,7 +71,6 @@ final class ImagesListService {
                 thumbImageURL: thumbImageUrl,
                 largeImageURL: largeImageUrl,
                 isLiked: photoResult.liked_by_user)
-        return photo
     }
 
     struct PhotosResult: Decodable {
