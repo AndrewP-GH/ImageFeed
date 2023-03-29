@@ -41,7 +41,7 @@ final class ImagesListService {
                             self.images.append(contentsOf: photos)
                             NotificationCenter.default.post(name: ImagesListService.DidChangeNotification, object: self)
                         case let .failure(error):
-                            print(error)
+                            debugPrint("\(String(describing: error)): \(error.localizedDescription)")
                         }
                     }
                 }
