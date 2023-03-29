@@ -18,7 +18,7 @@ extension URLSession {
                         let object = try JSONDecoder().decode(T.self, from: data)
                         completion(.success(object))
                     } catch {
-                        debugPrint(error.localizedDescription)
+                        debugPrint("\(String(describing: error)): \(error.localizedDescription)")
                         completion(.failure(error))
                     }
                 default:
