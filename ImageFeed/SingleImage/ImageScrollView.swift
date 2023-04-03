@@ -23,9 +23,22 @@ final class ImageScrollView: UIScrollView {
         setupView()
     }
 
-    func setImage(_ image: UIImage) {
-        imageView.image = image
-        rescaleAndCenterImageInScrollView(image: image)
+    func setImage(url: URL) {
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: url) { [weak self] result in
+            switch result {
+            case .success(let value):
+                self?.rescaleAndCenterImageInScrollView(image: value.image)
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+
+    var image: UIImage? {
+        get {
+            imageView.image
+        }
     }
 
     private func setupView() {

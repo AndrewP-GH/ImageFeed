@@ -26,11 +26,11 @@ final class ImagesListService {
         task = URLSession.shared
                 .objectTask(request: request) { [weak self] (result: Result<[PhotoResult], Error>) in
                     DispatchQueue.main.async {
-                        defer{
-                            self?.task = nil
-                        }
                         guard let self else {
                             return
+                        }
+                        defer{
+                            self.task = nil
                         }
                         switch result {
                         case let .success(photosResult):

@@ -33,25 +33,19 @@ final class SingleImageViewController: UIViewController {
         return button
     }()
 
-    var image: UIImage! {
-        didSet {
-            guard isViewLoaded else {
-                return
-            }
-            scrollView.setImage(image)
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+    }
+
+    func setImage(url: URL) {
+        scrollView.setImage(url: url)
     }
 
     private func setupView() {
         view.backgroundColor = .backgroundColor
         addSubviews()
         setupConstraints()
-        scrollView.setImage(image)  // (re)set image after constraints are set
     }
 
     private func addSubviews() {
@@ -85,7 +79,7 @@ final class SingleImageViewController: UIViewController {
     }
 
     @objc private func didTapShareButton(_ sender: Any) {
-        guard let image else {
+        guard let image = scrollView.image else {
             return
         }
         let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)

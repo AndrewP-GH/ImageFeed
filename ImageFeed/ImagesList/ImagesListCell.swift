@@ -55,8 +55,19 @@ final class ImagesListCell: UITableViewCell {
         setupView()
     }
 
-    func setImage(_ image: UIImage) {
-        pictureView.image = image
+    func setImage(url: URL, completion: @escaping () -> Void) {
+        pictureView.kf.indicatorType = .activity
+        pictureView.kf.setImage(with: url) { [weak self] result in
+            switch result {
+            case .success(let value):
+                guard let self else {
+                    return
+                }
+                completion()
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
     }
 
     func setDate(_ date: String) {
@@ -65,6 +76,11 @@ final class ImagesListCell: UITableViewCell {
 
     func setFavorite(_ isFavorite: Bool) {
         addToFavoriteButton.setImage(isFavorite ? heartFillImage : heartImage, for: .normal)
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pictureView.kf.cancelDownloadTask()
     }
 
     private func setupView() {
