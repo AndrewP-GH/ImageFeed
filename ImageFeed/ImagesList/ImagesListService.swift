@@ -48,11 +48,35 @@ final class ImagesListService {
         task!.resume()
     }
 
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        let request = createChangeLikeRequest(photoId: photoId, isLike: isLike)
+        URLSession.shared
+                .objectTask(request: request) { (result: Result<LikeResult, Error>) in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            completion(.success(()))
+                        case let .failure(error):
+                            completion(.failure(error))
+                        }
+                    }
+                }
+                .resume()
+    }
+
     private func createGetPhotosRequest(page: Int) -> URLRequest {
         var request = URLRequest.makeHTTPRequest(path: "/photos", baseURL: Constants.UnsplashUrls.api, queryItems: [
             URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "per_page", value: String(perPageItems)),
         ])
+        request.addAuthorizationHeader(tokenStore.token!)
+        return request
+    }
+
+    private func createChangeLikeRequest(photoId: String, isLike: Bool) -> URLRequest {
+        var request = URLRequest.makeHTTPRequest(path: "/photos/\(photoId)/like",
+                                                 baseURL: Constants.UnsplashUrls.api,
+                                                 httpMethod: isLike ? .POST : .DELETE)
         request.addAuthorizationHeader(tokenStore.token!)
         return request
     }
@@ -86,6 +110,10 @@ final class ImagesListService {
         let description: String?
         let liked_by_user: Bool
         let urls: [String: URL]
+    }
+
+    private struct LikeResult: Decodable {
+        let photo: PhotoResult
     }
 
     private enum ImageSize: String {
