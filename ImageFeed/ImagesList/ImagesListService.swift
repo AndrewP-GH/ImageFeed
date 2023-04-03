@@ -11,6 +11,9 @@ final class ImagesListService {
     static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
 
     private let tokenStore = OAuth2TokenStorage()
+    private var token: String {
+        tokenStore.token!
+    }
     private let perPageItems = 10
 
     private(set) var images: [Photo] = []
@@ -69,7 +72,7 @@ final class ImagesListService {
             URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "per_page", value: String(perPageItems)),
         ])
-        request.addAuthorizationHeader(tokenStore.token!)
+        request.addAuthorizationHeader(token)
         return request
     }
 
@@ -77,7 +80,7 @@ final class ImagesListService {
         var request = URLRequest.makeHTTPRequest(path: "/photos/\(photoId)/like",
                                                  baseURL: Constants.UnsplashUrls.api,
                                                  httpMethod: isLike ? .POST : .DELETE)
-        request.addAuthorizationHeader(tokenStore.token!)
+        request.addAuthorizationHeader(token)
         return request
     }
 
