@@ -151,6 +151,8 @@ final class ProfileViewController: UIViewController {
     @objc private func didTapLogout() {
         OAuth2TokenStorage().token = nil
         CookieHelper.cleanAll()
-        //TODO: переход на экран авторизации
+        let window = UIApplication.shared.windows.first!
+        window.rootViewController = SplashViewController()
+        window.makeKeyAndVisible()
     }
 }
