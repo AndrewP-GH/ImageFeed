@@ -135,8 +135,12 @@ extension ImagesListViewController: ImagesListCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
+        UIBlockingProgressHUD.show()
         let photo = photos[indexPath.row]
         imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self, weak cell] result in
+            defer {
+                UIBlockingProgressHUD.dismiss()
+            }
             switch result {
             case .success(let photo):
                 self?.photos[indexPath.row] = photo
