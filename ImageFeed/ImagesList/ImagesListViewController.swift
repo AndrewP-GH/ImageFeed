@@ -82,7 +82,9 @@ extension ImagesListViewController: UITableViewDataSource {
             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
         cell.setDate(dateFormatter.string(from: photo.createdAt))
-        cell.setFavorite(photo.isLiked)
+        cell.setIsLiked(photo.isLiked)
+        cell.delegate = self
+        cell.isUserInteractionEnabled = true
     }
 
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -125,5 +127,23 @@ extension ImagesListViewController: UITableViewDelegate {
         destination.setImage(url: photos[indexPath.row].largeImageURL)
         destination.modalPresentationStyle = .fullScreen
         present(destination, animated: true)
+    }
+}
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        let photo = photos[indexPath.row]
+        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self, weak cell] result in
+            switch result {
+            case .success(let photo):
+                self?.photos[indexPath.row] = photo
+                cell?.setIsLiked(photo.isLiked)
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
+        }
     }
 }

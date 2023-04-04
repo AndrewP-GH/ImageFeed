@@ -40,6 +40,7 @@
 		AE09AD82B4F8B1696ED8D792 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A174D3678C7ED8F770DE /* URLSession+Extensions.swift */; };
 		AE09ADA09AF56FA88B7DD34E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09ABC2179DBE20A46A25D7 /* String+Extensions.swift */; };
 		AE09AF6823071ECC74749EA3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A784AF52643263C8A665 /* Constants.swift */; };
+		AE09AFB871F898D9886FD500 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AF9B9C5B7CC90050A1B1 /* ImagesListCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		AE09AD919E7E47456E907D4F /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		AE09AD9F327D9B085B525429 /* AuthViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewControllerDelegate.swift; sourceTree = "<group>"; };
 		AE09ADBDB74E7560CF6814EB /* SingleImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
+		AE09AF9B9C5B7CC90050A1B1 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				AE09A7771A9E34BADF21B057 /* GradientView.swift */,
 				1B201E2029D383C1002D8B06 /* ImagesListService.swift */,
 				AE09A90F228917942AD70E29 /* Photo.swift */,
+				AE09AF9B9C5B7CC90050A1B1 /* ImagesListCellDelegate.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				AE09A2699BFA357458B4EE90 /* ImageScrollView.swift in Sources */,
 				1B201E2129D383C1002D8B06 /* ImagesListService.swift in Sources */,
 				AE09A512225CD550B777C47D /* Photo.swift in Sources */,
+				AE09AFB871F898D9886FD500 /* ImagesListCellDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

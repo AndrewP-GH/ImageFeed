@@ -22,6 +22,7 @@ final class ImagesListCell: UITableViewCell {
         let addToFavoriteButton = UIButton(type: .custom)
         addToFavoriteButton.translatesAutoresizingMaskIntoConstraints = false
         addToFavoriteButton.setImage(heartImage, for: .normal)
+        addToFavoriteButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         return addToFavoriteButton
     }()
     private lazy var gradientView: GradientView = {
@@ -44,6 +45,8 @@ final class ImagesListCell: UITableViewCell {
     private lazy var heartFillImage: UIImage = {
         UIImage(named: "Heart.fill")!
     }()
+
+    weak var delegate: ImagesListCellDelegate?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -74,7 +77,7 @@ final class ImagesListCell: UITableViewCell {
         dateLabel.text = date
     }
 
-    func setFavorite(_ isFavorite: Bool) {
+    func setIsLiked(_ isFavorite: Bool) {
         addToFavoriteButton.setImage(isFavorite ? heartFillImage : heartImage, for: .normal)
     }
 
@@ -92,9 +95,9 @@ final class ImagesListCell: UITableViewCell {
 
     private func addSubviews() {
         contentView.addSubview(pictureView)
-        pictureView.addSubview(addToFavoriteButton)
-        pictureView.addSubview(gradientView)
-        gradientView.addSubview(dateLabel)
+        contentView.addSubview(addToFavoriteButton)
+        contentView.addSubview(gradientView)
+        contentView.addSubview(dateLabel)
     }
 
     private func setupConstraints() {
@@ -120,5 +123,9 @@ final class ImagesListCell: UITableViewCell {
                     dateLabel.bottomAnchor.constraint(equalTo: gradientView.bottomAnchor, constant: -8)
                 ]
         )
+    }
+
+    @objc private func likeButtonClicked() {
+        delegate?.imageListCellDidTapLike(self)
     }
 }
