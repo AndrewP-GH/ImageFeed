@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ImageScrollView: UIScrollView {
     private lazy var imageView: UIImageView = {
@@ -25,12 +26,17 @@ final class ImageScrollView: UIScrollView {
 
     func setImage(url: URL) {
         imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: url) { [weak self] result in
-            switch result {
-            case .success(let value):
-                self?.rescaleAndCenterImageInScrollView(image: value.image)
-            case .failure(let error):
-                debugPrint(error.localizedDescription)
+        if ImageCache.default.isCached(forKey: url.absoluteString) {
+            imageView.kf.setImage(with: url)
+            rescaleAndCenterImageInScrollView(image: imageView.image!)
+        } else {
+            imageView.kf.setImage(with: url) { [weak self] result in
+                switch result {
+                case .success(let value):
+                    self?.rescaleAndCenterImageInScrollView(image: value.image)
+                case .failure(let error):
+                    debugPrint(error.localizedDescription)
+                }
             }
         }
     }
