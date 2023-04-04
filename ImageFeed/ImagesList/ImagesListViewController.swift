@@ -143,8 +143,8 @@ extension ImagesListViewController: ImagesListCellDelegate {
             }
             switch result {
             case .success(let photo):
-                self?.photos[indexPath.row] = photo
-                cell?.setIsLiked(photo.isLiked)
+                self.photos[indexPath.row] = photo
+                cell.setIsLiked(photo.isLiked)
             case .failure(let error):
                 debugPrint(error.localizedDescription)
             }
