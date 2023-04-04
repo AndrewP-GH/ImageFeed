@@ -25,19 +25,27 @@ final class ImageScrollView: UIScrollView {
     }
 
     func setImage(url: URL) {
-        if ImageCache.default.isCached(forKey: url.absoluteString) {
-            imageView.kf.setImage(with: url)
-            rescaleAndCenterImageInScrollView(image: imageView.image!)
-        } else {
-            UIBlockingProgressHUD.show()
-            imageView.kf.setImage(with: url) { [weak self] result in
-                UIBlockingProgressHUD.dismiss()
-                switch result {
-                case .success(let value):
-                    self?.rescaleAndCenterImageInScrollView(image: value.image)
-                case .failure(let error):
-                    debugPrint(error.localizedDescription)
-                }
+        ImageCache.default.retrieveImage(forKey: url.absoluteString) { result in
+            switch result {
+            case .success(let value) where value.image != nil:
+                let image = value.image!
+                self.imageView.image = image
+                self.rescaleAndCenterImageInScrollView(image: image)
+            default:
+                self.loadImage(url: url)
+            }
+        }
+    }
+
+    private func loadImage(url: URL) {
+        UIBlockingProgressHUD.show()
+        imageView.kf.setImage(with: url) { result in
+            UIBlockingProgressHUD.dismiss()
+            switch result {
+            case .success(let value):
+                self.rescaleAndCenterImageInScrollView(image: value.image)
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
             }
         }
     }
@@ -82,6 +90,7 @@ final class ImageScrollView: UIScrollView {
         let (offsetX, offsetY) = ((contentWidth - visibleSize.width) / 2, (contentHeight - visibleSize.height) / 2)
         setContentOffset(CGPoint(x: offsetX, y: offsetY), animated: false)
     }
+
 }
 
 extension ImageScrollView: UIScrollViewDelegate {
