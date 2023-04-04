@@ -10,7 +10,7 @@ class CookieHelper {
         let dataStore = WKWebsiteDataStore.default()
         dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
             records.forEach { record in
-                WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
+                dataStore.removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
             }
         }
     }
