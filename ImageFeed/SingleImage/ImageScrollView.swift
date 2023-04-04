@@ -25,12 +25,11 @@ final class ImageScrollView: UIScrollView {
     }
 
     func setImage(url: URL) {
-        UIBlockingProgressHUD.show()
         if ImageCache.default.isCached(forKey: url.absoluteString) {
             imageView.kf.setImage(with: url)
-            UIBlockingProgressHUD.dismiss()
             rescaleAndCenterImageInScrollView(image: imageView.image!)
         } else {
+            UIBlockingProgressHUD.show()
             imageView.kf.setImage(with: url) { [weak self] result in
                 UIBlockingProgressHUD.dismiss()
                 switch result {
