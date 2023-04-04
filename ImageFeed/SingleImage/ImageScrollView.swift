@@ -28,14 +28,14 @@ final class ImageScrollView: UIScrollView {
         ImageCache.default.retrieveImage(forKey: url.absoluteString) { result in
             switch result {
             case .success(let value) where value.image != nil:
-                self.setImage(image: value.image!)
+                self.setImageAsync(image: value.image!)
             default:
                 self.loadImage(url: url)
             }
         }
     }
 
-    private func setImage(image: UIImage) {
+    private func setImageAsync(image: UIImage) {
         DispatchQueue.main.async {
             self.imageView.image = image
             self.rescaleAndCenterImageInScrollView(image: image)
