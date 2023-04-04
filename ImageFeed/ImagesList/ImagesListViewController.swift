@@ -137,7 +137,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
         }
         UIBlockingProgressHUD.show()
         let photo = photos[indexPath.row]
-        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self, weak cell] result in
+        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { result in
             defer {
                 UIBlockingProgressHUD.dismiss()
             }
