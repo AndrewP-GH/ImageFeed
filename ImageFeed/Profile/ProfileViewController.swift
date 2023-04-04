@@ -149,6 +149,8 @@ final class ProfileViewController: UIViewController {
     }
 
     @objc private func didTapLogout() {
-        OAuth2TokenStorage().token = nil    //TODO: will be replaced in the future
+        OAuth2TokenStorage().token = nil
+        CookieHelper.cleanAll()
+        //TODO: переход на экран авторизации
     }
 }

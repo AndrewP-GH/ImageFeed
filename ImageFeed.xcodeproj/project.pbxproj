@@ -39,6 +39,7 @@
 		AE09AD0FE32C8AAE59EE7956 /* AuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AD9F327D9B085B525429 /* AuthViewControllerDelegate.swift */; };
 		AE09AD82B4F8B1696ED8D792 /* URLSession+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A174D3678C7ED8F770DE /* URLSession+Extensions.swift */; };
 		AE09ADA09AF56FA88B7DD34E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09ABC2179DBE20A46A25D7 /* String+Extensions.swift */; };
+		AE09ADB916AF7292AE893E3D /* CookieHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A7CB9C4D8E6C15B2A262 /* CookieHelper.swift */; };
 		AE09AF6823071ECC74749EA3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A784AF52643263C8A665 /* Constants.swift */; };
 		AE09AFB871F898D9886FD500 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AF9B9C5B7CC90050A1B1 /* ImagesListCellDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,7 @@
 		AE09A66DC839E6E051A8E31C /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		AE09A7771A9E34BADF21B057 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		AE09A784AF52643263C8A665 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AE09A7CB9C4D8E6C15B2A262 /* CookieHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookieHelper.swift; sourceTree = "<group>"; };
 		AE09A89434C45F97733C8CC5 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AE09A90F228917942AD70E29 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		AE09AB573C1BF014B250FCD1 /* ProfileImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				AE09A1B0FA109F0477807926 /* URLRequest+Extensions.swift */,
 				AE09ABC2179DBE20A46A25D7 /* String+Extensions.swift */,
 				AE09A174D3678C7ED8F770DE /* URLSession+Extensions.swift */,
+				AE09A7CB9C4D8E6C15B2A262 /* CookieHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				1B201E2129D383C1002D8B06 /* ImagesListService.swift in Sources */,
 				AE09A512225CD550B777C47D /* Photo.swift in Sources */,
 				AE09AFB871F898D9886FD500 /* ImagesListCellDelegate.swift in Sources */,
+				AE09ADB916AF7292AE893E3D /* CookieHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
