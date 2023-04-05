@@ -99,7 +99,7 @@ final class WebViewViewController: UIViewController {
                 baseURL: Constants.UnsplashUrls.general,
                 queryItems: [
                     URLQueryItem(name: "client_id", value: Constants.accessKey),
-                    URLQueryItem(name: "redirect_uriJ", value: Constants.redirectURI),
+                    URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
                     URLQueryItem(name: "response_type", value: "code"),
                     URLQueryItem(name: "scope", value: Constants.accessScope)
                 ]
