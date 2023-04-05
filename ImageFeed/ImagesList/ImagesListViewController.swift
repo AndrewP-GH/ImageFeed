@@ -80,8 +80,8 @@ extension ImagesListViewController: UITableViewDataSource {
         cell.setImage(url: photo.thumbImageURL) { [weak self] in
             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        let date = photo.createdAt != nil ? dateFormatter.string(from: photo.createdAt!) : ""
-        cell.setDate(date)
+        let createdAt = photo.createdAt != nil ? dateFormatter.string(from: photo.createdAt!) : ""
+        cell.setDate(createdAt)
         cell.setIsLiked(photo.isLiked)
         cell.delegate = self
         cell.isUserInteractionEnabled = true
