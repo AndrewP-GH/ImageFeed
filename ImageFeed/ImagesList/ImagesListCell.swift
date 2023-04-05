@@ -60,9 +60,9 @@ final class ImagesListCell: UITableViewCell {
 
     func setImage(url: URL, completion: @escaping () -> Void) {
         pictureView.kf.indicatorType = .activity
-        pictureView.kf.setImage(with: url) { [weak self] result in
+        pictureView.kf.setImage(with: url) { result in
             switch result {
-            case .success(let _):
+            case .success(_):
                 completion()
             case .failure(let error):
                 debugPrint(error.localizedDescription)
