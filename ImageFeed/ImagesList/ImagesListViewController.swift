@@ -19,6 +19,12 @@ final class ImagesListViewController: UIViewController {
         tableView.separatorStyle = .none
         return tableView
     }()
+    private lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        return dateFormatter
+    }()
     private let imagesListService = ImagesListService()
     private var photos: [Photo] = []
     private var imageListServiceObserver: NSObjectProtocol?
@@ -55,13 +61,6 @@ final class ImagesListViewController: UIViewController {
                 ]
         )
     }
-
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
 }
 
 extension ImagesListViewController: UITableViewDataSource {
@@ -81,22 +80,12 @@ extension ImagesListViewController: UITableViewDataSource {
         cell.setImage(url: photo.thumbImageURL) { [weak self] in
             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        cell.setDate(dateFormatter.string(from: photo.createdAt))
+        let date = photo.createdAt != nil ? dateFormatter.string(from: photo.createdAt!) : ""
+        cell.setDate(date)
         cell.setIsLiked(photo.isLiked)
         cell.delegate = self
         cell.isUserInteractionEnabled = true
     }
-
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        guard let image = UIImage(named: photosName[indexPath.row]) else {
-//            return 0
-//        }
-//        let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-//        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-//        let scale = imageViewWidth / image.size.width
-//        let imageViewHeight = image.size.height * scale
-//        return imageViewHeight + imageInsets.top + imageInsets.bottom
-//    }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == photos.count {

@@ -62,10 +62,7 @@ final class ImagesListCell: UITableViewCell {
         pictureView.kf.indicatorType = .activity
         pictureView.kf.setImage(with: url) { [weak self] result in
             switch result {
-            case .success(let value):
-                guard let self else {
-                    return
-                }
+            case .success(let _):
                 completion()
             case .failure(let error):
                 debugPrint(error.localizedDescription)

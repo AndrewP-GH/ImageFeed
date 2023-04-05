@@ -9,13 +9,14 @@ import Foundation
 
 final class ImagesListService {
     static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
-
+    private static var dateFormatter: ISO8601DateFormatter = {
+        ISO8601DateFormatter()
+    }()
     private let tokenStore = OAuth2TokenStorage()
+    private let perPageItems = 10
     private var token: String {
         tokenStore.token!
     }
-    private let perPageItems = 10
-
     private(set) var images: [Photo] = []
     private var lastLoadedPage = 0
     private var task: URLSessionDataTask?
@@ -38,7 +39,7 @@ final class ImagesListService {
                         switch result {
                         case let .success(photosResult):
                             self.lastLoadedPage += 1
-                            let photos = photosResult.compactMap {
+                            let photos = photosResult.map {
                                 ImagesListService.createPhoto(from: $0)
                             }
                             self.images.append(contentsOf: photos)
@@ -58,7 +59,7 @@ final class ImagesListService {
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let likeResult):
-                            completion(.success(ImagesListService.createPhoto(from: likeResult.photo)!))
+                            completion(.success(ImagesListService.createPhoto(from: likeResult.photo)))
                         case let .failure(error):
                             completion(.failure(error))
                         }
@@ -84,25 +85,18 @@ final class ImagesListService {
         return request
     }
 
-    private class func createPhoto(from photoResult: PhotoResult) -> Photo? {
-        guard let thumbImageUrl = photoResult.urls[ImageSize.thumb.rawValue],
-              let largeImageUrl = photoResult.urls[ImageSize.full.rawValue] else {
-            return nil
-        }
-        return Photo(
-                id: photoResult.id,
-                size: CGSize(width: photoResult.width, height: photoResult.height),
-                createdAt: toDate(photoResult.created_at),
-                welcomeDescription: photoResult.description,
-                thumbImageURL: thumbImageUrl,
-                largeImageURL: largeImageUrl,
-                isLiked: photoResult.liked_by_user)
+    private class func createPhoto(from photoResult: PhotoResult) -> Photo {
+        Photo(id: photoResult.id,
+              size: CGSize(width: photoResult.width, height: photoResult.height),
+              createdAt: toDate(photoResult.created_at),
+              welcomeDescription: photoResult.description,
+              thumbImageURL: photoResult.urls.thumb,
+              largeImageURL: photoResult.urls.full,
+              isLiked: photoResult.liked_by_user)
     }
 
-    private class func toDate(_ string: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        return dateFormatter.date(from: string)!
+    private class func toDate(_ string: String) -> Date? {
+        dateFormatter.date(from: string)
     }
 
     private struct PhotoResult: Decodable {
@@ -112,19 +106,19 @@ final class ImagesListService {
         let created_at: String
         let description: String?
         let liked_by_user: Bool
-        let urls: [String: URL]
+        let urls: UrlsResult
+    }
+
+    private struct UrlsResult: Decodable {
+        let raw: URL
+        let full: URL
+        let regular: URL
+        let small: URL
+        let thumb: URL
+        let small_s3: URL
     }
 
     private struct LikeResult: Decodable {
         let photo: PhotoResult
-    }
-
-    private enum ImageSize: String {
-        case raw
-        case full
-        case regular
-        case small
-        case thumb
-        case small_s3
     }
 }
