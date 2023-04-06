@@ -25,7 +25,10 @@ final class ImageScrollView: UIScrollView {
     }
 
     func setImage(url: URL) {
-        ImageCache.default.retrieveImage(forKey: url.absoluteString) { result in
+        ImageCache.default.retrieveImage(forKey: url.absoluteString) { [weak self] result in
+            guard let self else {
+                return
+            }
             switch result {
             case .success(let value) where value.image != nil:
                 self.setImageAsync(image: value.image!)
@@ -36,7 +39,10 @@ final class ImageScrollView: UIScrollView {
     }
 
     private func setImageAsync(image: UIImage) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {
+                return
+            }
             self.imageView.image = image
             self.rescaleAndCenterImageInScrollView(image: image)
         }
@@ -44,11 +50,11 @@ final class ImageScrollView: UIScrollView {
 
     private func loadImage(url: URL) {
         UIBlockingProgressHUD.show()
-        imageView.kf.setImage(with: url) { result in
+        imageView.kf.setImage(with: url) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let value):
-                self.rescaleAndCenterImageInScrollView(image: value.image)
+                self?.rescaleAndCenterImageInScrollView(image: value.image)
             case .failure(let error):
                 debugPrint(error.localizedDescription)
             }
