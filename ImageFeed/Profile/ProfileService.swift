@@ -10,9 +10,17 @@ final class ProfileService {
     private struct ProfileResult: Decodable {
         let id: String
         let username: String
-        let first_name: String?
-        let last_name: String?
+        let firstName: String?
+        let lastName: String?
         let bio: String?
+
+        enum CodingKeys: String, CodingKey {
+            case id
+            case username
+            case firstName = "first_name"
+            case lastName = "last_name"
+            case bio
+        }
     }
 
     private(set) var profile: Profile?
@@ -45,7 +53,7 @@ final class ProfileService {
         Profile(
                 username: result.username,
                 name: """
-                      \(result.first_name.orEmpty()) \(result.last_name.orEmpty())
+                      \(result.firstName.orEmpty()) \(result.lastName.orEmpty())
                       """,
                 loginName: "@\(result.username)",
                 bio: result.bio.orEmpty()

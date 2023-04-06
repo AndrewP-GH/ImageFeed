@@ -8,7 +8,12 @@ import Foundation
 final class ProfileImageService {
     private struct UserResult: Decodable {
         let id: String
-        let profile_image: ProfileImage
+        let profileImage: ProfileImage
+
+        enum CodingKeys: String, CodingKey {
+            case id
+            case profileImage = "profile_image"
+        }
     }
 
     private struct ProfileImage: Decodable {
@@ -33,7 +38,7 @@ final class ProfileImageService {
                     DispatchQueue.main.async {
                         switch result {
                         case let .success(userResult):
-                            let imageURL = userResult.profile_image.small
+                            let imageURL = userResult.profileImage.small
                             self?.avatarURL = imageURL
                             completion(.success(imageURL))
                             NotificationCenter.default.post(

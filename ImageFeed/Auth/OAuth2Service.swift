@@ -29,7 +29,7 @@ final class OAuth2Service {
                         }
                         switch result {
                         case let .success(authResponse):
-                            completion(.success(authResponse.access_token))
+                            completion(.success(authResponse.accessToken))
                         case let .failure(error):
                             completion(.failure(error))
                         }
@@ -50,10 +50,17 @@ final class OAuth2Service {
     }
 
     private struct OAuthTokenResponseBody: Decodable {
-        let access_token: String
-        let token_type: String
+        let accessToken: String
+        let tokenType: String
         let scope: String
-        let created_at: Int
+        let createdAt: Int
+
+        enum CodingKeys: String, CodingKey {
+            case accessToken = "access_token"
+            case tokenType = "token_type"
+            case scope
+            case createdAt = "created_at"
+        }
     }
 
 }
