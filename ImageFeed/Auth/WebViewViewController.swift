@@ -96,27 +96,16 @@ final class WebViewViewController: UIViewController {
     private func loadAuthPage() {
         let urlRequest = URLRequest.makeHTTPRequest(
                 path: "/oauth/authorize",
+                baseURL: Constants.UnsplashUrls.general,
                 queryItems: [
                     URLQueryItem(name: "client_id", value: Constants.accessKey),
                     URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
                     URLQueryItem(name: "response_type", value: "code"),
                     URLQueryItem(name: "scope", value: Constants.accessScope)
-                ],
-                baseURL: Constants.UnsplashUrls.general)
-        removeUnsplashCookies()
+                ]
+        )
+        CookieHelper.cleanAll()
         webView.load(urlRequest)
-    }
-
-    private func removeUnsplashCookies() {
-        let dataStore = WKWebsiteDataStore.default()
-        dataStore.fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-            records.forEach { record in
-                if record.displayName.contains("unsplash") {
-                    dataStore.removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-                    debugPrint("Record \(record) deleted")
-                }
-            }
-        }
     }
 }
 

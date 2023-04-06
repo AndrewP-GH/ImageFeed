@@ -7,17 +7,17 @@ import UIKit
 final class GradientView: UIView {
     private var gradientLayer: CAGradientLayer? = nil
     private let cornerRadius: CGFloat = 16
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
     }
-
+    
     private func setupView() {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
         guard let gradientLayer = layer as? CAGradientLayer else {
@@ -31,15 +31,15 @@ final class GradientView: UIView {
         gradientLayer.frame = bounds
         self.gradientLayer = gradientLayer
     }
-
+    
     private func roundCorners() {
         guard let gradientLayer = gradientLayer else {
             return
         }
         let path = UIBezierPath(
-                roundedRect: bounds,
-                byRoundingCorners: [.bottomLeft, .bottomRight],
-                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+            roundedRect: bounds,
+            byRoundingCorners: [.bottomLeft, .bottomRight],
+            cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
         )
         var mask = gradientLayer.mask as? CAShapeLayer
         if mask == nil {
@@ -48,11 +48,11 @@ final class GradientView: UIView {
         }
         mask!.path = path.cgPath
     }
-
+    
     override class var layerClass: AnyClass {
         CAGradientLayer.self
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         roundCorners()

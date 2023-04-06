@@ -59,7 +59,7 @@ final class ProfileViewController: UIViewController {
         self.init(nibName: nil, bundle: nil)
         profileImageServiceObserver = NotificationCenter.default
                 .addObserver(
-                        forName: ProfileImageService.DidChangeNotification,
+                        forName: ProfileImageService.didChangeNotification,
                         object: nil,
                         queue: .main
                 ) { [weak self] notification in
@@ -149,6 +149,21 @@ final class ProfileViewController: UIViewController {
     }
 
     @objc private func didTapLogout() {
-        OAuth2TokenStorage().token = nil    //TODO: will be replaced in the future
+        let alert = UIAlertController(
+                title: "Пока, пока!",
+                message: "Уверены что хотите выйти?",
+                preferredStyle: .alert)
+        let yes = UIAlertAction(title: "Да", style: .default) { _ in
+            OAuth2TokenStorage().token = nil
+            CookieHelper.cleanAll()
+            let window = UIApplication.shared.windows.first!
+            window.rootViewController = SplashViewController()
+            window.makeKeyAndVisible()
+        }
+        let no = UIAlertAction(title: "Нет", style: .default)
+        alert.addAction(yes)
+        alert.addAction(no)
+        alert.preferredAction = no
+        present(alert, animated: true)
     }
 }

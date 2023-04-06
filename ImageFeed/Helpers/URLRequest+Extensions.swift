@@ -22,11 +22,7 @@ extension URLRequest {
         return request
     }
 
-    static func makeHTTPRequest(
-            path: String,
-            queryItems: [URLQueryItem],
-            baseURL: URL
-    ) -> URLRequest {
+    static func makeHTTPRequest(path: String, baseURL: URL, queryItems: [URLQueryItem]) -> URLRequest {
         var urlComponent = URLComponents(url: URL(string: path, relativeTo: baseURL)!, resolvingAgainstBaseURL: true)!
         urlComponent.queryItems = queryItems
         return URLRequest(url: urlComponent.url!)
