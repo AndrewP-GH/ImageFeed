@@ -9,7 +9,7 @@ import Foundation
 
 final class ImagesListService {
     static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
-    private static var dateFormatter: ISO8601DateFormatter = {
+    private var dateFormatter: ISO8601DateFormatter = {
         ISO8601DateFormatter()
     }()
     private let tokenStore = OAuth2TokenStorage()
@@ -40,7 +40,7 @@ final class ImagesListService {
                         case let .success(photosResult):
                             self.lastLoadedPage += 1
                             let photos = photosResult.map {
-                                ImagesListService.createPhoto(from: $0)
+                                self.createPhoto(from: $0)
                             }
                             self.images.append(contentsOf: photos)
                             NotificationCenter.default.post(name: ImagesListService.DidChangeNotification, object: self)
@@ -55,11 +55,14 @@ final class ImagesListService {
     func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void) {
         let request = createChangeLikeRequest(photoId: photoId, isLike: isLike)
         URLSession.shared
-                .objectTask(request: request) { (result: Result<LikeResult, Error>) in
+                .objectTask(request: request) { [weak self] (result: Result<LikeResult, Error>) in
                     DispatchQueue.main.async {
+                        guard let self else {
+                            return
+                        }
                         switch result {
                         case .success(let likeResult):
-                            completion(.success(ImagesListService.createPhoto(from: likeResult.photo)))
+                            completion(.success(self.createPhoto(from: likeResult.photo)))
                         case let .failure(error):
                             completion(.failure(error))
                         }
@@ -85,7 +88,7 @@ final class ImagesListService {
         return request
     }
 
-    private class func createPhoto(from photoResult: PhotoResult) -> Photo {
+    private func createPhoto(from photoResult: PhotoResult) -> Photo {
         Photo(id: photoResult.id,
               size: CGSize(width: photoResult.width, height: photoResult.height),
               createdAt: toDate(photoResult.created_at),
@@ -95,7 +98,7 @@ final class ImagesListService {
               isLiked: photoResult.liked_by_user)
     }
 
-    private class func toDate(_ string: String) -> Date? {
+    private func toDate(_ string: String) -> Date? {
         dateFormatter.date(from: string)
     }
 
