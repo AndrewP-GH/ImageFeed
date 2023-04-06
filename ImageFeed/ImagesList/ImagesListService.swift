@@ -8,7 +8,7 @@
 import Foundation
 
 final class ImagesListService {
-    static let DidChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private var dateFormatter: ISO8601DateFormatter = {
         ISO8601DateFormatter()
     }()
@@ -43,7 +43,7 @@ final class ImagesListService {
                                 self.createPhoto(from: $0)
                             }
                             self.images.append(contentsOf: photos)
-                            NotificationCenter.default.post(name: ImagesListService.DidChangeNotification, object: self)
+                            NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
                         case let .failure(error):
                             debugPrint("\(String(describing: error)): \(error.localizedDescription)")
                         }

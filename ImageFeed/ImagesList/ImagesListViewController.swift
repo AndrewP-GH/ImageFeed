@@ -33,7 +33,7 @@ final class ImagesListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         imageListServiceObserver = NotificationCenter.default
-                .addObserver(forName: ImagesListService.DidChangeNotification,
+                .addObserver(forName: ImagesListService.didChangeNotification,
                              object: nil,
                              queue: .main) { [weak self] _ in
                     self?.updateTableViewAnimated()

@@ -13,7 +13,7 @@ final class ImagesListServiceTests: XCTestCase {
         let service = ImagesListService()
         let expectation = self.expectation(description: "Wait for Notification")
         NotificationCenter.default
-                .addObserver(forName: ImagesListService.DidChangeNotification, object: nil, queue: .main) { _ in
+                .addObserver(forName: ImagesListService.didChangeNotification, object: nil, queue: .main) { _ in
                     expectation.fulfill()
                 }
         service.fetchPhotosNextPage()
