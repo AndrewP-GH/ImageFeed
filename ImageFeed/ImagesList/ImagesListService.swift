@@ -91,11 +91,11 @@ final class ImagesListService {
     private func createPhoto(from photoResult: PhotoResult) -> Photo {
         Photo(id: photoResult.id,
               size: CGSize(width: photoResult.width, height: photoResult.height),
-              createdAt: toDate(photoResult.created_at),
+              createdAt: toDate(photoResult.createdAt),
               welcomeDescription: photoResult.description,
               thumbImageURL: photoResult.urls.thumb,
               largeImageURL: photoResult.urls.full,
-              isLiked: photoResult.liked_by_user)
+              isLiked: photoResult.likedByUser)
     }
 
     private func toDate(_ string: String) -> Date? {
@@ -106,10 +106,20 @@ final class ImagesListService {
         let id: String
         let width: Int
         let height: Int
-        let created_at: String
+        let createdAt: String
         let description: String?
-        let liked_by_user: Bool
+        let likedByUser: Bool
         let urls: UrlsResult
+
+        enum CodingKeys: String, CodingKey {
+            case id
+            case width
+            case height
+            case createdAt = "created_at"
+            case description
+            case likedByUser = "liked_by_user"
+            case urls
+        }
     }
 
     private struct UrlsResult: Decodable {
@@ -118,7 +128,16 @@ final class ImagesListService {
         let regular: URL
         let small: URL
         let thumb: URL
-        let small_s3: URL
+        let smallS3: URL
+
+        enum CodingKeys: String, CodingKey {
+            case raw
+            case full
+            case regular
+            case small
+            case thumb
+            case smallS3 = "small_s3"
+        }
     }
 
     private struct LikeResult: Decodable {
