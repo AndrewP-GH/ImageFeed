@@ -82,13 +82,13 @@ extension ImagesListViewController: UITableViewDataSource {
             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
 
-        cell.setDate(formatCreationDate(photo.createdAt))
+        cell.setDate(formatDate(photo.createdAt))
         cell.setIsLiked(photo.isLiked)
         cell.delegate = self
         cell.isUserInteractionEnabled = true
     }
 
-    private func formatCreationDate(_ createdAt: Date?) -> String {
+    private func formatDate(_ createdAt: Date?) -> String {
         var formattedDate = ""
         if let date = createdAt {
             formattedDate = dateFormatter.string(from: date)
