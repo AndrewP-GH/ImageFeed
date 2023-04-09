@@ -45,6 +45,9 @@ final class ImagesListCell: UITableViewCell {
     private lazy var heartFillImage: UIImage = {
         UIImage(named: "Heart.fill")!
     }()
+    private lazy var placeholderImage: UIImage = {
+        UIImage(named: "CardStub")!
+    }()
 
     weak var delegate: ImagesListCellDelegate?
 
@@ -59,8 +62,7 @@ final class ImagesListCell: UITableViewCell {
     }
 
     func setImage(url: URL, completion: @escaping () -> Void) {
-        pictureView.kf.indicatorType = .activity
-        pictureView.kf.setImage(with: url) { result in
+        pictureView.kf.setImage(with: url, placeholder: placeholderImage) { result in
             switch result {
             case .success(_):
                 completion()

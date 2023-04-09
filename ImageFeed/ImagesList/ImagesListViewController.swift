@@ -38,7 +38,7 @@ final class ImagesListViewController: UIViewController {
                              queue: .main) { [weak self] _ in
                     self?.updateTableViewAnimated()
                 }
-        imagesListService.fetchPhotosNextPage()
+        fetchPhotosNextPage()
     }
 
     private func setupView() {
@@ -80,23 +80,29 @@ extension ImagesListViewController: UITableViewDataSource {
         cell.setImage(url: photo.thumbImageURL) { [weak self] in
             self?.tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        var formattedDate = ""
-        if let date = photo.createdAt {
-            formattedDate = dateFormatter.string(from: date)
-        }
-        cell.setDate(formattedDate)
+
+        cell.setDate(formatCreationDate(photo.createdAt))
         cell.setIsLiked(photo.isLiked)
         cell.delegate = self
         cell.isUserInteractionEnabled = true
     }
 
+    private func formatCreationDate(_ createdAt: Date?) -> String {
+        var formattedDate = ""
+        if let date = createdAt {
+            formattedDate = dateFormatter.string(from: date)
+        }
+        return formattedDate
+    }
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row + 1 == photos.count {
-            imagesListService.fetchPhotosNextPage()
+            fetchPhotosNextPage()
         }
     }
 
     private func updateTableViewAnimated() {
+        UIBlockingProgressHUD.dismiss()
         let oldCount = photos.count
         let newCount = imagesListService.images.count
         photos = imagesListService.images
@@ -110,6 +116,11 @@ extension ImagesListViewController: UITableViewDataSource {
             }
         }
 
+    }
+
+    private func fetchPhotosNextPage() {
+        UIBlockingProgressHUD.show()
+        imagesListService.fetchPhotosNextPage()
     }
 }
 
