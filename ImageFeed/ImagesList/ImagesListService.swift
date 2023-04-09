@@ -34,6 +34,7 @@ final class ImagesListService {
                             return
                         }
                         defer{
+                            NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
                             self.task = nil
                         }
                         switch result {
@@ -43,7 +44,6 @@ final class ImagesListService {
                                 self.createPhoto(from: $0)
                             }
                             self.images.append(contentsOf: photos)
-                            NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
                         case let .failure(error):
                             debugPrint("\(String(describing: error)): \(error.localizedDescription)")
                         }

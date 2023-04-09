@@ -28,6 +28,7 @@ final class ImagesListViewController: UIViewController {
     private let imagesListService = ImagesListService()
     private var photos: [Photo] = []
     private var imageListServiceObserver: NSObjectProtocol?
+    private var fetchNext = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,11 +115,15 @@ extension ImagesListViewController: UITableViewDataSource {
                 tableView.insertRows(at: indexPaths, with: .automatic)
             } completion: { _ in
             }
+        } else {
+            fetchNext = false
         }
-
     }
 
     private func fetchPhotosNextPage() {
+        guard fetchNext else {
+            return
+        }
         UIBlockingProgressHUD.show()
         imagesListService.fetchPhotosNextPage()
     }
