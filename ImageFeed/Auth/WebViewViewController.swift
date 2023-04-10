@@ -26,8 +26,6 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         backButton.tintColor = .ypBlack
         return backButton
     }()
-    private let webViewProgressKeyPath = #keyPath(WKWebView.estimatedProgress)
-    private let pageLoadedProgress = 1.0
     private var estimateProgressObserver: NSKeyValueObservation?
     weak var delegate: WebViewViewControllerDelegate?
     var presenter: WebViewPresenterProtocol?
@@ -46,7 +44,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
                 \.estimatedProgress,
                 options: [.new],
                 changeHandler: { [weak self] _, change in
-                    self?.updateProgress(change.newValue!)
+                    self?.presenter?.didUpdateProgressValue(change.newValue!)
                 }
         )
         webView.navigationDelegate = self
@@ -86,12 +84,15 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateProgress(webView.estimatedProgress)
+        presenter?.didUpdateProgressValue(webView.estimatedProgress)
     }
 
-    private func updateProgress(_ progress: Double) {
-        progressView.progress = Float(progress)
-        progressView.isHidden = fabs(progress - 1.0) <= 0.0001
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
+
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
 
     func load(request: URLRequest) {
@@ -113,18 +114,13 @@ extension WebViewViewController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        updateProgress(pageLoadedProgress)
+        presenter?.didUpdateProgressValue(1)
     }
 
     private func code(from navigationAction: WKNavigationAction) -> String? {
-        if let url = navigationAction.request.url,
-           let urlComponent = URLComponents(string: url.absoluteString),
-           urlComponent.path == "/oauth/authorize/native",
-           let items = urlComponent.queryItems,
-           let codeItem = items.first(where: { $0.name == "code" }) {
-            return codeItem.value
-        } else {
-            return nil
+        if let url = navigationAction.request.url {
+            return presenter?.code(from: url)
         }
+        return nil
     }
 }

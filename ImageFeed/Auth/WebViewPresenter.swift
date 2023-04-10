@@ -19,6 +19,31 @@ final class WebViewPresenter: WebViewPresenterProtocol {
                 ]
         )
         CookieHelper.cleanAll()
+
+        didUpdateProgressValue(0)
+
         view?.load(request: urlRequest)
+    }
+
+    func didUpdateProgressValue(_ newValue: Double) {
+        let newProgressValue = Float(newValue)
+        view?.setProgressValue(newProgressValue)
+
+        let shouldHideProgress = shouldHideProgress(for: newProgressValue)
+        view?.setProgressHidden(shouldHideProgress)
+    }
+
+    func shouldHideProgress(for value: Float) -> Bool {
+        abs(value - 1.0) <= 0.0001
+    }
+
+    func code(from url: URL) -> String? {
+        if let urlComponent = URLComponents(string: url.absoluteString),
+           urlComponent.path == "/oauth/authorize/native",
+           let items = urlComponent.queryItems,
+           let codeItem = items.first(where: { $0.name == "code" }) {
+            return codeItem.value
+        }
+        return nil
     }
 }
