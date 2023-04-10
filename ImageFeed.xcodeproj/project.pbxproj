@@ -43,7 +43,7 @@
 		AE09ADA09AF56FA88B7DD34E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09ABC2179DBE20A46A25D7 /* String+Extensions.swift */; };
 		AE09ADB916AF7292AE893E3D /* CookieHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A7CB9C4D8E6C15B2A262 /* CookieHelper.swift */; };
 		AE09ADE79E1F4942F385E502 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AE2C78A90DCE0376D27A /* WebViewPresenter.swift */; };
-		AE09AF6823071ECC74749EA3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A784AF52643263C8A665 /* Constants.swift */; };
+		AE09AF6823071ECC74749EA3 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A784AF52643263C8A665 /* AuthConfiguration.swift */; };
 		AE09AFB871F898D9886FD500 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AF9B9C5B7CC90050A1B1 /* ImagesListCellDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,7 +84,7 @@
 		AE09A520B1B37643FE7DE828 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
 		AE09A66DC839E6E051A8E31C /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		AE09A7771A9E34BADF21B057 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		AE09A784AF52643263C8A665 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AE09A784AF52643263C8A665 /* AuthConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		AE09A7CB9C4D8E6C15B2A262 /* CookieHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookieHelper.swift; sourceTree = "<group>"; };
 		AE09A89434C45F97733C8CC5 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AE09A90F228917942AD70E29 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				1BD36C0E2979CBD700C6B73F /* LaunchScreen.storyboard */,
 				1BD36C112979CBD700C6B73F /* Info.plist */,
 				AE09A7BB6B9588D0398294DE /* SingleImage */,
-				AE09A784AF52643263C8A665 /* Constants.swift */,
+				AE09A784AF52643263C8A665 /* AuthConfiguration.swift */,
 				AE09AE4847BC7BFADC65FC34 /* Splash */,
 				AE09AD919E7E47456E907D4F /* UIBlockingProgressHUD.swift */,
 				AE09AABBEA0F84375B88C228 /* TabBar */,
@@ -370,7 +370,7 @@
 				1BD36C1A297BF9BC00C6B73F /* UIColor+Extensions.swift in Sources */,
 				AE09A736214C7276671BBEEF /* GradientView.swift in Sources */,
 				AE09A2DDC54C07668E706DAE /* SingleImageViewController.swift in Sources */,
-				AE09AF6823071ECC74749EA3 /* Constants.swift in Sources */,
+				AE09AF6823071ECC74749EA3 /* AuthConfiguration.swift in Sources */,
 				AE09A85F1A6129EB796A3742 /* WebViewViewController.swift in Sources */,
 				AE09AA37A126A1E18C87997B /* WebViewViewControllerDelegate.swift in Sources */,
 				AE09A6297ADBA8653A38EAFB /* OAuth2Service.swift in Sources */,

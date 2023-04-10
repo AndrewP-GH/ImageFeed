@@ -44,7 +44,7 @@ final class ProfileService {
     }
 
     private func createGetProfileRequest(accessToken: String) -> URLRequest {
-        var request = URLRequest.makeHTTPRequest(path: "/me", baseURL: Constants.UnsplashUrls.api)
+        var request = URLRequest.makeHTTPRequest(path: "/me", baseURL: AuthConfiguration.standard.apiURL)
         request.addAuthorizationHeader(accessToken)
         return request
     }

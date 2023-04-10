@@ -72,17 +72,19 @@ final class ImagesListService {
     }
 
     private func createGetPhotosRequest(page: Int) -> URLRequest {
-        var request = URLRequest.makeHTTPRequest(path: "/photos", baseURL: Constants.UnsplashUrls.api, queryItems: [
-            URLQueryItem(name: "page", value: String(page)),
-            URLQueryItem(name: "per_page", value: String(perPageItems)),
-        ])
+        var request = URLRequest.makeHTTPRequest(path: "/photos",
+                                                 baseURL: AuthConfiguration.standard.apiURL,
+                                                 queryItems: [
+                                                     URLQueryItem(name: "page", value: String(page)),
+                                                     URLQueryItem(name: "per_page", value: String(perPageItems)),
+                                                 ])
         request.addAuthorizationHeader(token)
         return request
     }
 
     private func createChangeLikeRequest(photoId: String, isLike: Bool) -> URLRequest {
         var request = URLRequest.makeHTTPRequest(path: "/photos/\(photoId)/like",
-                                                 baseURL: Constants.UnsplashUrls.api,
+                                                 baseURL: AuthConfiguration.standard.apiURL,
                                                  httpMethod: isLike ? .DELETE : .POST)
         request.addAuthorizationHeader(token)
         return request

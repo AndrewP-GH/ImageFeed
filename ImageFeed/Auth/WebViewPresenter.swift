@@ -8,14 +8,15 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     weak var view: WebViewViewControllerProtocol?
 
     func viewDidLoad() {
+        let config = AuthConfiguration.standard
         let urlRequest = URLRequest.makeHTTPRequest(
                 path: "/oauth/authorize",
-                baseURL: Constants.UnsplashUrls.general,
+                baseURL: config.generalURL,
                 queryItems: [
-                    URLQueryItem(name: "client_id", value: Constants.accessKey),
-                    URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+                    URLQueryItem(name: "client_id", value: AuthConfiguration.standard.accessKey),
+                    URLQueryItem(name: "redirect_uri", value: AuthConfiguration.standard.redirectURI),
                     URLQueryItem(name: "response_type", value: "code"),
-                    URLQueryItem(name: "scope", value: Constants.accessScope)
+                    URLQueryItem(name: "scope", value: AuthConfiguration.standard.accessScope)
                 ]
         )
         CookieHelper.cleanAll()
