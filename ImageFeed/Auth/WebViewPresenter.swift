@@ -6,30 +6,22 @@ import Foundation
 
 final class WebViewPresenter: WebViewPresenterProtocol {
     weak var view: WebViewViewControllerProtocol?
+    var authHelper: AuthHelperProtocol
+
+    init(authHelper: AuthHelperProtocol) {
+        self.authHelper = authHelper
+    }
 
     func viewDidLoad() {
-        let config = AuthConfiguration.standard
-        let urlRequest = URLRequest.makeHTTPRequest(
-                path: "/oauth/authorize",
-                baseURL: config.generalURL,
-                queryItems: [
-                    URLQueryItem(name: "client_id", value: AuthConfiguration.standard.accessKey),
-                    URLQueryItem(name: "redirect_uri", value: AuthConfiguration.standard.redirectURI),
-                    URLQueryItem(name: "response_type", value: "code"),
-                    URLQueryItem(name: "scope", value: AuthConfiguration.standard.accessScope)
-                ]
-        )
+        let request = authHelper.authRequest()
         CookieHelper.cleanAll()
-
         didUpdateProgressValue(0)
-
-        view?.load(request: urlRequest)
+        view?.load(request: request)
     }
 
     func didUpdateProgressValue(_ newValue: Double) {
         let newProgressValue = Float(newValue)
         view?.setProgressValue(newProgressValue)
-
         let shouldHideProgress = shouldHideProgress(for: newProgressValue)
         view?.setProgressHidden(shouldHideProgress)
     }
@@ -39,12 +31,6 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     }
 
     func code(from url: URL) -> String? {
-        if let urlComponent = URLComponents(string: url.absoluteString),
-           urlComponent.path == "/oauth/authorize/native",
-           let items = urlComponent.queryItems,
-           let codeItem = items.first(where: { $0.name == "code" }) {
-            return codeItem.value
-        }
-        return nil
+        authHelper.code(from: url)
     }
 }

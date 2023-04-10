@@ -12,6 +12,7 @@ let AccessScope = "public+read_user+write_likes"
 private struct UnsplashUrls {
     static let api = URL(string: "https://api.unsplash.com")!
     static let general = URL(string: "https://unsplash.com")!
+    static let UnsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }
 
 struct AuthConfiguration {
@@ -21,14 +22,16 @@ struct AuthConfiguration {
     let accessScope: String
     let apiURL: URL
     let generalURL: URL
+    let authURLString: String
 
-    init(accessKey: String, secretKey: String, redirectURI: String, accessScope: String, generalURL: URL, apiURL: URL) {
+    init(accessKey: String, secretKey: String, redirectURI: String, accessScope: String, generalURL: URL, apiURL: URL, authURLString: String) {
         self.accessKey = accessKey
         self.secretKey = secretKey
         self.redirectURI = redirectURI
         self.accessScope = accessScope
         self.apiURL = apiURL
         self.generalURL = generalURL
+        self.authURLString = authURLString
     }
 
     static var standard: AuthConfiguration {
@@ -37,6 +40,7 @@ struct AuthConfiguration {
                           redirectURI: RedirectURI,
                           accessScope: AccessScope,
                           generalURL: UnsplashUrls.general,
-                          apiURL: UnsplashUrls.api)
+                          apiURL: UnsplashUrls.api,
+                          authURLString: UnsplashUrls.UnsplashAuthorizeURLString)
     }
 }
