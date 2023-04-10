@@ -36,10 +36,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .ypWhite
-        addSubviews()
-        setupConstraints()
-        setupActions()
+        setupView()
         estimateProgressObserver = webView.observe(
                 \.estimatedProgress,
                 options: [.new],
@@ -49,6 +46,13 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         )
         webView.navigationDelegate = self
         presenter?.viewDidLoad()
+    }
+
+    private func setupView() {
+        view.backgroundColor = .ypWhite
+        addSubviews()
+        setupConstraints()
+        setupActions()
     }
 
     private func addSubviews() {
