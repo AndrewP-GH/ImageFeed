@@ -7,13 +7,19 @@
 
 import Foundation
 
-final class ImagesListService {
+protocol ImagesListServiceProtocol {
+    var images: [Photo] { get }
+    func fetchPhotosNextPage()
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void)
+}
+
+final class ImagesListService: ImagesListServiceProtocol {
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private var dateFormatter: ISO8601DateFormatter = {
         ISO8601DateFormatter()
     }()
     private let tokenStore = OAuth2TokenStorage()
-    private let perPageItems = 1
+    private let perPageItems = 2
     private var token: String {
         tokenStore.token!
     }

@@ -39,6 +39,7 @@
 		AE09A6297ADBA8653A38EAFB /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A0E4075332BBFD98779E /* OAuth2Service.swift */; };
 		AE09A63C49AAA53063C70015 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A1B0FA109F0477807926 /* URLRequest+Extensions.swift */; };
 		AE09A736214C7276671BBEEF /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A7771A9E34BADF21B057 /* GradientView.swift */; };
+		AE09A7E357E586AE0FF0D4A2 /* ImageListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AF71D16957BA7D1C59B7 /* ImageListPresenter.swift */; };
 		AE09A85F1A6129EB796A3742 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A4021228B9D0D1AF869D /* WebViewViewController.swift */; };
 		AE09A8F8DF4D02C397AE2AC0 /* WebViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AC7C3A56496C323A7464 /* WebViewPresenterProtocol.swift */; };
 		AE09A9592C16D6ADF4311829 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AB573C1BF014B250FCD1 /* ProfileImageService.swift */; };
@@ -51,6 +52,7 @@
 		AE09ADA09AF56FA88B7DD34E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09ABC2179DBE20A46A25D7 /* String+Extensions.swift */; };
 		AE09ADB916AF7292AE893E3D /* CookieHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A7CB9C4D8E6C15B2A262 /* CookieHelper.swift */; };
 		AE09ADE79E1F4942F385E502 /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AE2C78A90DCE0376D27A /* WebViewPresenter.swift */; };
+		AE09AEB090364EE61392E608 /* ImageDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AAB80C89A6325E52133E /* ImageDateFormatter.swift */; };
 		AE09AF6823071ECC74749EA3 /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09A784AF52643263C8A665 /* AuthConfiguration.swift */; };
 		AE09AFB871F898D9886FD500 /* ImagesListCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE09AF9B9C5B7CC90050A1B1 /* ImagesListCellDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -109,6 +111,7 @@
 		AE09A7CB9C4D8E6C15B2A262 /* CookieHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CookieHelper.swift; sourceTree = "<group>"; };
 		AE09A89434C45F97733C8CC5 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		AE09A90F228917942AD70E29 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		AE09AAB80C89A6325E52133E /* ImageDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDateFormatter.swift; sourceTree = "<group>"; };
 		AE09AB573C1BF014B250FCD1 /* ProfileImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		AE09ABC2179DBE20A46A25D7 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		AE09AC7C3A56496C323A7464 /* WebViewPresenterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPresenterProtocol.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 		AE09AE2C78A90DCE0376D27A /* WebViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		AE09AE59E32DBE98F8C20659 /* WebViewViewControllerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerSpy.swift; sourceTree = "<group>"; };
 		AE09AF2A92E359F544591DF3 /* WebViewPresenterSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPresenterSpy.swift; sourceTree = "<group>"; };
+		AE09AF71D16957BA7D1C59B7 /* ImageListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageListPresenter.swift; sourceTree = "<group>"; };
 		AE09AF9B9C5B7CC90050A1B1 /* ImagesListCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -268,6 +272,8 @@
 				1B201E2029D383C1002D8B06 /* ImagesListService.swift */,
 				AE09A90F228917942AD70E29 /* Photo.swift */,
 				AE09AF9B9C5B7CC90050A1B1 /* ImagesListCellDelegate.swift */,
+				AE09AF71D16957BA7D1C59B7 /* ImageListPresenter.swift */,
+				AE09AAB80C89A6325E52133E /* ImageDateFormatter.swift */,
 			);
 			path = ImagesList;
 			sourceTree = "<group>";
@@ -502,6 +508,8 @@
 				AE09ADE79E1F4942F385E502 /* WebViewPresenter.swift in Sources */,
 				AE09A2B5F6F8DB3E32DDE8EC /* AuthHelperProtocol.swift in Sources */,
 				AE09A512E39695A79C50D5DB /* AuthHelper.swift in Sources */,
+				AE09A7E357E586AE0FF0D4A2 /* ImageListPresenter.swift in Sources */,
+				AE09AEB090364EE61392E608 /* ImageDateFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

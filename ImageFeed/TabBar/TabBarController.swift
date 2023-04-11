@@ -14,6 +14,10 @@ final class TabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
 
         let imageListVC = ImagesListViewController()
+        let imageListPresenter = ImageListPresenter(imagesListService: ImagesListService(),
+                                                    dateFormatter: ImageDateFormatter())
+        imageListPresenter.view = imageListVC
+        imageListVC.presenter = imageListPresenter
         imageListVC.tabBarItem = UITabBarItem(title: nil,
                                               image: UIImage(named: "tab_editorial_active"),
                                               selectedImage: nil)
