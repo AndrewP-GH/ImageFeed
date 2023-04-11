@@ -55,18 +55,18 @@ final class ImageFeedUITests: XCTestCase {
         cell.swipeUp()
         sleep(2)
         print(app.debugDescription)
-        cell.swipeDown()
-        sleep(2)
-        print(app.debugDescription)
 
-        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
+        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 4)
         print(cellToLike.debugDescription)
 
-//        cellToLike.buttons["Like"].tapUnhittable()
-//        sleep(2)
-//        print(app.debugDescription)
-//        cellToLike.buttons["Unlike"].tapUnhittable()
-//        sleep(2)
+        let likeButton = cellToLike.buttons["Like"]
+        likeButton.tap()
+        sleep(5)
+        print(app.debugDescription)
+        let unlikeButton = cellToLike.buttons["Unlike"]
+        XCTAssertTrue(unlikeButton.waitForExistence(timeout: 10))
+        sleep(5)
+        unlikeButton.tap()
 
         cellToLike.tap()
         let image = app.scrollViews.images.element(boundBy: 0)

@@ -24,6 +24,7 @@ final class ImagesListCell: UITableViewCell {
         addToFavoriteButton.setImage(heartImage, for: .normal)
         addToFavoriteButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
         addToFavoriteButton.accessibilityIdentifier = "Like"
+        addToFavoriteButton.isAccessibilityElement = true
         return addToFavoriteButton
     }()
     private lazy var gradientView: GradientView = {
