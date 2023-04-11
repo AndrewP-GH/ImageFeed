@@ -13,7 +13,7 @@ final class ImagesListService {
         ISO8601DateFormatter()
     }()
     private let tokenStore = OAuth2TokenStorage()
-    private let perPageItems = 10
+    private let perPageItems = 1
     private var token: String {
         tokenStore.token!
     }

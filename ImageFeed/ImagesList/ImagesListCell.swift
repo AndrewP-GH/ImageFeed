@@ -23,6 +23,7 @@ final class ImagesListCell: UITableViewCell {
         addToFavoriteButton.translatesAutoresizingMaskIntoConstraints = false
         addToFavoriteButton.setImage(heartImage, for: .normal)
         addToFavoriteButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+        addToFavoriteButton.accessibilityIdentifier = "Like"
         return addToFavoriteButton
     }()
     private lazy var gradientView: GradientView = {
@@ -78,6 +79,7 @@ final class ImagesListCell: UITableViewCell {
 
     func setIsLiked(_ isFavorite: Bool) {
         addToFavoriteButton.setImage(isFavorite ? heartFillImage : heartImage, for: .normal)
+        addToFavoriteButton.accessibilityIdentifier = isFavorite ? "Unlike" : "Like"
     }
 
     override func prepareForReuse() {

@@ -10,6 +10,7 @@ final class WebViewViewController: UIViewController & WebViewViewControllerProto
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.backgroundColor = .ypWhite
+        webView.accessibilityIdentifier = "UnsplashWebView"
         return webView
     }()
     private lazy var progressView: UIProgressView = {

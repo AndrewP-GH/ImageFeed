@@ -28,6 +28,7 @@ final class ProfileViewController: UIViewController {
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         fullNameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)   // bold (700)
         fullNameLabel.textColor = .ypWhite
+        fullNameLabel.accessibilityIdentifier = "FullName"
         return fullNameLabel
     }()
     private lazy var nicknameLabel: UILabel = {
@@ -35,6 +36,7 @@ final class ProfileViewController: UIViewController {
         nicknameLabel.translatesAutoresizingMaskIntoConstraints = false
         nicknameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)   // regular (400)
         nicknameLabel.textColor = .ypGrey
+        nicknameLabel.accessibilityIdentifier = "Nickname"
         return nicknameLabel
     }()
     private lazy var descriptionLabel: UILabel = {
@@ -43,6 +45,7 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)   // regular (400)
         descriptionLabel.textColor = .ypWhite
         descriptionLabel.numberOfLines = 0
+        descriptionLabel.accessibilityIdentifier = "Description"
         return descriptionLabel
     }()
     private lazy var logoutButton: UIButton = {
@@ -52,6 +55,7 @@ final class ProfileViewController: UIViewController {
                 action: #selector(didTapLogout))
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.tintColor = .ypRed
+        logoutButton.accessibilityIdentifier = "Logout"
         return logoutButton
     }()
 
@@ -153,6 +157,8 @@ final class ProfileViewController: UIViewController {
                 title: "Пока, пока!",
                 message: "Уверены что хотите выйти?",
                 preferredStyle: .alert)
+        alert.view.accessibilityIdentifier = "LogoutAlert"
+
         let yes = UIAlertAction(title: "Да", style: .default) { _ in
             OAuth2TokenStorage().token = nil
             CookieHelper.cleanAll()
@@ -160,7 +166,11 @@ final class ProfileViewController: UIViewController {
             window.rootViewController = SplashViewController()
             window.makeKeyAndVisible()
         }
+        yes.accessibilityIdentifier = "LogoutAlertYes"
+
         let no = UIAlertAction(title: "Нет", style: .default)
+        no.accessibilityIdentifier = "LogoutAlertNo"
+
         alert.addAction(yes)
         alert.addAction(no)
         alert.preferredAction = no

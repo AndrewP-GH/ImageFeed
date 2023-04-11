@@ -22,6 +22,7 @@ final class SingleImageViewController: UIViewController {
         button.setImage(UIImage(named: "Backward"), for: .normal)
         button.tintColor = .ypWhite
         button.addTarget(self, action: #selector(didTapBackwardButton), for: .touchUpInside)
+        button.accessibilityIdentifier = "Backward"
         return button
     }()
     private lazy var shareButton: UIButton = {

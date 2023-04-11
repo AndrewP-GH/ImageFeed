@@ -17,6 +17,7 @@ final class AuthViewController: UIViewController {
         loginButton.titleLabel!.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         loginButton.layer.cornerRadius = 16
         loginButton.clipsToBounds = true
+        loginButton.accessibilityIdentifier = "Authenticate"
         return loginButton
     }()
     private lazy var logoImageView: UIImageView = {
