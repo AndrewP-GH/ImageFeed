@@ -8,11 +8,13 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
-    private let profileService = ProfileService.shared
-    private let profileImageService = ProfileImageService.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
-    private var profileImageSize: CGFloat = 70
+protocol ProfileViewControllerProtocol: UIViewController {
+    func updateProfile(with profile: Profile)
+    func updateAvatar(with url: URL)
+}
+
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+    private let profileImageSize: CGFloat = 70
 
     private lazy var personImage: UIImageView = {
         let personImage = UIImageView()
@@ -58,44 +60,18 @@ final class ProfileViewController: UIViewController {
         logoutButton.accessibilityIdentifier = "Logout"
         return logoutButton
     }()
-
-    convenience init() {
-        self.init(nibName: nil, bundle: nil)
-        profileImageServiceObserver = NotificationCenter.default
-                .addObserver(
-                        forName: ProfileImageService.didChangeNotification,
-                        object: nil,
-                        queue: .main
-                ) { [weak self] notification in
-                    self?.updateAvatar()
-                }
-    }
+    var presenter: ProfilePresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        guard let profile = profileService.profile else {
-            return
-        }
-        updateProfileDetails(profile: profile)
-        updateAvatar()
+        presenter?.viewDidLoad()
     }
 
     private func setupView() {
         view.backgroundColor = .backgroundColor
         addSubViews()
         setupConstraints()
-    }
-
-    private func updateAvatar() {
-        if let avatarUrl = profileImageService.avatarURL,
-           let imageUrl = URL(string: avatarUrl) {
-            personImage.kf.indicatorType = .activity
-            personImage.kf.setImage(
-                    with: imageUrl,
-                    placeholder: personImage.image,
-                    options: [.cacheSerializer(FormatIndicatedCacheSerializer.png), .cacheMemoryOnly])
-        }
     }
 
     private func addSubViews() {
@@ -136,10 +112,18 @@ final class ProfileViewController: UIViewController {
         )
     }
 
-    private func updateProfileDetails(profile: Profile) {
+    func updateProfile(with profile: Profile) {
         fullNameLabel.text = profile.name
         nicknameLabel.text = profile.loginName
         descriptionLabel.text = profile.bio
+    }
+
+    func updateAvatar(with url: URL) {
+        personImage.kf.indicatorType = .activity
+        personImage.kf.setImage(
+                with: url,
+                placeholder: personImage.image,
+                options: [.cacheSerializer(FormatIndicatedCacheSerializer.png), .cacheMemoryOnly])
     }
 
     private static func getPersonImage() -> UIImage {
@@ -153,27 +137,6 @@ final class ProfileViewController: UIViewController {
     }
 
     @objc private func didTapLogout() {
-        let alert = UIAlertController(
-                title: "Пока, пока!",
-                message: "Уверены что хотите выйти?",
-                preferredStyle: .alert)
-        alert.view.accessibilityIdentifier = "LogoutAlert"
-
-        let yes = UIAlertAction(title: "Да", style: .default) { _ in
-            OAuth2TokenStorage().token = nil
-            CookieHelper.cleanAll()
-            let window = UIApplication.shared.windows.first!
-            window.rootViewController = SplashViewController()
-            window.makeKeyAndVisible()
-        }
-        yes.accessibilityIdentifier = "LogoutAlertYes"
-
-        let no = UIAlertAction(title: "Нет", style: .default)
-        no.accessibilityIdentifier = "LogoutAlertNo"
-
-        alert.addAction(yes)
-        alert.addAction(no)
-        alert.preferredAction = no
-        present(alert, animated: true)
+        presenter?.logout()
     }
 }

@@ -4,8 +4,12 @@
 
 import Foundation
 
+protocol ProfileImageServiceProtocol {
+    var avatarURL: String? { get }
+    func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void)
+}
 
-final class ProfileImageService {
+final class ProfileImageService: ProfileImageServiceProtocol {
     private struct UserResult: Decodable {
         let id: String
         let profileImage: ProfileImage
