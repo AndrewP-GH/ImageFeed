@@ -73,6 +73,7 @@ final class ImageFeedUITests: XCTestCase {
         image.pinch(withScale: 0.5, velocity: -1)
 
         let navBackButtonWhiteButton = app.buttons["Backward"]
+        XCTAssertTrue(navBackButtonWhiteButton.waitForExistence(timeout: 5))
         navBackButtonWhiteButton.tap()
 
         let cellToReturn = app.tables.children(matching: .cell).element(boundBy: 1)
