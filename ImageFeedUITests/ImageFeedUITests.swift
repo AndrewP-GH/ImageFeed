@@ -54,8 +54,10 @@ final class ImageFeedUITests: XCTestCase {
 
         cell.swipeUp()
         sleep(2)
+        cell.swipeDown()
+        sleep(2)
 
-        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 4)
+        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 0)
 
         let likeButton = cellToLike.buttons["Like"]
         likeButton.tapUnhittable()
