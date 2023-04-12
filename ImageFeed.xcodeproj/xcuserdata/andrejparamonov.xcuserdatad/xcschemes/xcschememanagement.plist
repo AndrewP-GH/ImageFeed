@@ -23,28 +23,7 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>ImageFeedUITests.testAuth.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>ImageFeed (1).xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
 		<key>ImageFeedUITests.testFeed.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>ImageFeedUITests.testProfile.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
@@ -52,6 +31,27 @@
 			<integer>7</integer>
 		</dict>
 		<key>ProfileTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
+		<key>ImagesListTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>ImagesListTests.testPresenterCallsLikeButtonTapped.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>ImagesListTests.testImageDateFormatter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />

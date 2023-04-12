@@ -5,7 +5,7 @@
 import Foundation
 
 protocol ImageDateFormatterProtocol {
-    func formatDate(_ date: Date?) -> String
+    func format(_ date: Date?) -> String
 }
 
 final class ImageDateFormatter: ImageDateFormatterProtocol {
@@ -16,7 +16,7 @@ final class ImageDateFormatter: ImageDateFormatterProtocol {
         return dateFormatter
     }()
 
-    func formatDate(_ date: Date?) -> String {
+    func format(_ date: Date?) -> String {
         var formattedDate = ""
         if let date = date {
             formattedDate = dateFormatter.string(from: date)

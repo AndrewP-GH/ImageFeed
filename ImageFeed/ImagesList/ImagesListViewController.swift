@@ -24,7 +24,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
         tableView.separatorStyle = .none
         return tableView
     }()
-    var presenter: ImageListPresenterProtocol?
+    var presenter: ImagesListPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()

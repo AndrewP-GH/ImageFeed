@@ -14,7 +14,7 @@ final class TabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
 
         let imageListVC = ImagesListViewController()
-        let imageListPresenter = ImageListPresenter(imagesListService: ImagesListService(),
+        let imageListPresenter = ImagesListPresenter(imagesListService: ImagesListService(),
                                                     dateFormatter: ImageDateFormatter())
         imageListPresenter.view = imageListVC
         imageListVC.presenter = imageListPresenter

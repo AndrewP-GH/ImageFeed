@@ -1,5 +1,5 @@
 //
-//  ProfileViewControllerSpy.swift
+//  ImagesListViewControllerSpy.swift
 //  ImageFeedTests
 //
 //  Created by Андрей Парамонов on 12.04.2023.

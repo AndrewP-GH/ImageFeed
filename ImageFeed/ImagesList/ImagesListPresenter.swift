@@ -4,7 +4,7 @@
 
 import UIKit
 
-protocol ImageListPresenterProtocol {
+protocol ImagesListPresenterProtocol {
     func viewDidLoad()
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath)
     func numberOfRows() -> Int
@@ -13,7 +13,7 @@ protocol ImageListPresenterProtocol {
     func likeButtonTapped(at indexPath: IndexPath)
 }
 
-final class ImageListPresenter: ImageListPresenterProtocol {
+final class ImagesListPresenter: ImagesListPresenterProtocol {
     private let imagesListService: ImagesListServiceProtocol
     private let dateFormatter: ImageDateFormatterProtocol
     weak var view: ImagesListViewControllerProtocol?
@@ -43,7 +43,7 @@ final class ImageListPresenter: ImageListPresenterProtocol {
         cell.setImage(url: photo.thumbImageURL) { [weak self] in
             self?.view?.reloadRows(at: [indexPath])
         }
-        cell.setDate(dateFormatter.formatDate(photo.createdAt))
+        cell.setDate(dateFormatter.format(photo.createdAt))
         cell.setIsLiked(photo.isLiked)
         cell.delegate = view
         cell.isUserInteractionEnabled = true
