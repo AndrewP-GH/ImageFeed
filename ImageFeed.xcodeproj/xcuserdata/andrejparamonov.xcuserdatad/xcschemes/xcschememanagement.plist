@@ -23,13 +23,6 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>ImageFeedUITests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
 		<key>ImageFeedUITests.testAuth.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,6 +50,13 @@
 			<false />
 			<key>orderHint</key>
 			<integer>7</integer>
+		</dict>
+		<key>ProfileTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 	</dict>
 </dict>
