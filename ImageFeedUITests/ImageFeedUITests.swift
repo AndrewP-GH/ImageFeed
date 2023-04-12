@@ -13,9 +13,9 @@ final class ImageFeedUITests: XCTestCase {
     private struct UserData {
         static let login = ""
         static let password = ""
-        static let userName = "@paravoz"
-        static let fullName = "Андрей Парамонов"
-        static let description = "iOS Developer"
+        static let userName = ""
+        static let fullName = ""
+        static let description = ""
     }
 
     override func setUpWithError() throws {
