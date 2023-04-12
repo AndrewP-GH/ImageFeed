@@ -60,7 +60,7 @@ final class ImageFeedUITests: XCTestCase {
         let likeButton = cellToLike.buttons["Like"]
         likeButton.tapUnhittable()
         sleep(3)
-        let unlikeButton = tablesQuery.children(matching: .cell).buttons["Unlike"]
+        let unlikeButton = tablesQuery.children(matching: .cell).buttons["Unlike"].firstMatch
         XCTAssertTrue(unlikeButton.waitForExistence(timeout: 5))
         unlikeButton.tapUnhittable()
         sleep(3)
@@ -75,7 +75,7 @@ final class ImageFeedUITests: XCTestCase {
         let navBackButtonWhiteButton = app.buttons["Backward"]
         navBackButtonWhiteButton.tap()
 
-        let cellToReturn = tablesQuery.children(matching: .cell).element(boundBy: 1)
+        let cellToReturn = app.tables.children(matching: .cell).element(boundBy: 1)
         XCTAssertTrue(cellToReturn.waitForExistence(timeout: 5))
     }
 
