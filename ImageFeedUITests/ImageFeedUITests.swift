@@ -76,7 +76,7 @@ final class ImageFeedUITests: XCTestCase {
         XCTAssertTrue(navBackButtonWhiteButton.waitForExistence(timeout: 5))
         navBackButtonWhiteButton.tap()
 
-        let cellToReturn = app.tables.children(matching: .cell).element(boundBy: 1)
+        let cellToReturn = app.tables.children(matching: .cell).element(boundBy: 0)
         XCTAssertTrue(cellToReturn.waitForExistence(timeout: 5))
     }
 
