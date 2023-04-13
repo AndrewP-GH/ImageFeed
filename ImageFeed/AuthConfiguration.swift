@@ -24,23 +24,13 @@ struct AuthConfiguration {
     let generalURL: URL
     let authURLString: String
 
-    init(accessKey: String, secretKey: String, redirectURI: String, accessScope: String, generalURL: URL, apiURL: URL, authURLString: String) {
-        self.accessKey = accessKey
-        self.secretKey = secretKey
-        self.redirectURI = redirectURI
-        self.accessScope = accessScope
-        self.apiURL = apiURL
-        self.generalURL = generalURL
-        self.authURLString = authURLString
-    }
-
     static var standard: AuthConfiguration {
         AuthConfiguration(accessKey: AccessKey,
                           secretKey: SecretKey,
                           redirectURI: RedirectURI,
                           accessScope: AccessScope,
-                          generalURL: UnsplashUrls.general,
                           apiURL: UnsplashUrls.api,
+                          generalURL: UnsplashUrls.general,
                           authURLString: UnsplashUrls.UnsplashAuthorizeURLString)
     }
 }
