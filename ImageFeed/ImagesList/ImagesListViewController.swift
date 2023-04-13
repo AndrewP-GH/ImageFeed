@@ -22,6 +22,7 @@ final class ImagesListViewController: UIViewController, ImagesListViewController
         tableView.backgroundColor = .backgroundColor
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         tableView.separatorStyle = .none
+        tableView.accessibilityIdentifier = "ImagesList"
         return tableView
     }()
     var presenter: ImagesListPresenterProtocol?

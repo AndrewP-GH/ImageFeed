@@ -42,30 +42,31 @@ final class ImageFeedUITests: XCTestCase {
 
         webView.buttons["Login"].tap()
 
-        let tablesQuery = app.tables
-        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        let table = app.tables["ImagesList"]
+        let cell = table.children(matching: .cell).element(boundBy: 0)
         XCTAssertTrue(cell.waitForExistence(timeout: 5))
     }
 
     func testFeed() throws {
-        let tablesQuery = app.tables
-        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        let table = app.tables["ImagesList"]
+        let cell = table.children(matching: .cell).element(boundBy: 0)
         XCTAssertTrue(cell.waitForExistence(timeout: 5))
 
-        cell.swipeUp()
+        table.swipeUp()
+        sleep(2)
+        table.swipeDown()
         sleep(2)
 
-        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 5)
-        let likeButton = cellToLike.buttons["Like"]
+        let likeButton = cell.buttons["Like"]
         likeButton.tapUnhittable()
         sleep(3)
         print(app.debugDescription)
-        let unlikeButton = cellToLike.buttons["Unlike"].firstMatch
+        let unlikeButton = cell.buttons["Unlike"]
         XCTAssertTrue(unlikeButton.waitForExistence(timeout: 5))
         unlikeButton.tapUnhittable()
         sleep(3)
 
-        cellToLike.tapUnhittable()
+        cell.tapUnhittable()
         sleep(2)
         let image = app.scrollViews.images.element(boundBy: 0)
         XCTAssertTrue(image.waitForExistence(timeout: 5))
@@ -76,13 +77,13 @@ final class ImageFeedUITests: XCTestCase {
         XCTAssertTrue(navBackButtonWhiteButton.waitForExistence(timeout: 5))
         navBackButtonWhiteButton.tap()
 
-        let cellToReturn = app.tables.children(matching: .cell).element(boundBy: 0)
+        let cellToReturn = table.children(matching: .cell).element(boundBy: 0)
         XCTAssertTrue(cellToReturn.waitForExistence(timeout: 5))
     }
 
     func testProfile() throws {
-        let tablesQuery = app.tables
-        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        let table = app.tables["ImagesList"]
+        let cell = table.children(matching: .cell).element(boundBy: 0)
         XCTAssertTrue(cell.waitForExistence(timeout: 5))
         let profile = app.tabBars.buttons.element(boundBy: 1)
         XCTAssertTrue(profile.waitForExistence(timeout: 5))
