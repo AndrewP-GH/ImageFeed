@@ -2,7 +2,6 @@
 // Created by Андрей Парамонов on 12.04.2023.
 //
 
-@testable import ImageFeed
 import Foundation
 
 final class ProfileImageServiceSpy: ProfileImageServiceProtocol {
