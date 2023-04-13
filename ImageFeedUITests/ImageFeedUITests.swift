@@ -89,10 +89,13 @@ final class ImageFeedUITests: XCTestCase {
         profile.tap()
 
         let fullName = app.staticTexts["FullName"]
+        XCTAssertTrue(fullName.exists)
         XCTAssertEqual(UserData.fullName, fullName.label)
         let nickname = app.staticTexts["Nickname"]
+        XCTAssertTrue(nickname.exists)
         XCTAssertEqual(UserData.userName, nickname.label)
         let description = app.staticTexts["Description"]
+        XCTAssertTrue(description.exists)
         XCTAssertEqual(UserData.description, description.label)
 
         app.buttons["Logout"].tap()
