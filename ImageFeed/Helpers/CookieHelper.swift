@@ -4,7 +4,7 @@
 
 import WebKit
 
-class CookieHelper {
+final class CookieHelper {
     static func cleanAll() {
         HTTPCookieStorage.shared.removeCookies(since: Date.distantPast)
         let dataStore = WKWebsiteDataStore.default()
