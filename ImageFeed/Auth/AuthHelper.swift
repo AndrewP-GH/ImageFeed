@@ -4,7 +4,7 @@
 
 import Foundation
 
-final class AuthHelper: AuthHelperProtocol {
+private final class AuthHelper: AuthHelperProtocol {
     let configuration: AuthConfiguration
 
     init(configuration: AuthConfiguration = .standard) {
@@ -16,17 +16,6 @@ final class AuthHelper: AuthHelperProtocol {
         return URLRequest(url: url)
     }
 
-    func authURL() -> URL {
-        var urlComponents = URLComponents(string: configuration.authURLString)!
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: configuration.accessKey),
-            URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "scope", value: configuration.accessScope)
-        ]
-        return urlComponents.url!
-    }
-
     func code(from url: URL) -> String? {
         if let urlComponent = URLComponents(string: url.absoluteString),
            urlComponent.path == "/oauth/authorize/native",
@@ -35,5 +24,16 @@ final class AuthHelper: AuthHelperProtocol {
             return codeItem.value
         }
         return nil
+    }
+
+    private func authURL() -> URL {
+        var urlComponents = URLComponents(string: configuration.authURLString)!
+        urlComponents.queryItems = [
+            URLQueryItem(name: "client_id", value: configuration.accessKey),
+            URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: configuration.accessScope)
+        ]
+        return urlComponents.url!
     }
 }
