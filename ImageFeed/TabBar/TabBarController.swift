@@ -14,10 +14,18 @@ final class TabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
 
         let imageListVC = ImagesListViewController()
+        let imageListPresenter = ImagesListPresenter(imagesListService: ImagesListService(),
+                                                    dateFormatter: ImageDateFormatter())
+        imageListPresenter.view = imageListVC
+        imageListVC.presenter = imageListPresenter
         imageListVC.tabBarItem = UITabBarItem(title: nil,
                                               image: UIImage(named: "tab_editorial_active"),
                                               selectedImage: nil)
         let profileVC = ProfileViewController()
+        let profilePresenter = ProfilePresenter(profileService: ProfileService.shared,
+                                                profileImageService: ProfileImageService.shared)
+        profilePresenter.view = profileVC
+        profileVC.presenter = profilePresenter
         profileVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "tab_profile_active"), selectedImage: nil)
         viewControllers = [imageListVC, profileVC]
     }

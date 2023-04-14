@@ -5,11 +5,12 @@
 import UIKit
 import WebKit
 
-final class WebViewViewController: UIViewController {
+final class WebViewViewController: UIViewController & WebViewViewControllerProtocol {
     private lazy var webView: WKWebView = {
         let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.backgroundColor = .ypWhite
+        webView.accessibilityIdentifier = "UnsplashWebView"
         return webView
     }()
     private lazy var progressView: UIProgressView = {
@@ -26,10 +27,9 @@ final class WebViewViewController: UIViewController {
         backButton.tintColor = .ypBlack
         return backButton
     }()
-    private let webViewProgressKeyPath = #keyPath(WKWebView.estimatedProgress)
-    private let pageLoadedProgress = 1.0
     private var estimateProgressObserver: NSKeyValueObservation?
     weak var delegate: WebViewViewControllerDelegate?
+    var presenter: WebViewPresenterProtocol?
 
     @objc private func didTapBackButton() {
         delegate?.webViewViewControllerDidCancel(self)
@@ -37,19 +37,23 @@ final class WebViewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .ypWhite
-        addSubviews()
-        setupConstraints()
-        setupActions()
+        setupView()
         estimateProgressObserver = webView.observe(
                 \.estimatedProgress,
                 options: [.new],
                 changeHandler: { [weak self] _, change in
-                    self?.updateProgress(change.newValue!)
+                    self?.presenter?.didUpdateProgressValue(change.newValue!)
                 }
         )
         webView.navigationDelegate = self
-        loadAuthPage()
+        presenter?.viewDidLoad()
+    }
+
+    private func setupView() {
+        view.backgroundColor = .ypWhite
+        addSubviews()
+        setupConstraints()
+        setupActions()
     }
 
     private func addSubviews() {
@@ -85,27 +89,19 @@ final class WebViewViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateProgress(webView.estimatedProgress)
+        presenter?.didUpdateProgressValue(webView.estimatedProgress)
     }
 
-    private func updateProgress(_ progress: Double) {
-        progressView.progress = Float(progress)
-        progressView.isHidden = fabs(progress - 1.0) <= 0.0001
+    func setProgressValue(_ newValue: Float) {
+        progressView.progress = newValue
     }
 
-    private func loadAuthPage() {
-        let urlRequest = URLRequest.makeHTTPRequest(
-                path: "/oauth/authorize",
-                baseURL: Constants.UnsplashUrls.general,
-                queryItems: [
-                    URLQueryItem(name: "client_id", value: Constants.accessKey),
-                    URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-                    URLQueryItem(name: "response_type", value: "code"),
-                    URLQueryItem(name: "scope", value: Constants.accessScope)
-                ]
-        )
-        CookieHelper.cleanAll()
-        webView.load(urlRequest)
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
+    }
+
+    func load(request: URLRequest) {
+        webView.load(request)
     }
 }
 
@@ -123,18 +119,13 @@ extension WebViewViewController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        updateProgress(pageLoadedProgress)
+        presenter?.didUpdateProgressValue(1)
     }
 
     private func code(from navigationAction: WKNavigationAction) -> String? {
-        if let url = navigationAction.request.url,
-           let urlComponent = URLComponents(string: url.absoluteString),
-           urlComponent.path == "/oauth/authorize/native",
-           let items = urlComponent.queryItems,
-           let codeItem = items.first(where: { $0.name == "code" }) {
-            return codeItem.value
-        } else {
-            return nil
+        if let url = navigationAction.request.url {
+            return presenter?.code(from: url)
         }
+        return nil
     }
 }

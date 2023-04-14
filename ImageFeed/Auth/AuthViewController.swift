@@ -17,6 +17,7 @@ final class AuthViewController: UIViewController {
         loginButton.titleLabel!.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         loginButton.layer.cornerRadius = 16
         loginButton.clipsToBounds = true
+        loginButton.accessibilityIdentifier = "Authenticate"
         return loginButton
     }()
     private lazy var logoImageView: UIImageView = {
@@ -65,6 +66,10 @@ final class AuthViewController: UIViewController {
 
     @objc private func loginButtonTapped() {
         let vc = WebViewViewController()
+        let authHelper = AuthHelper()
+        let presenter = WebViewPresenter(authHelper: authHelper)
+        presenter.view = vc
+        vc.presenter = presenter
         vc.delegate = self
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)

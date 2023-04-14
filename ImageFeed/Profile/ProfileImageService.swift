@@ -4,8 +4,12 @@
 
 import Foundation
 
+protocol ProfileImageServiceProtocol {
+    var avatarURL: String? { get }
+    func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void)
+}
 
-final class ProfileImageService {
+final class ProfileImageService: ProfileImageServiceProtocol {
     private struct UserResult: Decodable {
         let id: String
         let profileImage: ProfileImage
@@ -56,7 +60,7 @@ final class ProfileImageService {
 
 
     private func createGetProfileImageRequest(username: String, token: String) -> URLRequest {
-        var request = URLRequest.makeHTTPRequest(path: "/users/\(username)", baseURL: Constants.UnsplashUrls.api)
+        var request = URLRequest.makeHTTPRequest(path: "/users/\(username)", baseURL: AuthConfiguration.standard.apiURL)
         request.addAuthorizationHeader(token)
         return request
     }

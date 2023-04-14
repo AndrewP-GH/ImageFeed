@@ -40,10 +40,11 @@ final class OAuth2Service {
     }
 
     private func createAuthRequest(code: String) -> URLRequest {
-        URLRequest.makeHTTPRequest(path: "/oauth/token", baseURL: Constants.UnsplashUrls.general, queryItems: [
-            URLQueryItem(name: "client_id", value: Constants.accessKey),
-            URLQueryItem(name: "client_secret", value: Constants.secretKey),
-            URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+        let config = AuthConfiguration.standard
+        return URLRequest.makeHTTPRequest(path: "/oauth/token", baseURL: config.generalURL, queryItems: [
+            URLQueryItem(name: "client_id", value: config.accessKey),
+            URLQueryItem(name: "client_secret", value: config.secretKey),
+            URLQueryItem(name: "redirect_uri", value: config.redirectURI),
             URLQueryItem(name: "code", value: code),
             URLQueryItem(name: "grant_type", value: "authorization_code"),
         ])

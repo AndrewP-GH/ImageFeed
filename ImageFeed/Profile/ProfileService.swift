@@ -4,7 +4,12 @@
 
 import Foundation
 
-final class ProfileService {
+protocol ProfileServiceProtocol {
+    var profile: Profile? { get }
+    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void)
+}
+
+final class ProfileService: ProfileServiceProtocol {
     static let shared = ProfileService()
 
     private struct ProfileResult: Decodable {
@@ -44,7 +49,7 @@ final class ProfileService {
     }
 
     private func createGetProfileRequest(accessToken: String) -> URLRequest {
-        var request = URLRequest.makeHTTPRequest(path: "/me", baseURL: Constants.UnsplashUrls.api)
+        var request = URLRequest.makeHTTPRequest(path: "/me", baseURL: AuthConfiguration.standard.apiURL)
         request.addAuthorizationHeader(accessToken)
         return request
     }

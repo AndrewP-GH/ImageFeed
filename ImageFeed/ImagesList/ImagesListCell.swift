@@ -23,6 +23,8 @@ final class ImagesListCell: UITableViewCell {
         addToFavoriteButton.translatesAutoresizingMaskIntoConstraints = false
         addToFavoriteButton.setImage(heartImage, for: .normal)
         addToFavoriteButton.addTarget(self, action: #selector(likeButtonClicked), for: .touchUpInside)
+        addToFavoriteButton.accessibilityIdentifier = "Like"
+        addToFavoriteButton.isAccessibilityElement = true
         return addToFavoriteButton
     }()
     private lazy var gradientView: GradientView = {
@@ -45,6 +47,9 @@ final class ImagesListCell: UITableViewCell {
     private lazy var heartFillImage: UIImage = {
         UIImage(named: "Heart.fill")!
     }()
+    private lazy var placeholderImage: UIImage = {
+        UIImage(named: "CardStub")!
+    }()
 
     weak var delegate: ImagesListCellDelegate?
 
@@ -59,8 +64,7 @@ final class ImagesListCell: UITableViewCell {
     }
 
     func setImage(url: URL, completion: @escaping () -> Void) {
-        pictureView.kf.indicatorType = .activity
-        pictureView.kf.setImage(with: url) { result in
+        pictureView.kf.setImage(with: url, placeholder: placeholderImage) { result in
             switch result {
             case .success(_):
                 completion()
@@ -76,6 +80,7 @@ final class ImagesListCell: UITableViewCell {
 
     func setIsLiked(_ isFavorite: Bool) {
         addToFavoriteButton.setImage(isFavorite ? heartFillImage : heartImage, for: .normal)
+        addToFavoriteButton.accessibilityIdentifier = isFavorite ? "Unlike" : "Like"
     }
 
     override func prepareForReuse() {

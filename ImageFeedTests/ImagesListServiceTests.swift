@@ -9,6 +9,8 @@
 import XCTest
 
 final class ImagesListServiceTests: XCTestCase {
+
+    // This test requires to be logged in
     func testFetchPhotos() {
         let service = ImagesListService()
         let expectation = self.expectation(description: "Wait for Notification")

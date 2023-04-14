@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class ImagesListService {
+protocol ImagesListServiceProtocol {
+    var images: [Photo] { get }
+    func fetchPhotosNextPage()
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void)
+}
+
+final class ImagesListService: ImagesListServiceProtocol {
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private var dateFormatter: ISO8601DateFormatter = {
         ISO8601DateFormatter()
@@ -34,6 +40,7 @@ final class ImagesListService {
                             return
                         }
                         defer{
+                            NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
                             self.task = nil
                         }
                         switch result {
@@ -43,7 +50,6 @@ final class ImagesListService {
                                 self.createPhoto(from: $0)
                             }
                             self.images.append(contentsOf: photos)
-                            NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
                         case let .failure(error):
                             debugPrint("\(String(describing: error)): \(error.localizedDescription)")
                         }
@@ -72,17 +78,19 @@ final class ImagesListService {
     }
 
     private func createGetPhotosRequest(page: Int) -> URLRequest {
-        var request = URLRequest.makeHTTPRequest(path: "/photos", baseURL: Constants.UnsplashUrls.api, queryItems: [
-            URLQueryItem(name: "page", value: String(page)),
-            URLQueryItem(name: "per_page", value: String(perPageItems)),
-        ])
+        var request = URLRequest.makeHTTPRequest(path: "/photos",
+                                                 baseURL: AuthConfiguration.standard.apiURL,
+                                                 queryItems: [
+                                                     URLQueryItem(name: "page", value: String(page)),
+                                                     URLQueryItem(name: "per_page", value: String(perPageItems)),
+                                                 ])
         request.addAuthorizationHeader(token)
         return request
     }
 
     private func createChangeLikeRequest(photoId: String, isLike: Bool) -> URLRequest {
         var request = URLRequest.makeHTTPRequest(path: "/photos/\(photoId)/like",
-                                                 baseURL: Constants.UnsplashUrls.api,
+                                                 baseURL: AuthConfiguration.standard.apiURL,
                                                  httpMethod: isLike ? .DELETE : .POST)
         request.addAuthorizationHeader(token)
         return request
